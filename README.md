@@ -2,7 +2,6 @@
 # SLACK-PACK
 ### Slack conversation summarizer for content-discovery and easy catching-up with all that has happened
 
-
 <div style="background-color: #b3d9ff; border: 1px solid #004d99; padding: 10px; margin: 10px; width: 80%; text-align: center">
 	<em style="font-family: Lucida Console">Under Active Development</em>
 </div>
