@@ -5,6 +5,7 @@
 # ------> availability zone : us-east-1a
 # ------> AMI : ami-dabcfccd
 # you need to choose your own security group (named above "clouderaTest") which has open ports: 8080,8088,4040,50070,22,8020
+# Also make sure to set environmental variables for your EC2 KEY (KEY) and the path to your .pem (PATH_TO_PEM)
 
 ##############################################################################
 
@@ -18,7 +19,7 @@ SEC_GROUP="clouderaTest"
 AVAIL_ZONE="us-east-1a"
 AMI="ami-dabcfccd" 
 INSTANCE_TYPE="m3.medium"
-KEY="EC2-US-EAST-1A" # Key for the appropriate region
+#KEY="EC2-US-EAST-1A" # Key for the appropriate region
 
 NEWINATANCES="$(aws ec2 run-instances --image-id $AMI --key $KEY --count 1 --instance-type $INSTANCE_TYPE --security-groups $SEC_GROUP)"
 
