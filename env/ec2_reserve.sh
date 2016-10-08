@@ -5,7 +5,7 @@
 # ------> availability zone : us-east-1a
 # ------> AMI : ami-dabcfccd
 # you need to choose your own security group (named above "clouderaTest") which has open ports: 8080,8088,4040,50070,22,8020
-# Also make sure to set environmental variables for your EC2 KEY (KEY) and the path to your .pem (PATH_TO_PEM)
+# Also make sure to set environmental variables for your EC2 KEY (KEY)
 
 ##############################################################################
 
