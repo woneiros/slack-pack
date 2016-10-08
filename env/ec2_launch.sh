@@ -10,8 +10,8 @@
 #############################################################################
 
 # launch first ec2 node found:
-TEMP="$(aws ec2 describe-instance-status --query InstanceStatuses[*][InstanceId] --output text)"
-publicDnsName="$(aws ec2 describe-instances --instance-ids $temp --query Reservations[*].Instances[*].NetworkInterfaces[*].Association.PublicDnsName --output text)"
+TEMP="$(aws ec2 describe-instance-status --query 'InstanceStatuses[*][InstanceId]' --output text)"
+publicDnsName="$(aws ec2 describe-instances --instance-ids $temp --query 'Reservations[*].Instances[*].NetworkInterfaces[*].Association.PublicDnsName' --output text)"
 ssh -i $PATH_TO_PEM root@$publicDnsName
 
 # set elastic ip. you can do this first, one time through he AWS console
