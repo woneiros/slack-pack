@@ -1,0 +1,229 @@
+{
+    "SecurityGroups": [
+        {
+            "IpPermissionsEgress": [
+                {
+                    "IpProtocol": "-1", 
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ], 
+                    "UserIdGroupPairs": [], 
+                    "PrefixListIds": []
+                }
+            ], 
+            "Description": "added more ports created 2016-10-23T13:12:51.639-04:00", 
+            "IpPermissions": [
+                {
+                    "PrefixListIds": [], 
+                    "FromPort": 8080, 
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ], 
+                    "ToPort": 8080, 
+                    "IpProtocol": "tcp", 
+                    "UserIdGroupPairs": []
+                }, 
+                {
+                    "PrefixListIds": [], 
+                    "FromPort": 7199, 
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ], 
+                    "ToPort": 7199, 
+                    "IpProtocol": "tcp", 
+                    "UserIdGroupPairs": []
+                }, 
+                {
+                    "PrefixListIds": [], 
+                    "FromPort": 7180, 
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ], 
+                    "ToPort": 7180, 
+                    "IpProtocol": "tcp", 
+                    "UserIdGroupPairs": []
+                }, 
+                {
+                    "PrefixListIds": [], 
+                    "FromPort": 7432, 
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ], 
+                    "ToPort": 7432, 
+                    "IpProtocol": "tcp", 
+                    "UserIdGroupPairs": []
+                }, 
+                {
+                    "PrefixListIds": [], 
+                    "FromPort": 7000, 
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ], 
+                    "ToPort": 7001, 
+                    "IpProtocol": "tcp", 
+                    "UserIdGroupPairs": []
+                }, 
+                {
+                    "PrefixListIds": [], 
+                    "FromPort": 7182, 
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ], 
+                    "ToPort": 7182, 
+                    "IpProtocol": "tcp", 
+                    "UserIdGroupPairs": []
+                }, 
+                {
+                    "PrefixListIds": [], 
+                    "FromPort": 8088, 
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ], 
+                    "ToPort": 8088, 
+                    "IpProtocol": "tcp", 
+                    "UserIdGroupPairs": []
+                }, 
+                {
+                    "PrefixListIds": [], 
+                    "FromPort": 4040, 
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ], 
+                    "ToPort": 4040, 
+                    "IpProtocol": "tcp", 
+                    "UserIdGroupPairs": []
+                }, 
+                {
+                    "PrefixListIds": [], 
+                    "FromPort": 50070, 
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ], 
+                    "ToPort": 50070, 
+                    "IpProtocol": "tcp", 
+                    "UserIdGroupPairs": []
+                }, 
+                {
+                    "PrefixListIds": [], 
+                    "FromPort": 8888, 
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ], 
+                    "ToPort": 8888, 
+                    "IpProtocol": "tcp", 
+                    "UserIdGroupPairs": []
+                }, 
+                {
+                    "PrefixListIds": [], 
+                    "FromPort": 22, 
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ], 
+                    "ToPort": 22, 
+                    "IpProtocol": "tcp", 
+                    "UserIdGroupPairs": []
+                }, 
+                {
+                    "PrefixListIds": [], 
+                    "FromPort": 8020, 
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ], 
+                    "ToPort": 8020, 
+                    "IpProtocol": "tcp", 
+                    "UserIdGroupPairs": []
+                }, 
+                {
+                    "PrefixListIds": [], 
+                    "FromPort": 7183, 
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ], 
+                    "ToPort": 7183, 
+                    "IpProtocol": "tcp", 
+                    "UserIdGroupPairs": []
+                }, 
+                {
+                    "PrefixListIds": [], 
+                    "FromPort": 9160, 
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ], 
+                    "ToPort": 9160, 
+                    "IpProtocol": "tcp", 
+                    "UserIdGroupPairs": []
+                }, 
+                {
+                    "PrefixListIds": [], 
+                    "FromPort": 2181, 
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ], 
+                    "ToPort": 2181, 
+                    "IpProtocol": "tcp", 
+                    "UserIdGroupPairs": []
+                }, 
+                {
+                    "PrefixListIds": [], 
+                    "FromPort": 9092, 
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ], 
+                    "ToPort": 9092, 
+                    "IpProtocol": "tcp", 
+                    "UserIdGroupPairs": []
+                }, 
+                {
+                    "PrefixListIds": [], 
+                    "FromPort": 9042, 
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ], 
+                    "ToPort": 9042, 
+                    "IpProtocol": "tcp", 
+                    "UserIdGroupPairs": []
+                }
+            ], 
+            "GroupName": "slackpstone-2", 
+            "VpcId": "vpc-bb36f3df", 
+            "OwnerId": "648868566041", 
+            "GroupId": "sg-31d1364c"
+        }
+    ]
+}
