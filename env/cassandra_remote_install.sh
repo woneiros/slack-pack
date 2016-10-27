@@ -3,7 +3,7 @@
 # Bash scrip to set up an aws instance for kafka
 
 # Install java
-sudo add-apt-repository ppa:webupd8team/java
+sudo add-apt-repository ppa:webupd8team/java -y
 sudo apt-get update -y
 sudo apt-get install oracle-java8-installer -y
 #etc.
@@ -15,7 +15,7 @@ wget -qO - http://debian.datastax.com/debian/repo_key | sudo apt-key add -
 # Update apt
 sudo apt-get update
 # Install cassandra (it is automatically running as a service)
-sudo apt-get install datastax-ddc -yes
+sudo apt-get install datastax-ddc -y
 # Stop the service
 sudo service cassandra stop
 # Delete any logs
