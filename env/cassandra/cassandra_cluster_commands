@@ -3,67 +3,39 @@
 # Run the provided ec2_reserve_3node_demo_cassandra_cluster.sh
 ./ec2_reserve_3node_demo_cassandra_cluster.sh
 
-# Open 3 terminals and connect to each node
-ssh -i /etc/ssh/EC2-US-EAST-1A.pem ubuntu@ec2-52-201-212-166.compute-1.amazonaws.com
-ssh -i /etc/ssh/EC2-US-EAST-1A.pem ubuntu@ec2-54-227-164-225.compute-1.amazonaws.com
-ssh -i /etc/ssh/EC2-US-EAST-1A.pem ubuntu@ec2-54-146-154-198.compute-1.amazonaws.com
-
-# Install java 8 on each node
-
-sudo add-apt-repository ppa:webupd8team/java
-sudo apt-get update
-sudo apt-get install oracle-java8-installer
+# Get your instance info in the terminal
+instance_ids="$(aws ec2 describe-instance-status --query InstanceStatuses[*][InstanceId] --output text)"
+publicDnsName="$(aws ec2 describe-instances --instance-ids $temp --query Reservations[*].Instances[*].NetworkInterfaces[*].Association.PublicDnsName --output text)"
+c=0;for dns in $publicDnsName; do eval "dns$c=$dns";c=$((c+1));done
+c=0;for id in $instance_ids; do eval "id$c=$id"; c=$((c+1));done
 
 
-# Install cassandra using latest datastax release (3.9.0)
-# Do this for each instance
-
-# Add to apt sources
-echo deb http://debian.datastax.com/datastax-ddc 3.9 main | sudo tee -a /etc/apt/sources.list.d/cassandra.sources.list
-# Add datastax as trusted source
-wget -qO - http://debian.datastax.com/debian/repo_key | sudo apt-key add -
-# Update apt
-sudo apt-get update
-# Install cassandra (it is automatically running as a service)
-sudo apt-get install datastax-ddc
-# Stop the service
-sudo service cassandra stop
-# Delete any logs
-sudo rm -rf /var/lib/cassandra/data/system/*
-
-
-# Configuring the cluster
-# File is located at /etc/cassandra/cassandra.yaml
-
+# For each instance
+ssh -o StrictHostKeyChecking=no -i /etc/ssh/EC2-US-EAST-1A.pem ubuntu@$dns1
+# In the instance
+wget https://raw.githubusercontent.com/WillahScott/slack-pack/dev-env/env/cassandra_remote_install.sh
+sudo chmod a+x cassandra_remote_install.sh
+sudo ./cassandra_remote_install.sh
 sudo vi /etc/cassandra/cassandra.yaml
-cluster_name: 'Demo Cluster'
-# Line 424
-# Set 2 of the 3 nodes as seeds
-seeds: "54.227.164.225,54.146.154.198" # This line is always the same for each node
-# Line 575 (change to blank)
-listen_address:
-# Line 589
-broadcast_address: 52.201.212.166 (the current machine's public ip)
+	cluster_name: 'Demo Cluster'
+	# Line 424
+	# Set 2 of the 3 nodes as seeds
+	seeds: "54.227.164.225,54.146.154.198" # This line is always the same for each node
+	# Line 575 (change to blank)
+	listen_address:
+	# Line 589
+	broadcast_address: 52.201.212.166 (the current machine's public ip)
+exit
 
-# Restart the cluster on each node
-# NOTE: you must start one of the seed nodes first
+scp -i /etc/ssh/EC2-US-EAST-1A.pem ubuntu@$dns2:/etc/cassandra/cassandra.yaml cassandra_$dns2
+
+# ssh back in to each instance
+ssh -o StrictHostKeyChecking=no -i /etc/ssh/EC2-US-EAST-1A.pem ubuntu@$dns0
 sudo service cassandra start
 
 # Check status (Should see 3 nodes)
 nodetool status
 
-# Datacenter: datacenter1
-# =======================
-# Status=Up/Down
-# |/ State=Normal/Leaving/Joining/Moving
-# --  Address         Load       Tokens       Owns (effective)  Host ID                               Rack
-# UN  54.227.164.225  88.81 KiB  256          100.0%            dedc7594-16ac-45a9-a936-56a05578be3e  rack1
-# UN  54.146.154.198  69.76 KiB  256          100.0%            e2ea639f-2dfe-4b8f-bd11-6f8ab59e5c95  rack1
-# UJ  52.201.212.166  124.33 KiB  256          ?                 27af8c3c-4cd6-4440-9994-ff5e73422aba  rack1
-
-
-# To query
-cqlsh
-
-
+# Terminate instances
+aws ec2 terminate-instances --instance-ids "$id0" "$id1" "$id2" --output text --query 'TerminatingInstances[*].CurrentState.Name'
 
