@@ -3,7 +3,7 @@
 # Simple script that launches micro server with
 # ------> security group : clouderaTest
 # ------> availability zone : us-east-1a
-# ------> AMI : ami-dabcfccd
+# ------> AMI : ami-1785de00 
 # you need to choose your own security group (named above "clouderaTest") which has open ports: 8080,8088,4040,50070,22,8020
 # Also make sure to set environmental variables for your EC2 KEY (KEY)
 
@@ -17,7 +17,7 @@
 
 SEC_GROUP="clouderaTest"
 AVAIL_ZONE="us-east-1a"
-AMI="ami-dabcfccd" 
+AMI="ami-1785de00" 
 INSTANCE_TYPE="m3.medium"
 #KEY="EC2-US-EAST-1A" # Key for the appropriate region
 
