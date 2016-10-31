@@ -15,11 +15,12 @@
 
 #############################################################################
 
-SEC_GROUP="clouderaTest"
+#SEC_GROUP="clouderaTest"
+SEC_GROUP="openTest"
 AVAIL_ZONE="us-east-1a"
 AMI="ami-1785de00" 
 INSTANCE_TYPE="m3.medium"
-#KEY="EC2-US-EAST-1A" # Key for the appropriate region
+KEY="EC2-US-EAST-1A" # Key for the appropriate region
 
 NEWINATANCES="$(aws ec2 run-instances --image-id $AMI --key $KEY --count 1 --instance-type $INSTANCE_TYPE --security-groups $SEC_GROUP)"
 
