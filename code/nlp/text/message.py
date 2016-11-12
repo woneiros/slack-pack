@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
-"""Natural Language Processing for Topic Segmenting and Summarizing
+"""Slack message implementation for Slack-Pack Topic Summarizer
 
-.. module:: nlp.text.parser
+.. module:: nlp.text.mesage
    :platform: Unix, Windows
-   :synopsis: NLP for topic segmenting and summarizing
+   :synopsis: Message object
 
 """
 
