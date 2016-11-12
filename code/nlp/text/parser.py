@@ -57,9 +57,9 @@ class JSONParser(Parser):
     def getMessages(self):
         users = self.jsonObject[USER]
         texts = self.jsonObject[ANON_TEXT]
-        timestamp = self.jsonObject[TIMESTAMP]
+        timestamps = self.jsonObject[TIMESTAMP]
         return sorted(
-            [ Message(int(id), texts[id], users[id]) for id in users.keys() ],
+            [ Message(int(id), texts[id], users[id], timestamps[id]) for id in users.keys() ],
             key=lambda msg: msg.id() )
 
 
