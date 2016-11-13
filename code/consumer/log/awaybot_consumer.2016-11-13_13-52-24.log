@@ -1,0 +1,12 @@
+2016-11-13 13:51:39,089 - INFO - Starting __main__, simple test for awaybot_consumer.py
+2016-11-13 13:51:39,090 - INFO - Initializing cassandra connectionwith parameters:
+	ip: ['54.175.189.47']
+	keyspace: test_keyspace
+2016-11-13 13:51:54,199 - INFO - Starting __main__, simple test for awaybot_consumer.py
+2016-11-13 13:51:54,199 - INFO - Initializing cassandra connectionwith parameters:
+	ip: ['54.175.189.47']
+	keyspace: test_keyspace
+2016-11-13 13:52:24,432 - INFO - Starting __main__, simple test for awaybot_consumer.py
+2016-11-13 13:52:24,433 - INFO - Initializing cassandra connectionwith parameters:
+	ip: ['54.175.189.47']
+	keyspace: test_keyspace
