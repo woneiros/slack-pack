@@ -174,6 +174,7 @@ strong {
 <head>
   <title>Awaybot</title>
   <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Dancing+Script|Lato:100i|Open+Sans+Condensed:300|Ranga" rel="stylesheet">
+  <link rel="icon" href="favicon.png">
 </head>
 
 <body>
@@ -205,8 +206,8 @@ strong {
     of interest flourishes. This is wonderful. However, as working-students
     (or one might argue, members of the 21st century), we recognize that
     our limited time is no match for the deluge of information available on Slack.
-    This leads to a serious case of <strong>slack anxiety</strong>. There is all
-    this useful and valuable information out there. Finding the information you
+    This leads to a serious case of <strong>slack anxiety</strong>. When there is all
+    this useful and valuable information out there, finding the information you
     need becomes a case of finding a needle in a haystack.
   </div>
 
@@ -235,19 +236,19 @@ strong {
 
   <div id="Section4">
     <p class="heading">the architecture...</p>
-    We use the <a href="https://api.slack.com/rtm">Slack real time messaging API</a>
+    We use the <a href="https://api.slack.com/rtm" target="_blank">Slack real time messaging API</a>
     to listen to the Slack channel. We use a simple
-    <a href="https://kafka.apache.org/">Kafka</a> producer to write this
+    <a href="https://kafka.apache.org/" target="_blank">Kafka</a> producer to write this
     information to a 3 node Kafka cluster. We originally planned to serialize
     this data before writing to Kafka with
-    <a href="https://avro.apache.org/">Avro</a>. However, we found that Kafka’s
+    <a href="https://avro.apache.org/" target="_blank">Avro</a>. However, we found that Kafka’s
     latest version makes serializing with Avro unnecessary. We then use a Kafka
     consumer to store the data in a 3-node
-    <a href="http://cassandra.apache.org/">Cassandra</a> cluster from which our
+    <a href="http://cassandra.apache.org/" target="_blank">Cassandra</a> cluster from which our
     NLP builds summaries for different time durations. These summaries are
     stored in SimpleDB. When the user queries the Slackbot for a summary, the
     request goes to a python layer that queries
-    <a href="https://aws.amazon.com/documentation/simpledb/">SimpleDB</a> for
+    <a href="https://aws.amazon.com/documentation/simpledb/" target="_blank">SimpleDB</a> for
     the relevant information and serves it to the user as the Slackbot.
   </div>
 
@@ -261,23 +262,23 @@ strong {
     <p>We have successfully created a topic generator that appropriately splits
     conversation into relevant topics based on two key ideas: implicit reply and
     concept similarity.</p>
-    <p><a href="https://drive.google.com/open?id=0BwEDqldf45ESeUdnUzRNQ0xBN0E">Implicit
+    <p><a href="https://drive.google.com/open?id=0BwEDqldf45ESeUdnUzRNQ0xBN0E" target="_blank">Implicit
     Reply</a> clusters messages based on the probability that a message is a
     reply to a previous message. It does not rely on the assumption that related
     messages share similar words. This is helpful because it is not uncommon for
     users who are engaged in conversation on a single topic to interchange words
     used for similar ideas. Additionally, we use
-    <a href="https://en.wikipedia.org/wiki/Part-of-speech_tagging">
+    <a href="https://en.wikipedia.org/wiki/Part-of-speech_tagging" target="_blank">
     part-of-speech tagging</a> to help determine when a message is a reply. This
     is especially useful for short responses that carry little meaning outside
     of the conversation context.</p>
     <p>We calcualte concept similarity by comparing the geometric representations
-    of words and sentences using <a href="https://en.wikipedia.org/wiki/Word2vec">
+    of words and sentences using <a href="https://en.wikipedia.org/wiki/Word2vec" target="_blank">
     Google's Word2Vec models</a>. We first stem the words, and then compare the
     distances between the message vectors. Messages closer together are closer in
     semantic meaning. Messages farther apart are semantically, more dissimilar.</p>
     <p>Once the topic generation is complete, we summarize the topics using word clouds.
-    These word clouds are built around the <a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">
+    These word clouds are built around the <a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf" target="_blank">
     term frequency–inverse document frequency (TF-IDF)</a> statistics of the words
     in the topic. This statistic is a measure of how important a word is to a topic
     in the corpus of all topics. It does this by calculating how often the word
@@ -295,17 +296,17 @@ strong {
     <p class="heading">☆ ☆ ☆ ☆ ☆</p>
     <p class="heading">meet the all-star team</p>
     We are students enrolled in UC Berkeley's Master of Information and Data
-    Science program. This project is the cumulination of a semester long class
+    Science program. This project is the cumulation of a semester long class
     that brought together all that we had learned during the program (<a
     href="https://www.ischool.berkeley.edu/courses/datasci/210" target="_blank">W210
     - Capstone</a>).
     <p>
       <div class="centered">
-        <a href="https://www.linkedin.com/in/kevin-davis-5a83075a">Kevin Davis</a> &nbsp &nbsp
-        <a href="https://www.linkedin.com/in/werquinigo/en">Walter Erquinigo</a> &nbsp &nbsp
-        <a href="https://www.linkedin.com/in/guillermomonge/en">Guillermo Monge</a> &nbsp &nbsp
-        <a href="https://www.linkedin.com/in/carloserodriguezcastillo">Carlos Rodriguez Castillo</a> &nbsp &nbsp
-        <a href="https://www.linkedin.com/in/alexksmith">Alex Keivahn Smith</a>
+        <a href="https://www.linkedin.com/in/kevin-davis-5a83075a" target="_blank">Kevin Davis</a> &nbsp &nbsp
+        <a href="https://www.linkedin.com/in/werquinigo/en" target="_blank">Walter Erquinigo</a> &nbsp &nbsp
+        <a href="https://www.linkedin.com/in/guillermomonge/en" target="_blank">Guillermo Monge</a> &nbsp &nbsp
+        <a href="https://www.linkedin.com/in/carloserodriguezcastillo" target="_blank">Carlos Rodriguez Castillo</a> &nbsp &nbsp
+        <a href="https://www.linkedin.com/in/alexksmith" target="_blank">Alex Keivahn Smith</a>
       </div>
     </p>
   </div>
