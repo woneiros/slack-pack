@@ -2,14 +2,12 @@
 
 """Window of observation (amount of topics being observed)
 
-.. module:: nlp.utils.window
+.. module:: nlp.text.window
    :platform: Unix, Windows
    :synopsis: Window object
 
 """
 
-
-from collections import deque
 
 class Window:
     """Window of observation for topics (amount of topics maintained)
@@ -37,7 +35,19 @@ class Window:
         """
         return self.windowSize <= len(self.topics)
 
-    def addTopic(self, topic):
+    @property
+    def is_empty(self):
+        """Property, if the window doesn't have any topics
+
+        Returns
+        -------
+        bool
+            Returns `True` if empty
+
+        """
+        return len(self.topics) == 0
+
+    def add_topic(self, topic):
         """Incorporate a new topic into the window
 
         Note
