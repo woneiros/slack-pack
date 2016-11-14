@@ -42,20 +42,20 @@ class Message(object):
         self.author = author
         self.timestamp = pm.from_timestamp(timestamp) if timestamp else None
 
-    def process(self, processor, processor_id=None, verbose=False):
+    def process(self, processor, verbose=False):
         """Processes the message text
 
         Parameters
         ----------
-        processor : TYPE
+        processor : callable
             Message processor to create the text representation
-        processor_id : str, optional
-            Description of the processor (if not specified now() will be used to ensure uniqueness)
         verbose : bool, optional
             Warn if processing is unnecessary
 
         """
-        if processor_id is None:
+        try:
+            processor_id = processor.__id
+        except AttributeError:
             # In case the processor_id is not specified defaults to the `now()` timestamp
             processor_id = pm.now()
 
