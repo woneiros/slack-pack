@@ -6,31 +6,37 @@
    :platform: Unix, Windows
    :synopsis: Topic object
 
+.. |message| replace:: :class:`nlp.text.message.Message`
+.. |topic| replace:: :class:`nlp.text.topic.Topic`
+
 """
 
 class Topic:
     """Slack conversation topic: subset of highly-related messages
 
-    Parameters
+    Attributes
     ----------
-    startMessage : :class:`nlp.text.message.Message`
+    start_message : :class:`nlp.text.message.Message`
         First message of the topic
-    reason : str
-        Rationale why the message was added to the topic
+    messages : list[|message|]
+        List of Message was added to the topic
+    reasons : list[str]
+        List of the rationales why the messages were added to the topic
 
     """
 
-    def __init__(self, startMessage, reason):
-        self.startMessage = startMessage
+    def __init__(self, start_message, reason):
+        self.start_message = start_message
         self.messages = [startMessage, ]
         self.reasons = [reason, ]
+        # TODO: possible summary
 
-    def appendMessage(self, message, reason):
+    def append_message(self, message, reason):
         """Add a message into the topic
 
         Parameters
         ----------
-        message : :class:`nlp.text.message.Message`
+        message : |message|
             Message to be appended
         reason : str
             Reason as to why this message is being appended
@@ -38,9 +44,6 @@ class Topic:
         """
         self.messages.append(message)
         self.reasons.append(reason)
-
-    def getStartMessage(self):
-        return self.startMessage
 
     @property
     def size(self):
@@ -58,7 +61,7 @@ class Topic:
 
         Parameters
         ----------
-        other_topic : :class:`nlp.text.topic.Topic`
+        other_topic : |topic|
             Topic to be absorbed
 
         """
@@ -66,3 +69,12 @@ class Topic:
         self.messages.sort(key=lambda msg: msg.id)
         self.reasons.extend( other.reasons )  # append reasons from other topic
 
+    def __len__(self):
+        """Length of the topic (number of messages)
+
+        Returns
+        -------
+        int
+            Number of messages in the topic
+        """
+        return len(self.messages)

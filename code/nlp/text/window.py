@@ -6,6 +6,9 @@
    :platform: Unix, Windows
    :synopsis: Window object
 
+.. |message| replace:: :class:`nlp.text.message.Message`
+.. |topic| replace:: :class:`nlp.text.topic.Topic`
+
 """
 
 
@@ -15,7 +18,7 @@ class Window:
     Parameters
     ----------
     window_size : int
-        Maximum amount of topics in the window
+        Maximum amount of |topic|s in the window
 
     """
 
@@ -47,8 +50,23 @@ class Window:
         """
         return len(self.topics) == 0
 
-    def add_topic(self, topic):
-        """Incorporate a new topic into the window
+    @property
+    def len_active(self):
+        return len(self.topics[-1])
+
+    def __len__(self):
+        """Length of the window (number of topics)
+
+        Returns
+        -------
+        int
+            Number of topics
+        """
+        return len(self.topics)
+
+
+    def activate_topic(self, topic):
+        """Incorporate a new topic into the window, or set an older topic as most active
 
         Note
         ----
@@ -60,7 +78,7 @@ class Window:
 
         Parameters
         ----------
-        topic : :class:`nlp.text.topic.Topic`
+        topic : |topic|
             Topic to be added to the observed window
 
         """
@@ -76,4 +94,25 @@ class Window:
                 _ = self.topics.pop(0)
 
             self.topics.append(topic)
+
+    def insert_message(message, reason, topic_index=-1):
+        """Inserts the messgae into the specified topic
+
+        Parameters
+        ----------
+        message : |message|
+            Description
+        topic_index : int, optional
+            Index of the |topic| to which the |message| will be appended.
+            If no index is specified it will be added to the latest active |topic|
+        reason : str
+            Reason why the |message| will be appended to the specific |topic|
+
+        Deleted Parameters
+        ------------------
+        rationale : tuple(int, str)
+            Topic and reason why to which the message will be appended to
+
+        """
+        self.topics[topic_index].append_message(message, reason)
 
