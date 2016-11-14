@@ -52,7 +52,7 @@ class SentenceGrammarAnalyzer:
         self.message = message
         self.tokenizer = tokenizer
 
-    def isAReply(self):
+    def is_reply(self):
         """Summary
 
         Returns
@@ -61,16 +61,16 @@ class SentenceGrammarAnalyzer:
             Assessment of message being a starter: (Boolean, Reason)
 
         """
-        stemmedTokens = self.tokenizer.stemAndTokenize(self.message)
+        stemmedTokens = self.tokenizer(self.message)
 
         if len(stemmedTokens) <= 1:
             return (True, 'stemmed length of ' + str(len(stemmedTokens)))
 
         tokens = self.tokenizer.tokenize(self.message)
-        univeralTags = nltk.pos_tag(tokens, tagset='universal')
+        universalTags = nltk.pos_tag(tokens, tagset='universal')
 
-        if univeralTags[0][1] in SentenceGrammarAnalyzer.REPLY_POS_VALID_UNIVERSAL_TAGS:
-            return (True, 'universal tag ' + univeralTags[0][1])
+        if universalTags[0][1] in SentenceGrammarAnalyzer.REPLY_POS_VALID_UNIVERSAL_TAGS:
+            return (True, 'universal tag ' + universalTags[0][1])
 
         upennTags = nltk.pos_tag(tokens)
         if upennTags[0][1] in SentenceGrammarAnalyzer.REPLY_POS_VALID_UPENN_TAGS:

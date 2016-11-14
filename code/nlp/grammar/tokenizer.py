@@ -43,7 +43,7 @@ class MessageTokenizer:
         self.cache = {}
         self.userRe = re.compile('<@U\w\w\w\w\w\w\w\w>')  # TODO: change the user compilation
 
-    def stemAndTokenize(self, message):
+    def __call__(self, message):
         """ Fully processes a message (stem and tokenize)
 
         Parameters
@@ -127,3 +127,8 @@ class MessageTokenizer:
         """
         # TODO: User removal not working!
         return self.userRe.sub('', message.text)
+
+
+# TODO: create TopicTokenizer
+class TopicTokenizer(object):
+    pass
