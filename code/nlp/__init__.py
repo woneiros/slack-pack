@@ -7,4 +7,4 @@
 """
 
 
-__all__ = ['dist', 'grammar', 'models', 'repr', 'text', 'viz']
+__all__ = ['dist', 'grammar', 'models', 'repr', 'text', 'viz', 'utils']
