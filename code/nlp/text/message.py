@@ -42,6 +42,10 @@ class Message(object):
         self.author = author
         self.timestamp = pm.from_timestamp(timestamp) if timestamp else None
 
+    @property
+    def is_processed(self):
+        return self.text_repr is not None
+
     def process(self, processor, verbose=False):
         """Processes the message text
 
