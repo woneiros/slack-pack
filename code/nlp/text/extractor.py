@@ -13,8 +13,6 @@ from message import Message
 
 
 
-# TODO: Implement anonymization on parse
-
 class Extractor(metaclass=ABCMeta):
     """ Abstract class for a message parser
 

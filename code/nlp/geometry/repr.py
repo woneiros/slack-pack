@@ -17,3 +17,6 @@ Needs `gensim <https://radimrehurek.com/gensim/>`_
 """
 
 # TODO: add __str__ methods to representations
+# TODO: implement representation of objects
+
+

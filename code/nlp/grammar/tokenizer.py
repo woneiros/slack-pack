@@ -125,7 +125,6 @@ class MessageTokenizer:
             Parsed message
 
         """
-        # TODO: User removal not working!
         return self.userRe.sub('', message.text)
 
 
