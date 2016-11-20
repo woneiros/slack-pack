@@ -2,7 +2,6 @@ from kafka import KafkaClient, KafkaConsumer
 from cassandra import ConsistencyLevel
 from cassandra.cluster import Cluster
 from cassandra.query import SimpleStatement
-import threading
 import logging
 import logging.handlers
 import time
@@ -93,19 +92,43 @@ if __name__ == "__main__":
         logger.info("Connected to kafka and cassandra clusters!")
         # for msg in ac.consumer:
         #     print msg
-        ac.session.execute("""CREATE TABLE test_table (
-            id_1 timeuuid,
-            id_2 timeuuid,
-            number int,
-            PRIMARY KEY (id_1)
-            )""")
-        insert_stmt = ac.session.prepare(
-            "INSERT INTO test_table (id_1, id_2) VALUES (?, ?)")
-        for i in range(10):
-            id1 = uuid.uuid1()
-            id2 = uuid.uuid1() 
-            ac.session.execute(insert_stmt, (id1, id2))
-        ac.session.execute("""DROP TABLE test_table""")
+        ac.session.execute("""
+            CREATE TABLE IF NOT EXISTS awaybot_messages (
+                uuid text,
+                message_text text,
+                ts text,
+                user text,
+                team text,
+                type text,
+                channel text,
+                PRIMARY KEY (uuid)
+            )
+            """)
+        prepared_msg = ac.session.prepare("""
+            INSERT INTO awaybot_messages (uuid, message_text, ts,
+                user, team, type, channel)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+            """)
+        for msg in ac.consumer:
+            msg = json.loads(msg.value)
+            logger.info(msg)
+            if sorted(
+                [
+                    u'text', u'ts', u'user',
+                    u'team', u'type',
+                    u'channel', u'uuid'
+                ]
+                    ) == sorted(msg.keys()):
+                ac.session.execute(
+                    prepared_msg, 
+                    (msg['uuid'], msg['text'],
+                     msg['ts'], msg['user'], 
+                     msg['team'], msg['type'],
+                     msg['channel']))
+                logger.info(
+                    'Consume Message:\n{}'.format(msg['uuid']))
+            
+
     except:
         logging.error(
             "Failed to initialize consumer", exc_info=True)

@@ -274,7 +274,7 @@ class AwaybotProducer:
                         == sorted(message_dict.keys())):
                     message_dict['channel'] = channel
                     message_dict['team'] = team_name
-                    message_dict['uuid'] = uuid.uuid1()
+                    message_dict['uuid'] = str(uuid.uuid1())
                     yield message_dict
 
     
@@ -321,7 +321,8 @@ class AwaybotProducer:
         except:
             logger.error(
                 'Failed to send message of topic:\n\t{}'
-                ' and value:\n\t{}'.format(message_topic, message_value))
+                ' and value:\n\t{}'.format(message_topic, message_value),
+                exc_info=True)
         return
 
 
@@ -366,7 +367,7 @@ class AwaybotProducer:
                     return
                 else:
                     if message_dict:
-                        message_dict['uuid'] = uuid.uuid1()
+                        message_dict['uuid'] = str(uuid.uuid1())
                         yield message_dict
         else:
             raise ValueError(
@@ -396,5 +397,6 @@ if __name__ == "__main__":
         team_name=team_id, channel_list=channels, timestamp=latest_timestamp)
     for msg in history:
         logger.info(msg)
+        ap.produceMessage("test_topic", msg)
 
 
