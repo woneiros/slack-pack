@@ -1,0 +1,7 @@
+2016-11-13 13:56:54,442 - INFO - Starting __main__, simple test for awaybot_consumer.py
+2016-11-13 13:56:54,443 - INFO - Initializing cassandra connectionwith parameters:
+	ip: ['54.175.189.47']
+	keyspace: test_keyspace
+2016-11-13 13:56:55,121 - INFO - Initializing kafka connectionwith parameters:
+	ip: 54.197.178.209:9092
+	opic: test_topic
