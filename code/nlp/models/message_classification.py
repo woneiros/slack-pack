@@ -17,7 +17,6 @@
 
 import nltk
 
-
 # For our internal toolbox imports
 import os, sys
 path_to_here = os.path.abspath('.')
@@ -48,7 +47,7 @@ class MessageClassifier(object):
         self.sim_calc = similar_topic_calculator
 
         # Initialize a grammar analyzer to check if the message is a reply
-        self.gram_analyzer = SentenceGrammarAnalyzer(message, self.tokenizer)
+        self.gram_analyzer = SentenceGrammarAnalyzer(self.sim_calc.tokenizer)
 
     def classify(self, message, processor=None):
         """Predict the topic to be appended to along with the reason for the given message
@@ -76,7 +75,7 @@ class MessageClassifier(object):
             self.window.activate_topic( Topic(message, 'window empty') )
 
         # Check if the message is a reply
-        (is_reply, reason) = analyzer.is_reply()
+        (is_reply, reason) = analyzer.is_reply(message.text)
         if is_reply:  # we already know topics is not empty
             self.window.insert_message(message, 'grammatically ' + reason)  # will insert to the latest active channel
 
@@ -111,7 +110,12 @@ class MessageClassifier(object):
         # Pre-obtain processor and pass the same to every message for efficiency
         proc = self.sim_calc.get_processor()
 
+        counter = 0  # initialize message counter
+
         # Process each of the messages in the stream
         for message in messages:
-            yield self.classify(message, processor=proc)
+            counter += 1
+            self.classify(message, processor=proc)
+
+        print('  ... Finished classifying {} messages'.format(counter))
 

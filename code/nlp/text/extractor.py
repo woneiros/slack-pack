@@ -82,11 +82,8 @@ class JSONExtractor(Extractor):
 
 
 
-# TODO: implement CassandraParser
 class CassandraExtractor(Extractor):
     """ Queries `Cassandra database <http://cassandra.apache.org/>`_ and produces a generator of the extracted messages
-
-    # TODO: add link to Cassandra
 
     Warning
     -------
@@ -94,15 +91,15 @@ class CassandraExtractor(Extractor):
 
     """
     # TODO: implement all queries... check how to get filter working
-    QUERIES = { 'hour': 'SELECT ts, message_text, user FROM {}',
-                'day': 'SELECT ts, message_text, user FROM {}',
-                'week': 'SELECT ts, message_text, user FROM {}',
+    QUERIES = { 'hour': 'SELECT ts, message_text, user FROM {t}',
+                'day': 'SELECT ts, message_text, user FROM {t}',
+                'week': 'SELECT ts, message_text, user FROM {t}',
               }
 
 
     def __init__(self, cluster_ips, session_keyspace, table_name):
         self.cluster = Cluster(cluster_ips)
-        self.session = cluster.connect(session_keyspace)
+        self.session = self.cluster.connect(session_keyspace)
         self.table_name = table_name
 
     def add_query(label, query):
@@ -119,7 +116,7 @@ class CassandraExtractor(Extractor):
         self.QUERIES[label] = query
 
 
-    def get_messages(self, type_of_query, channel, table):
+    def get_messages(self, type_of_query, channel, table=None):
         """Gets the stream of messages
 
         Parameters
@@ -141,8 +138,10 @@ class CassandraExtractor(Extractor):
         KeyError
             If the query type was not found
         """
+        qtable = table if table is not None else self.table_name
+
         try:
-            query = self.QUERIES[type_of_query]
+            query = self.QUERIES[type_of_query].format(t=qtable)
         except KeyError:
             error_msg = 'The specific type_of_query ({}) was not found. Queries can be added with `add_query`'
             raise KeyError(error_msg.format(type_of_query))

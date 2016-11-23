@@ -48,11 +48,10 @@ class SentenceGrammarAnalyzer:
     REPLY_POS_VALID_UPENN_TAGS = Set(['WDT', 'DT'])
     REPLY_STARTERS = Set(['ok', 'ok.', 'k', 'k.' 'mine', 'his', 'hers', 'theirs', 'ours'])
 
-    def __init__(self, message, tokenizer):
-        self.message = message
+    def __init__(self, tokenizer):
         self.tokenizer = tokenizer
 
-    def is_reply(self):
+    def is_reply(self, message):
         """Summary
 
         Returns
@@ -61,12 +60,12 @@ class SentenceGrammarAnalyzer:
             Assessment of message being a starter: (Boolean, Reason)
 
         """
-        stemmedTokens = self.tokenizer(self.message)
+        stemmedTokens = self.tokenizer(message)
 
         if len(stemmedTokens) <= 1:
             return (True, 'stemmed length of ' + str(len(stemmedTokens)))
 
-        tokens = self.tokenizer.tokenize(self.message)
+        tokens = self.tokenizer.tokenize(message)
         universalTags = nltk.pos_tag(tokens, tagset='universal')
 
         if universalTags[0][1] in SentenceGrammarAnalyzer.REPLY_POS_VALID_UNIVERSAL_TAGS:
