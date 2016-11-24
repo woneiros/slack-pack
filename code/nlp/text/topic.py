@@ -27,7 +27,7 @@ class Topic:
 
     def __init__(self, start_message, reason):
         self.start_message = start_message
-        self.messages = [startMessage, ]
+        self.messages = [self.start_message, ]
         self.reasons = [reason, ]
         # TODO: possible summary
 

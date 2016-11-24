@@ -95,7 +95,7 @@ class Window:
 
             self.topics.append(topic)
 
-    def insert_message(message, reason, topic_index=-1):
+    def insert_message(self, message, reason, topic_index=-1):
         """Inserts the messgae into the specified topic
 
         Parameters

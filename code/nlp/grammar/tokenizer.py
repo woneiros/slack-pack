@@ -17,7 +17,7 @@ import re
 
 
 
-class MessageTokenizer:
+class MessageTokenizer(object):
     """A Message tokenizer
 
     Attributes
@@ -57,10 +57,8 @@ class MessageTokenizer:
             Processed message
 
         """
-        id = message.id
-        if id not in self.cache.keys():
-            self.cache[id] = [self.stemmer.stem(t) for t in self.getValidTokens(message)]
-        return self.cache[id]
+        return [ self.stemmer.stem(t) for t in self.getValidTokens(message) ]
+
 
     def tokenize(self, message):
         """Tokenizes the message text and removes the usernames
@@ -125,7 +123,7 @@ class MessageTokenizer:
             Parsed message
 
         """
-        return self.userRe.sub('', message.text)
+        return self.userRe.sub('', message)
 
 
 # TODO: create TopicTokenizer

@@ -38,7 +38,7 @@ def cosine(repr1, repr2):
     return (np.array(repr1) * np.array(repr2)).sum() / (np.linalg.norm(repr1) * np.linalg.norm(repr2))
 
 
-def jensen_shannon(repr1, repr1):
+def jensen_shannon(repr1, repr2):
     """Calculate the `Jensen-Shannon Divergence<https://en.wikipedia.org/wiki/Jensen%E2%80%93Shannon_divergence>`_ between two object representations
 
     Parameters

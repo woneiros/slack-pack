@@ -59,7 +59,7 @@ class SimilarTopicCalculator:
         bool
             True if messages will be tokenized
         """
-        return tokenizer is not None
+        return self.tokenizer is not None
 
     def get_similarities(self, window, message):
         """Calculates the similarity of the |message| with the |topic|s in the |window|
@@ -78,13 +78,13 @@ class SimilarTopicCalculator:
         """
         similarities = []
 
-        for topic in self.window.topics:
+        for topic in window.topics:
 
             # get centroid of the topic
             centroid = self.calculate_centroid(topic)
 
             # get similarity with centroid
-            similarities.append( self.similarity(centroid, messages.text_repr) )
+            similarities.append( self.similarity(centroid, message.text_repr) )
 
         return similarities
 
@@ -104,13 +104,13 @@ class SimilarTopicCalculator:
         proc = self.get_processor()  # obtain processor in case necessary
         pre_centroid = np.zeros_like( topic.start_message.text_repr )
 
-        for message in topic.messages:
+        for topic_message in topic.messages:
             # check if message was processed, process if necessary
             if not topic_message.is_processed:
                 topic_message.process( proc )
 
             # update centroid based on the text_repr
-            pre_centroid += message.text_repr
+            pre_centroid += topic_message.text_repr
 
         pre_centroid /= len(topic)
 

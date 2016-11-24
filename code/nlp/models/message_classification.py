@@ -70,12 +70,12 @@ class MessageClassifier(object):
         message.process(processor)  # processed text is stored in the message
 
         # If the window is empty --> start first topic
-        if self.window.topics.is_empty:
+        if self.window.is_empty:
             # Create new topic and append to window
             self.window.activate_topic( Topic(message, 'window empty') )
 
         # Check if the message is a reply
-        (is_reply, reason) = analyzer.is_reply(message.text)
+        (is_reply, reason) = self.gram_analyzer.is_reply(message.text)
         if is_reply:  # we already know topics is not empty
             self.window.insert_message(message, 'grammatically ' + reason)  # will insert to the latest active channel
 
@@ -85,7 +85,7 @@ class MessageClassifier(object):
 
         if sim_max >= self.sim_threshold:  # if found similarity
             self.window.activate_topic( self.window.topics[which_max] )
-            self.window.insert_message(message, 'distance {d:.3f} <= threshold({th})'.format(d=similarity.score, th=self.sim_threshold))
+            self.window.insert_message(message, 'distance {d:.3f} <= threshold({th})'.format(d=sim_max, th=self.sim_threshold))
 
         elif self.window.len_active == 1:  # else, if previous topic small, append to latest
             self.window.insert_message(message, 'previous topic with one element')
@@ -113,7 +113,7 @@ class MessageClassifier(object):
         counter = 0  # initialize message counter
 
         # Process each of the messages in the stream
-        for message in messages:
+        for message in message_stream:
             counter += 1
             self.classify(message, processor=proc)
 
