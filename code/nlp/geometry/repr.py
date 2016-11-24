@@ -160,14 +160,12 @@ class GloVe(Representation):
         dict
             dictionary containing the representations of the words
         """
-        with open(file_name, 'rb') as f:
-            lines = f.readlines()
-
         repr_dict = {}  # initialize dictionary
 
-        for line in lines:
-            _line = line.split()
-            repr_dict[_line[0]] = np.array(map(float, _line[1:]))
+        with open(file_name, 'rb') as f:
+            for line in iter(f.readline, ''):
+                _terms = line.split()
+                repr_dict[_terms[0]] = np.array(map(float, _terms[1:]))
 
         return repr_dict
 
