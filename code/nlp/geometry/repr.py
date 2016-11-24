@@ -14,8 +14,8 @@ Needs `gensim <https://radimrehurek.com/gensim/>`_
 .. |tokenizer| replace:: :class:`nlp.text.grammar.tokenizer`
 .. |sentgram| replace:: :class:`nlp.text.grammar.grammar_analyzer`
 
+# TODO: add documentation with download links to corpora and models
 """
-
 from six import with_metaclass  # for python compatibility
 from abc import ABCMeta, abstractmethod
 
@@ -29,8 +29,8 @@ from glob import glob
 # Obtain the absolute path to the corpora folder
 __path = abspath('.')
 __pos = __path.index('slack-pack')
-PATH_TO_COPORA = __path[:__pos + 10] + '/data/corpora/'  # len('slack-pack') --> 10
-PATH_TO_MODELS = __path[:__pos + 10] + '/data/models/'  # len('slack-pack') --> 10
+PATH_TO_COPORA = __path[:__pos + 10] + '/code/nlp/data/corpora/'  # len('slack-pack') --> 10
+PATH_TO_MODELS = __path[:__pos + 10] + '/code/nlp/data/models/'  # len('slack-pack') --> 10
 
 
 def list_corpora():
