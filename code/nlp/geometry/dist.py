@@ -17,6 +17,7 @@ The following are in fact _similarities_ and not distances (a score of 1 means v
 """
 
 import numpy as np
+from scipy.stats import entropy
 
 
 def cosine(repr1, repr2):
@@ -35,4 +36,27 @@ def cosine(repr1, repr2):
         Distance/Similarity between the two object representations
     """
     return (np.array(repr1) * np.array(repr2)).sum() / (np.linalg.norm(repr1) * np.linalg.norm(repr2))
+
+
+
+def jensen_shannon(repr1, repr1):
+    """Calculate the `Jensen-Shannon Divergence<https://en.wikipedia.org/wiki/Jensen%E2%80%93Shannon_divergence>`_ between two object representations
+
+    Parameters
+    ----------
+    repr1 : list[float]
+        Representation of object 1
+    repr2 : list[float]
+        Representation of object 2
+
+    Returns
+    -------
+    float
+        Distance/Similarity between the two object representations
+    """
+    _repr1 = repr1 / np.linalg.norm(repr1, ord=1)
+    _repr2 = repr2 / np.linalg.norm(repr2, ord=1)
+    mid_repr = 0.5 * (_repr1 + _repr2)
+
+    return 0.5 * (entropy(_repr1, mid_repr) + entropy(_repr2, mid_repr))
 
