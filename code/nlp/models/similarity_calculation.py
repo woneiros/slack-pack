@@ -124,22 +124,22 @@ class SimilarTopicCalculator:
         callable
             Message processing function. The processor will have an internal additional attribute `__id` with the processor specifications
         """
-        def processor(message):
+        def processor(message_text):
             """Proccesses the message according to
 
             Parameters
             ----------
-            message : TYPE
-                Description
+            message : str
+                Message text
 
             Returns
             -------
-            TYPE
-                Description
+            numpy.array(float)
+                representation of the message
             """
             if self.has_tokenizer:
-                message = self.tokenizer(message)  # the tokenizer is a callable object
-            return self.representation(message)  # the representation is also a callable object
+                message = self.tokenizer(message_text)  # the tokenizer is a callable object
+            return self.representation(message_text)  # the representation is a callable object
             processor.__id = 't:{tok!s}#r:{rep!s}'.format(tok=self.tokenizer, rep=self.representation)
         return processor
 

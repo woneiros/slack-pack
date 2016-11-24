@@ -77,6 +77,10 @@ class Representation(with_metaclass(ABCMeta, object)):
         pass
 
     @abstractmethod
+    def __call__(self, item):
+        pass
+
+    @abstractmethod
     def __str__(self):
         pass
 
@@ -124,6 +128,31 @@ class Word2Vec(Representation):
             representation = np.random.ranf( self.model.vector_size )
         finally:
             return representation
+
+
+    # NOTE: research other aggregation methods (other than mean)
+    def __call__(self, message_text):
+        """Geometric representation of a document
+
+        Parameters
+        ----------
+        message_text : str
+            Message to obtain a representation from
+
+        Returns
+        -------
+        np.array(float)
+            Geometric representation of the message_text
+        """
+        representation = 0.
+        words = message_text.lower().split()
+        for w in words:
+            representation += self.__getitem__( w.strip() )
+
+        representation /= len(words)
+
+        return representation
+
 
     def __str__(self):
         return 'word2vec'
@@ -188,6 +217,31 @@ class GloVe(Representation):
             representation = self.vocab['<unk>']
         finally:
             return representation
+
+
+    # NOTE: research other aggregation methods (other than mean)
+    def __call__(self, message_text):
+        """Geometric representation of a document
+
+        Parameters
+        ----------
+        message_text : str
+            Message to obtain a representation from
+
+        Returns
+        -------
+        np.array(float)
+            Geometric representation of the message_text
+        """
+        representation = 0.
+        words = message_text.lower().split()
+        for w in words:
+            representation += self.__getitem__( w.strip() )
+
+        representation /= len(words)
+
+        return representation
+
 
     def __str__(self):
         return 'gloVe'
