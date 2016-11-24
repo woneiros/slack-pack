@@ -38,7 +38,6 @@ def cosine(repr1, repr2):
     return (np.array(repr1) * np.array(repr2)).sum() / (np.linalg.norm(repr1) * np.linalg.norm(repr2))
 
 
-
 def jensen_shannon(repr1, repr1):
     """Calculate the `Jensen-Shannon Divergence<https://en.wikipedia.org/wiki/Jensen%E2%80%93Shannon_divergence>`_ between two object representations
 
@@ -59,4 +58,23 @@ def jensen_shannon(repr1, repr1):
     mid_repr = 0.5 * (_repr1 + _repr2)
 
     return 0.5 * (entropy(_repr1, mid_repr) + entropy(_repr2, mid_repr))
+
+
+def cross_entropy(repr1, repr2):
+    """Calculate the cross-entropy (or `Kullback-Leibler Divergence<https://en.wikipedia.org/wiki/Kullback%E2%80%93Leibler_divergence>`_) between two object representations
+
+    Parameters
+    ----------
+    repr1 : list[float]
+        Representation of object 1
+    repr2 : list[float]
+        Representation of object 2
+
+    Returns
+    -------
+    float
+        Distance/Similarity between the two object representations
+    """
+    return entropy(repr1, repr2)
+
 
