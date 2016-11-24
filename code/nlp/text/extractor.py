@@ -7,7 +7,6 @@
 """
 
 from six import with_metaclass  # for python compatibility
-import sys
 from abc import ABCMeta, abstractmethod
 import pendulum as pm
 
@@ -85,9 +84,19 @@ class JSONExtractor(Extractor):
 class CassandraExtractor(Extractor):
     """ Queries `Cassandra database <http://cassandra.apache.org/>`_ and produces a generator of the extracted messages
 
-    Warning
-    -------
-    This class has not been yet implemented
+    Parameters
+    ----------
+    cluster_ips : list[str]
+        IPs to the Cassandra cluster
+    session_keyspace : str
+        Keyspace on which to connect in the Cassandra cluster
+    table_name : str
+        Name of the main table to be queried
+
+    Attributes
+    ----------
+    QUERIES : dict
+        dictionary with the allowed template queries depending on the intended extraction
 
     """
     # TODO: implement all queries... check how to get filter working
