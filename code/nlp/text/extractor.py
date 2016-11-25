@@ -100,9 +100,9 @@ class CassandraExtractor(Extractor):
 
     """
     # TODO: implement all queries... check how to get filter working
-    QUERIES = { 'hour': 'SELECT ts, message_text, user FROM {t}',
-                'day': 'SELECT ts, message_text, user FROM {t}',
-                'week': 'SELECT ts, message_text, user FROM {t}',
+    QUERIES = { 'hour': 'SELECT * FROM {t}',
+                'day': 'SELECT * FROM {t}',
+                'week': 'SELECT * FROM {t}',
               }
 
 
@@ -158,7 +158,7 @@ class CassandraExtractor(Extractor):
         rows = self.session.execute(query)
 
         for r in rows:
-            # TODO: if other todo does not work, implement filter here
-            yield( Message(id=r.ts, text=r.message_text, author=r.user, timestamp=float(r.ts)) )
+            if r.channel == channel:
+                yield( Message(id=r.ts, text=r.message_text, author=r.user, timestamp=float(r.ts)) )
 
 
