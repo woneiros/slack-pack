@@ -6,6 +6,8 @@
 
 """
 
+import logging
+
 from six import with_metaclass  # for python compatibility
 from abc import ABCMeta, abstractmethod
 import pendulum as pm
@@ -55,9 +57,13 @@ class JSONExtractor(Extractor):
     TEXT = u'text'
     TIMESTAMP = u'ts'
 
-    def __init__(self, file_name):
+    def __init__(self, file_name, logger=None):
         self.file_name = file_name
         self.jsonObject = self.parse()
+        self.logger = False
+        if logger is not None:
+            self.set_logger(logger)
+            self.logger = True
 
     def parse(self):
         with open(self.file_name) as data_file:
@@ -72,12 +78,40 @@ class JSONExtractor(Extractor):
             Stream of messages
         """
         for message in self.jsonObject:
-            id_ = message[self.TIMESTAMP]
-            user = message[self.USER]
-            text = message[self.TEXT]
-            timestamp = float(message[self.TIMESTAMP])
+            try:
+                id_ = message[self.TIMESTAMP]
+                user = message[self.USER]
+                text = message[self.TEXT]
+                timestamp = float(message[self.TIMESTAMP])
+            except:
+                if self.logger:
+                    logging.error("Failed to parse message", exc_info=True)
+                continue
 
             yield Message(id_, text, user, timestamp)
+
+    def set_logger(self, logfile):
+        # Logging
+        self.logger = logging.getLogger('extractor')
+        self.logger.setLevel(logging.DEBUG)
+
+        # create formatter
+        formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+
+        # create console handler, set level of logging and add formatter
+        ch = logging.StreamHandler()
+        ch.setLevel(logging.DEBUG)
+        ch.setFormatter(formatter)
+
+        # create file handler, set level of logging and add formatter
+        fh = logging.handlers.TimedRotatingFileHandler(logfile, when='M', interval=1)
+        fh.setLevel(logging.DEBUG)
+        fh.setFormatter(formatter)
+        fh.suffix = '%Y-%m-%d_%H-%M-%S.log'
+
+        # add handlers to logger
+        self.logger.addHandler(ch)
+        self.logger.addHandler(fh)
 
 
 
