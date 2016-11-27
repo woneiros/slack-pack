@@ -108,13 +108,8 @@ class MessageClassifier(object):
 
         Parameters
         ----------
-        message_stream : TYPE
-            Description
-
-        Returns
-        -------
-        TYPE
-            Description
+        message_stream : iterable of |message|s
+            Iterator or list of messages
         """
         # Pre-obtain processor and pass the same to every message for efficiency
         proc = self.sim_calc.get_processor()
