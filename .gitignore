@@ -1,3 +1,7 @@
+## Ignore data (subfolder) in the NLP folder
+code/nlp/data/*
+
+
 ###Python###
 
 # Byte-compiled / optimized / DLL files
