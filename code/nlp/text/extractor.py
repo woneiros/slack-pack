@@ -11,6 +11,7 @@ import logging
 from six import with_metaclass  # for python compatibility
 from abc import ABCMeta, abstractmethod
 import pendulum as pm
+import warnings
 
 import json
 from cassandra import ConsistencyLevel
@@ -133,11 +134,13 @@ class CassandraExtractor(Extractor):
         dictionary with the allowed template queries depending on the intended extraction
 
     """
-    # TODO: implement all queries... check how to get filter working
-    QUERIES = { 'hour': 'SELECT * FROM {t}',
-                'day': 'SELECT * FROM {t}',
-                'week': 'SELECT * FROM {t}',
-              }
+    TIME_CALLS = { 'hour': lambda: pm.now().add(hours=-1).timestamp,
+                   'day': lambda: pm.now().add(days=-1).timestamp,
+                   'week': lambda: pm.now().add(days=-7).timestamp,
+                   'all': lambda: 0,
+                 }
+
+    BASE_QUERY = "SELECT * FROM {tb} WHERE ts > '{ts}' AND channel = '{c}' ALLOW FILTERING;"
 
 
     def __init__(self, cluster_ips, session_keyspace, table_name):
@@ -145,7 +148,10 @@ class CassandraExtractor(Extractor):
         self.session = self.cluster.connect(session_keyspace)
         self.table_name = table_name
 
-    def add_query(label, query):
+        self.CUSTOM_QUERIES = {}
+        self.__channels = None
+
+    def add_query(self, label, query):
         """Adds a custom query to the QUERIES dictionary
 
         Parameters
@@ -156,19 +162,48 @@ class CassandraExtractor(Extractor):
             CQL query to be executed
 
         """
-        self.QUERIES[label] = query
+        self.CUSTOM_QUERIES[label] = query
 
+    def list_channels(self, table=None):
+        """List the channels avaialable for the table
 
-    def get_messages(self, type_of_query, channel, table=None, min_words=5):
+        Parameters
+        ----------
+        table : str
+            override table_name specified on instantiation
+
+        Returns
+        -------
+        set(str)
+            Set with all the channels available in the specified table
+        """
+        if table is None:
+            # Obtain channels for the object's `table_name`
+            if self.__channels is None:
+                self.__channels = set()
+                for r in self.session.execute('select DISTINCT channel from {}'.format(self.table_name)):
+                    self.__channels.add( r.channel )
+
+            return self.__channels
+
+        else:
+            # Obtain the channel for the table specified
+            temp_channels = set()
+            for r in self.session.execute('select DISTINCT channel from {}'.format(table)):
+                temp_channels.add( r.channel )
+
+            return temp_channels
+
+    def get_messages(self, type_of_query, channel=None, table=None, min_words=5):
         """Gets the stream of messages
 
         Parameters
         ----------
         type_of_query : str
             Label of the query type unless custom queries are added: 'hour', 'day', 'week'
-        channel : str
+        channel : str, optional
             channel to be queried
-        table : str
+        table : str, optional
             override table_name specified on instantiation
         min_words : int, optional
             Minimum amount of words in the message to be streamed (defaults to 5)
@@ -185,26 +220,37 @@ class CassandraExtractor(Extractor):
         """
         qtable = table if table is not None else self.table_name
 
-        try:
-            query = self.QUERIES[type_of_query].format(t=qtable)
-        except KeyError:
-            error_msg = 'The specific type_of_query ({}) was not found. Queries can be added with `add_query`'
-            raise KeyError(error_msg.format(type_of_query))
+        # If the type_of_query is one of the base
+        if type_of_query in self.TIME_CALLS:
+            qtimestamp = self.TIME_CALLS[type_of_query]()
 
-        rows = self.session.execute(query)
+            rows = self.session.execute( self.BASE_QUERY.format(tb=qtable, ts=qtimestamp, c=channel) )
+
+        # Else, fetch query from CUSTOM_QUERIES
+        else:
+            try:
+                query = self.CUSTOM_QUERIES[type_of_query]
+            except KeyError:
+                error_msg = 'The specific type_of_query ({}) was not found. Queries can be added with `add_query`'
+                raise KeyError(error_msg.format(type_of_query))
+
+            rows = self.session.execute(query)
+
+        if not rows:
+            warnings.warn('No messages were returned from the query specified')
 
         for r in rows:
-            if r.channel == channel:
-                if len(r.message_text.split()) < min_words:
-                    continue
+            # Only stream messages with more than the specified amount of minimum words
+            if len(r.message_text.split()) < min_words:
+                continue
 
-                # Only stream messages with more than one word
-                try:
-                    timestamp = float(r.ts)
-                except ValueError:
-                    _datetime = pm.from_format(r.ts[:19], fmt='%Y-%m-%dT%H:%M:%S')
-                    timestamp = float(_datetime.timestamp) + float(r.ts.split('+')[0].split('.')[-1])
-                finally:
-                    yield( Message(id=r.ts, text=r.message_text, author=r.user, timestamp=timestamp) )
+            # Compute timestamps and yield
+            try:
+                timestamp = float(r.ts)
+            except ValueError:
+                _datetime = pm.from_format(r.ts[:19], fmt='%Y-%m-%dT%H:%M:%S')
+                timestamp = float(_datetime.timestamp) + float(r.ts.split('+')[0].split('.')[-1])
+            finally:
+                yield( Message(id=r.ts, text=r.message_text, author=r.user, timestamp=timestamp) )
 
 

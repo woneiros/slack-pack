@@ -146,10 +146,14 @@ class Word2Vec(Representation):
         """
         representation = 0.
         words = message_text.lower().split()
-        for w in words:
-            representation += self.__getitem__( w.strip() )
+        if words:
+            for w in words:
+                representation += self.__getitem__( w.strip() )
 
-        representation /= len(words)
+            representation /= len(words)
+        # If no words were specified
+        else:
+            representation = np.random.ranf( self.model.vector_size )
 
         return representation
 
@@ -235,10 +239,14 @@ class GloVe(Representation):
         """
         representation = 0.
         words = message_text.lower().split()
-        for w in words:
-            representation += self.__getitem__( w.strip() )
+        if words:
+            for w in words:
+                representation += self.__getitem__( w.strip() )
 
-        representation /= len(words)
+            representation /= len(words)
+        # If no words were specified
+        else:
+            representation = self.vocab['<unk>']
 
         return representation
 
