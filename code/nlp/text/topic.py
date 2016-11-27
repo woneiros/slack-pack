@@ -11,6 +11,7 @@
 
 """
 
+# NOTE: make class iterable with __iter__ and __next__
 class Topic:
     """Slack conversation topic: subset of highly-related messages
 
@@ -29,6 +30,7 @@ class Topic:
         self.start_message = start_message
         self.messages = [self.start_message, ]
         self.reasons = [reason, ]
+        self.last_timestamp = None
         # TODO: possible summary
 
     def append_message(self, message, reason):
@@ -44,6 +46,7 @@ class Topic:
         """
         self.messages.append(message)
         self.reasons.append(reason)
+        self.last_timestamp = message.timestamp
 
     @property
     def size(self):

@@ -12,6 +12,7 @@
 """
 
 
+# NOTE: make class iterable with __iter__ and __next__
 class Window:
     """Window of observation for topics (amount of topics maintained)
 
