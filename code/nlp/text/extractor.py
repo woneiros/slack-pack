@@ -145,7 +145,7 @@ class CassandraExtractor(Extractor):
         self.session = self.cluster.connect(session_keyspace)
         self.table_name = table_name
 
-    def add_query(label, query):
+    def add_query(self, label, query):
         """Adds a custom query to the QUERIES dictionary
 
         Parameters
