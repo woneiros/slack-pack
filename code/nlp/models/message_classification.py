@@ -41,13 +41,16 @@ class MessageClassifier(object):
         Window with |topic|s
 
     """
-    def __init__(self, window, similarity_threshold, similar_topic_calculator):
+    def __init__(self, window, similarity_threshold, similar_topic_calculator, reply_analysis=False):
         self.window = window
         self.sim_threshold = similarity_threshold
         self.sim_calc = similar_topic_calculator
 
         # Initialize a grammar analyzer to check if the message is a reply
-        self.gram_analyzer = SentenceGrammarAnalyzer(self.sim_calc.tokenizer)
+        if reply_analysis:
+            self.gram_analyzer = SentenceGrammarAnalyzer(self.sim_calc.tokenizer)
+        else:
+            self.grammar_analyzer = None
 
     def classify(self, message, processor=None):
         """Predict the topic to be appended to along with the reason for the given message
@@ -73,11 +76,14 @@ class MessageClassifier(object):
         if self.window.is_empty:
             # Create new topic and append to window
             self.window.activate_topic( Topic(message, 'window empty') )
+            return
 
         # Check if the message is a reply
-        (is_reply, reason) = self.gram_analyzer.is_reply(message.text)
-        if is_reply:  # we already know topics is not empty
-            self.window.insert_message(message, 'grammatically ' + reason)  # will insert to the latest active channel
+        if self.grammar_analyzer is not None:
+            (is_reply, reason) = self.gram_analyzer.is_reply(message.text)
+            if is_reply:  # we already know topics is not empty
+                self.window.insert_message(message, 'grammatically ' + reason)  # will insert to the latest active channel
+                return
 
         # If not a reply --> check most similar topic (using similarity calculator)
         similarities = self.sim_calc.get_similarities(self.window, message)
@@ -85,13 +91,16 @@ class MessageClassifier(object):
 
         if sim_max >= self.sim_threshold:  # if found similarity
             self.window.activate_topic( self.window.topics[which_max] )
-            self.window.insert_message(message, 'distance {d:.3f} <= threshold({th})'.format(d=sim_max, th=self.sim_threshold))
+            self.window.insert_message(message, 'Distance {d:.3f} <= threshold({th})'.format(d=sim_max, th=self.sim_threshold))
+            return
 
         elif self.window.len_active == 1:  # else, if previous topic small, append to latest
-            self.window.insert_message(message, 'previous topic with one element')
+            self.window.insert_message( message, 'No similarity ({d:.3f}) and previous topic with one element'.format(d=sim_max) )
+            return
 
         else:  # start a new topic with the new message
-            self.window.activate_topic( Topic(message, 'no similarity nor grammatically a reply') )
+            self.window.activate_topic( Topic(message, 'No similarity ({d:.3f}) nor grammatically a reply'.format(d=sim_max)) )
+            return
 
 
     def classify_stream(self, message_stream):
