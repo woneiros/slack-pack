@@ -159,7 +159,7 @@ class CassandraExtractor(Extractor):
         self.QUERIES[label] = query
 
 
-    def get_messages(self, type_of_query, channel, table=None):
+    def get_messages(self, type_of_query, channel, table=None, min_words=5):
         """Gets the stream of messages
 
         Parameters
@@ -170,6 +170,8 @@ class CassandraExtractor(Extractor):
             channel to be queried
         table : str
             override table_name specified on instantiation
+        min_words : int, optional
+            Minimum amount of words in the message to be streamed (defaults to 5)
 
         Returns
         -------
@@ -193,6 +195,10 @@ class CassandraExtractor(Extractor):
 
         for r in rows:
             if r.channel == channel:
+                if len(r.message_text.split()) < min_words:
+                    continue
+
+                # Only stream messages with more than one word
                 try:
                     timestamp = float(r.ts)
                 except ValueError:
