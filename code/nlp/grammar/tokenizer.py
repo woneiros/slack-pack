@@ -7,18 +7,61 @@
    :synopsis: Tokenization of messsages
 
 .. |message| replace:: :class:`nlp.text.message.Message`
+.. |re_pattern| replace :: `re object<https://docs.python.org/3/library/re.html#re-objects>`_
 
 """
 
 from nltk.stem.snowball import SnowballStemmer
 from nltk import word_tokenize
-from nltk.corpus import stopwords
+from gensim.parsing.preprocessing import STOPWORDS
 import re
 
 
+class SimpleCleaner(object):
+    """A light-weight text cleaner: removes stopwords, usernames and symbols (some are removed some are wrapped in spaces)
+
+    Parameters
+    ----------
+    symbols_to_remove : |re_pattern|
+        Symbolds to remove (defaults to `,.:'"<>!?*\/`)
+    symbols_to_space : |re_pattern|
+        Symbols to wrap in whitespace (defaults to `()[]{}`)
+    user : |re_pattern|
+        Username pattern (defaults to `<@U-------->` or `<@u-------->`, where `-` is any alphanumeric)
+    """
+    PATTERNS = { 'user': re.compile('<@[Uu]\w{8}>'),
+                 'symbols_remove': re.compile('[:\.,/\\<>\!\?\*"\']'),
+                 'symbols_space': re.compile('_[\(\)\[\]\{\}]') }
+
+    def __init__(self, user=None, symbols_to_remove=None, symbols_to_space=None):
+        if (user is not None) and hasattr(user, 'sub'):
+            self.PATTERNS['user'] = user
+        if (symbols_to_remove is not None) and hasattr(symbols_to_remove, 'sub'):
+            self.PATTERNS['symbols_remove'] = symbols_to_remove
+        if (symbols_to_space is not None) and hasattr(symbols_to_space, 'sub'):
+            self.PATTERNS['symbols_space'] = symbols_to_space
+
+    def __call__(self, text):
+        """ Fully processes a message
+
+        Parameters
+        ----------
+        message : |message|
+            Message to be processed
+
+        Returns
+        -------
+        |message|
+            Processed message
+        """
+        text = self.PATTERNS['user'].sub('', text.lower() )
+        text = self.PATTERNS['symbols_remove'].sub('', text)
+        text = self.PATTERNS['symbols_space'].sub(' ', text)
+        return ' '.join( filter(lambda x: x not in STOPWORDS, text.split()) )
+
 
 class MessageTokenizer(object):
-    """A Message tokenizer
+    """A Message tokenizer performing tokenization, stemming and stopword removal
 
     Attributes
     ----------
@@ -55,7 +98,6 @@ class MessageTokenizer(object):
         -------
         |message|
             Processed message
-
         """
         return [ self.stemmer.stem(t) for t in self.getValidTokens(message) ]
 
@@ -72,7 +114,6 @@ class MessageTokenizer(object):
         -------
         |message|
             Parsed message
-
         """
         return [ w for w in word_tokenize(self.removeUsers(message)) ]
 
@@ -88,7 +129,6 @@ class MessageTokenizer(object):
         -------
         |message|
             Parsed message
-
         """
         return [ w for w in self.tokenize(message) if w.isalnum() ]
 
@@ -104,7 +144,6 @@ class MessageTokenizer(object):
         -------
         |message|
             Parsed message
-
         """
         return [ word for word in self.punctuationTokenize(message)
             if word not in self.stopWords ]
