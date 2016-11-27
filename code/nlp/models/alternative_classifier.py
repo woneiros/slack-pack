@@ -1,4 +1,5 @@
-def classify_stream(message_stream, max_messages=20, verbose=True):
+
+def classify_stream(message_stream, max_messages=20, low_threshold=.7, high_threshold=.85, low_step=.05, high_step=.02, verbose=True):
     topics = []
     for m, msg in enumerate(message_stream):
         if m > max_messages:
@@ -16,8 +17,8 @@ def classify_stream(message_stream, max_messages=20, verbose=True):
             # We will sequentially try to append to each topic ...
             #    as time goes by it is harder to append to a topic
 
-            low_th = .5
-            high_th = .85
+            low_th = low_threshold
+            high_th = high_threshold
             topic_scores = []  # in case no topic is close
 
             for t in xrange(len(topics)):
@@ -59,11 +60,11 @@ def classify_stream(message_stream, max_messages=20, verbose=True):
                 topic_scores.append( (tp_len,score) )  # append score to topic_scores
 
                 # else try with next topic --> harder
-                low_th += .1 if low_th+.1 < high_th else .05
-                high_th += .05
+                low_th += low_step if low_th+low_step < high_th else high_step
+                high_th += high_step
             else:
                 # If no topic was suitable --> Start new topic
-                topics.insert(0, [(msg, 'No similar topics (to 0) scores:({})'.format(topic_scores))] )
+                topics.insert(0, [(msg, 'No similar topics (new 0) scores:({})'.format(topic_scores))] )
                 if verbose:
                     print '\t No similar topics (new 0) scores:({})\n'.format(topic_scores)
 
