@@ -11,6 +11,7 @@
 
 """
 
+from topic import Topic
 
 def from_topic_list(topic_list):
     """Generates a Window from a list of "topics", in which each "topic" is a list of tuples of (message, reason))
@@ -26,14 +27,14 @@ def from_topic_list(topic_list):
         :class:`nlp.text.window.Window`
     """
     _window = Window()
-    for topic in window_us[::-1]:
+    for topic in topic_list[::-1]:
         # Append topics from oldest to most recent
         uninit = True
 
         for m,r in topic:
             if uninit:
                 # generate new topic and append to window
-                _window.activate_topic( gt.Topic(start_message=m, reason=r) )
+                _window.activate_topic( Topic(start_message=m, reason=r) )
                 uninit = False  # no longer uninit
             else:
                 _window.insert_message(message=m, reason=r)
@@ -153,4 +154,12 @@ class Window:
             Reason why the |message| will be appended to the specific |topic|
         """
         self.topics[topic_index].append_message(message, reason)
+
+    def report_topics(self):
+        """Prints out a report of the amount of topics and the size (in messages) of each topic
+        """
+        print( 'Window has #{} topics\n'.format( len(self.topics) ) )
+        print( 'Topic length report:' )
+        for i, topic in enumerate(self.topics):
+            print( '  Topic #{:>2}  --> size: {:<3}'.format(i, len(topic)) )
 
