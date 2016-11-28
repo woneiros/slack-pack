@@ -1,0 +1,33 @@
+
+{
+"namespace": "slack.avro",
+"type": "record",
+"name": "slack_schema",
+"fields" : [
+    {
+        "name": "user_id",
+        "type": ["string", "null"],
+        "doc": "User ID, anonymized, equivalent to Slack RTM's 'user' field + anonymization function"
+    },
+    {
+        "name": "record_type",
+        "type": ["string","null"],
+        "doc": "type of record, includes options such as reconnect_url, presence_change, message; should be message for our data"
+    }
+    {
+        "name": "text",
+        "type": ["string", "null"],
+        "doc": "Text of message sent by user, equivalent to Slack RTM's 'text' field"
+    },
+    {
+        "name": "channel",
+        "type": ["string", "null"],
+        "doc": "The channel in which the message is being sent, equivalent to Slack RTM's 'channel' field"
+    },
+    {
+        "name": "timestamp",
+        "type": "float",
+        "doc": "Unix timestamp of record assigned by slack api, equivalent to Slack RTM's 'ts' field, required for each record"}
+ ],
+"doc": "A Schema for storing Slack messages."
+}
