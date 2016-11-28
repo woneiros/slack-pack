@@ -21,6 +21,11 @@ class Window:
     window_size : int
         Maximum amount of |topic|s in the window
 
+    Attributes
+    ----------
+    topics : list[|topic|]
+        List of topics. Ordered from most recent to oldest
+
     """
 
     def __init__(self, window_size):
@@ -71,7 +76,7 @@ class Window:
 
         Note
         ----
-        The topics will be re-ordered, the topic which was added the latest will be the last one
+        The topics will be re-ordered, the topic which was added the latest will be the first one
 
         Warning
         -------
@@ -81,20 +86,19 @@ class Window:
         ----------
         topic : |topic|
             Topic to be added to the observed window
-
         """
         if topic in self.topics:
             # Pop the actual topic
             current_topic = self.topics.pop( self.topics.index(topic) )
             # Append to the last position
-            self.topics.append( current_topic )
+            self.topics.insert(0, current_topic )
 
         else:
             # If full drop the oldest topic first
             if self.is_full:
-                _ = self.topics.pop(0)
+                _ = self.topics.pop(-1)
 
-            self.topics.append(topic)
+            self.topics.insert(0, topic)
 
     def insert_message(self, message, reason, topic_index=-1):
         """Inserts the messgae into the specified topic
@@ -108,12 +112,6 @@ class Window:
             If no index is specified it will be added to the latest active |topic|
         reason : str
             Reason why the |message| will be appended to the specific |topic|
-
-        Deleted Parameters
-        ------------------
-        rationale : tuple(int, str)
-            Topic and reason why to which the message will be appended to
-
         """
         self.topics[topic_index].append_message(message, reason)
 
