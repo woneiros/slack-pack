@@ -12,7 +12,36 @@
 """
 
 
-# NOTE: make class iterable with __iter__ and __next__
+def from_topic_list(topic_list):
+    """Generates a Window from a list of "topics", in which each "topic" is a list of tuples of (message, reason))
+
+    Parameters
+    ----------
+    topic_list : list(tuples(|message|, str))
+        List of lists of tuples of (message, reason)
+
+    Returns
+    -------
+    TYPE
+        :class:`nlp.text.window.Window`
+    """
+    _window = Window()
+    for topic in window_us[::-1]:
+        # Append topics from oldest to most recent
+        uninit = True
+
+        for m,r in topic:
+            if uninit:
+                # generate new topic and append to window
+                _window.activate_topic( gt.Topic(start_message=m, reason=r) )
+                uninit = False  # no longer uninit
+            else:
+                _window.insert_message(message=m, reason=r)
+
+    return _window
+
+
+
 class Window:
     """Window of observation for topics (amount of topics maintained)
 
@@ -70,6 +99,16 @@ class Window:
         """
         return len(self.topics)
 
+    def __iter__(self):
+        """Iterates over the topics
+
+        Yields
+        -------
+        |topic|
+            Next topic to be iterated over
+        """
+        for topic in self.topics:
+            yield topic
 
     def activate_topic(self, topic):
         """Incorporate a new topic into the window, or set an older topic as most active
@@ -100,7 +139,7 @@ class Window:
 
             self.topics.insert(0, topic)
 
-    def insert_message(self, message, reason, topic_index=-1):
+    def insert_message(self, message, reason, topic_index=0):
         """Inserts the messgae into the specified topic
 
         Parameters
