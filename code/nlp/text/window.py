@@ -18,8 +18,8 @@ class Window:
 
     Parameters
     ----------
-    window_size : int
-        Maximum amount of |topic|s in the window
+    window_size : int, optional
+        Maximum amount of |topic|s in the window. If left unspecified the window will not have a maximum
 
     Attributes
     ----------
@@ -28,9 +28,9 @@ class Window:
 
     """
 
-    def __init__(self, window_size):
+    def __init__(self, window_size=None):
         self.topics = []
-        self.windowSize = window_size
+        self.window_size = window_size if window_size is not None else float('inf')
 
     @property
     def is_full(self):
@@ -42,7 +42,7 @@ class Window:
             Returns `True` if full
 
         """
-        return self.windowSize <= len(self.topics)
+        return self.window_size <= len(self.topics)
 
     @property
     def is_empty(self):
