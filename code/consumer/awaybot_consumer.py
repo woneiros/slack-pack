@@ -93,7 +93,7 @@ if __name__ == "__main__":
         # for msg in ac.consumer:
         #     print msg
         ac.session.execute("""
-            CREATE TABLE IF NOT EXISTS awaybot_messages (
+            CREATE TABLE IF NOT EXISTS awaybot_messages2 (
                 uuid text,
                 message_text text,
                 ts text,
@@ -101,11 +101,11 @@ if __name__ == "__main__":
                 team text,
                 type text,
                 channel text,
-                PRIMARY KEY (uuid)
+                PRIMARY KEY (channel, ts)
             )
             """)
         prepared_msg = ac.session.prepare("""
-            INSERT INTO awaybot_messages (uuid, message_text, ts,
+            INSERT INTO awaybot_messages2 (uuid, message_text, ts,
                 user, team, type, channel)
             VALUES (?, ?, ?, ?, ?, ?, ?)
             """)

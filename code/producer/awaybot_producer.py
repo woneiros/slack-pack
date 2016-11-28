@@ -141,7 +141,7 @@ class AwaybotProducer:
         if not self.slack_status:
             self.slackConnect(self.token)
         channel_list = [
-            channel_dict['id'] for channel_dict in 
+            {channel_dict['id']:channel_dict['name']}  for channel_dict in 
             self.sc.api_call("channels.list")['channels']]
         return channel_list
 
@@ -231,6 +231,25 @@ class AwaybotProducer:
             else:
                 return '0'
 
+
+    def updateLatestTimestamp(self, domain, team_name, ts):
+        if not self.sdb_status:
+            self.simpledbConnect()
+        latest_ts = self.getLatestTimestamp(domain, team_name)
+        logger.info(
+            'Updating timestamp: latest: {}\nnew:{}'.format(latest_ts, ts))
+        if float(ts) > float(latest_ts):
+            item_attrs = [
+                {'Name': 'Team', 'Value': team_name, 'Replace': True},
+                {'Name': 'ts', 'Value': ts, 'Replace': True}
+                ]
+            response = self.sdb.put_attributes(
+                DomainName=domain,
+                ItemName=team_name,
+                Attributes=item_attrs)
+            logger.info(response)
+            return
+
     
     def fetchSlackHistory(self, team_name, channel_list, timestamp = '0'):
         """
@@ -266,13 +285,13 @@ class AwaybotProducer:
             self.slackConnect(self.token)
         for channel in channel_list:
             channel_history = self.sc.api_call(
-                "channels.history", channel=channel,
+                "channels.history", channel=channel.keys()[0],
                 oldest = timestamp, count="1000")
             for message_dict in channel_history['messages']:
                 if (
                     sorted(['user', 'text', 'type', 'ts'])
                         == sorted(message_dict.keys())):
-                    message_dict['channel'] = channel
+                    message_dict['channel'] = channel.values()[0]
                     message_dict['team'] = team_name
                     message_dict['uuid'] = str(uuid.uuid1())
                     yield message_dict
@@ -316,6 +335,15 @@ class AwaybotProducer:
         """ 
         if not self.kafka_status:
             self.connectKafkaProducer()
+
+        if ('team' in message_value and 'ts' in message_value):
+            try:
+                self.updateLatestTimestamp(
+                    'awaybot', message_value['team'], 
+                    message_value['ts'])
+            except:
+                logger.error('Failed to update timestamp for {}'.format(
+                    message_value), exc_info=True)
         try:
             self.kp.send(message_topic, json.dumps(message_value))
         except:
@@ -326,7 +354,7 @@ class AwaybotProducer:
         return
 
 
-    def openRtmConnection(self):
+    def openRtmConnection(self, team_name):
         """
         Generator function that fetches messages from the
         slack RTM API. 
@@ -354,12 +382,12 @@ class AwaybotProducer:
         """
         if not self.slack_status:
             self.slackConnect(self.token)
-        if self.sc.rtm_connnect():
-            print 'Currently Connected'
+        if self.sc.rtm_connect():
+            logger.info('Connected to Slack RTM API!')
             while True:
                 time.sleep(5)
                 try:
-                    message_dict = self.sc.rtm_ream()
+                    message_dict = self.sc.rtm_read()
                 except Exception as e:
                     logger.info(
                         'Failed to fetch latest message.', exc_info=True)
@@ -367,8 +395,11 @@ class AwaybotProducer:
                     return
                 else:
                     if message_dict:
-                        message_dict['uuid'] = str(uuid.uuid1())
-                        yield message_dict
+                        for message in message_dict:
+                            if message:
+                                message['uuid'] = str(uuid.uuid1())
+                                message['team'] = team_name
+                                yield message
         else:
             raise ValueError(
                 "Could not connect to Slack RTM API. "
@@ -391,11 +422,17 @@ if __name__ == "__main__":
             team_id, datetime.datetime.fromtimestamp(
                 float(latest_timestamp)).strftime('%Y-%m-%d %H:%M:%S')))
     channels = ap.getChannelList()
-    logger.info('Channnels available to producer: {}'.format
-        (' '.join([i for i in channels])))
+    print channels
+    # logger.info('Channnels available to producer: {}'.format
+    #     (' '.join([i for i in channels])))
     history = ap.fetchSlackHistory(
         team_name=team_id, channel_list=channels, timestamp=latest_timestamp)
     for msg in history:
+        logger.info(msg)
+        ap.produceMessage("test_topic", msg)
+
+    real_time_messages = ap.openRtmConnection(team_name=team_id)
+    for msg in real_time_messages:
         logger.info(msg)
         ap.produceMessage("test_topic", msg)
 
