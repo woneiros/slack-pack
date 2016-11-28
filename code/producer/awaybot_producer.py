@@ -57,7 +57,7 @@ class AwaybotProducer:
         token: str
             String representing a token used to connect to the slack api
         kafka_ip: str, list
-            String representing host:port of the kafka server(s).
+            String representing host:port of the kafka server(s). 
             If a list is supplied, format is ['h:p', 'h:p', ...]
         """
 
@@ -68,19 +68,19 @@ class AwaybotProducer:
         self.kafka_status = False
         self.sdb_status = False
 
-
+    
     def getTokenFromFile(self, auth_file):
         """
         Function that returns the slack token contained
         in the supplied file.
 
-        Parameters:
+        Parameters: 
         -----------
         auth_file: str
-            A single line text file containing a valid slack
+            A single line text file containing a valid slack 
             authorization token.
 
-        Returns:
+        Returns: 
         ----------
         None
         """
@@ -90,7 +90,7 @@ class AwaybotProducer:
         self.token = token
         return
 
-
+    
     def slackConnect(self):
         """
         Function that uses the supplied token to connect to the Slack API.
@@ -101,7 +101,7 @@ class AwaybotProducer:
         -----------
         None
 
-        Returns:
+        Returns: 
         ----------
         None
         """
@@ -123,7 +123,7 @@ class AwaybotProducer:
             self.slack_status = True
             return
 
-
+    
     def getChannelList(self):
         """
         Function that calls the slack API channels.list function
@@ -133,7 +133,7 @@ class AwaybotProducer:
         -----------
         None
 
-        Returns:
+        Returns: 
         ----------
         channel_list: list
             List with each channel represnted as a string.
@@ -141,25 +141,21 @@ class AwaybotProducer:
         if not self.slack_status:
             self.slackConnect(self.token)
         channel_list = [
-<<<<<<< HEAD
             {channel_dict['id']:channel_dict['name']}  for channel_dict in 
-=======
-            channel_dict['id'] for channel_dict in
->>>>>>> 2c479217064a080464b523b975f3baafb9bdfc62
             self.sc.api_call("channels.list")['channels']]
         return channel_list
 
-
+    
     def getTeamName(self):
         """
-        Function that calls the slack API team.info
-        function and returns the name of the team
+        Function that calls the slack API channels.list function
+        and returns the channel names, as aliased by the Slack API.
 
         Parameters:
         -----------
         None
 
-        Returns:
+        Returns: 
         ----------
         team_id: str
             The name of the slack team as aliased by the Slack API
@@ -167,20 +163,20 @@ class AwaybotProducer:
         if not self.slack_status:
             self.slackConnect()
         team_id = self.sc.api_call('team.info')['team']['id']
-
+    
         return team_id
 
-
+    
     def simpledbConnect(self):
         """
-        Function that uses saved AWS CLI configurations to connect to
-        the AWS simpleDB client. Quits if failure to connect.
+        Function that uses the supplied token to connect to the AWS simpleDB
+        client. Quits if failure to connect.
 
         Parameters:
         -----------
         None
 
-        Returns:
+        Returns: 
         ----------
         None
         """
@@ -236,7 +232,6 @@ class AwaybotProducer:
                 return '0'
 
 
-<<<<<<< HEAD
     def updateLatestTimestamp(self, domain, team_name, ts):
         if not self.sdb_status:
             self.simpledbConnect()
@@ -256,14 +251,12 @@ class AwaybotProducer:
             return
 
     
-=======
->>>>>>> 2c479217064a080464b523b975f3baafb9bdfc62
     def fetchSlackHistory(self, team_name, channel_list, timestamp = '0'):
         """
         Generator function that fetches messages from the
         slack api using the channel.history method for each channel
         and yields each message.
-        NOTES:
+        NOTES: 
         1. This method only fetches the text of messages and
         not reactions.
         2. Only users and bot users have access to channel.history.
@@ -275,7 +268,7 @@ class AwaybotProducer:
             The name of the slack team for which you are fetching messages
         timestamp: str
             The unix timestamp (as string) after which we will retrieve
-            messages.
+            messages. 
             Default: '0'
 
         Yields:
@@ -303,7 +296,7 @@ class AwaybotProducer:
                     message_dict['uuid'] = str(uuid.uuid1())
                     yield message_dict
 
-
+    
     def connectKafkaProducer(self):
         """
         Function that connects to the remote server as a
@@ -339,7 +332,7 @@ class AwaybotProducer:
 
         Returns:
             None
-        """
+        """ 
         if not self.kafka_status:
             self.connectKafkaProducer()
 
@@ -364,7 +357,7 @@ class AwaybotProducer:
     def openRtmConnection(self, team_name):
         """
         Generator function that fetches messages from the
-        slack RTM API.
+        slack RTM API. 
 
         TODO:
         -------
@@ -437,7 +430,6 @@ if __name__ == "__main__":
     for msg in history:
         logger.info(msg)
         ap.produceMessage("test_topic", msg)
-<<<<<<< HEAD
 
     real_time_messages = ap.openRtmConnection(team_name=team_id)
     for msg in real_time_messages:
@@ -445,5 +437,3 @@ if __name__ == "__main__":
         ap.produceMessage("test_topic", msg)
 
 
-=======
->>>>>>> 2c479217064a080464b523b975f3baafb9bdfc62
