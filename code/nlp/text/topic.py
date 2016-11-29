@@ -11,7 +11,7 @@
 
 """
 
-# NOTE: make class iterable with __iter__ and __next__
+
 class Topic:
     """Slack conversation topic: subset of highly-related messages
 
@@ -81,3 +81,20 @@ class Topic:
             Number of messages in the topic
         """
         return len(self.messages)
+
+    def __iter__(self):
+        """Iterates over the messages
+
+        Yields
+        -------
+        |message|
+            Next message to be iterated over
+        """
+        for message in self.messages:
+            yield message
+
+    def report_messages(self):
+        """Prints out the messages along with the reason as to why they were appended
+        """
+        for i,(m,r) in enumerate(zip(self.messages, self.reasons)):
+            print '{} -- {}\n\t\033[33m{}\033[0m\n\n'.format(i,r,m.text)
