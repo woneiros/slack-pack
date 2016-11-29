@@ -1,5 +1,5 @@
 
-def classify_stream(message_stream, distance=dist_m2m, max_messages=20,
+def classify_stream(message_stream, distance=dist_m2m, max_messages=20, max_active_topics=5,
                     low_threshold=.4, high_threshold=.7, low_step=.05, high_step=.02, verbose=True):
     """Classifies an entire stream of messages by predicting the topic to be appended to
 
@@ -11,6 +11,8 @@ def classify_stream(message_stream, distance=dist_m2m, max_messages=20,
         Distance measure between two texts
     max_messages : int, optional
         Maximum amount of messages to classify (for debugging and illustration purposes)
+    max_active_topics : int, optional
+        Maximum amount of (most-recent) topics a message can be compared to for similarity
     low_threshold : float, optional
         Description
     high_threshold : float, optional
@@ -49,7 +51,7 @@ def classify_stream(message_stream, distance=dist_m2m, max_messages=20,
             high_th = high_threshold
             topic_scores = []  # in case no topic is close
 
-            for t in xrange(len(topics)):
+            for t in xrange(max_active_topics):
                 tp_len = len(topics[t])
                 distances = map(lambda x: distance(msg.text, x[0].text), topics[t])
 
@@ -78,7 +80,7 @@ def classify_stream(message_stream, distance=dist_m2m, max_messages=20,
                             print '\t inserted to #{} : {}\n'.format(t, reason)
                         break
 
-                elif (tp_len > 10):
+                else:
                     if (score > tp_len*1.5):
                         reason = 'len({}) > 10 and distances({})'.format(tp_len, distances)
                         _topic = topics.pop(t)  # pop from topic queue
