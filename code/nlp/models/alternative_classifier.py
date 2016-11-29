@@ -51,7 +51,7 @@ def classify_stream(message_stream, distance=dist_m2m, max_messages=20, max_acti
             high_th = high_threshold
             topic_scores = []  # in case no topic is close
 
-            for t in xrange(max_active_topics):
+            for t in xrange( min(len(topics), max_topic_length) ):
                 tp_len = len(topics[t])
                 distances = map(lambda x: distance(msg.text, x[0].text), topics[t])
 
