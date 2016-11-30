@@ -72,6 +72,9 @@ class Topic:
         self.messages.sort(key=lambda msg: msg.id)
         self.reasons.extend( other.reasons )  # append reasons from other topic
 
+    def __getitem__(self, item):
+        return self.messages[item]
+
     def __len__(self):
         """Length of the topic (number of messages)
 

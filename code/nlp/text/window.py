@@ -8,10 +8,12 @@
 
 .. |message| replace:: :class:`nlp.text.message.Message`
 .. |topic| replace:: :class:`nlp.text.topic.Topic`
+.. |tfidf| replace:: :class:`nlp.models.summarization.TFIDF`
 
 """
 
 from topic import Topic
+
 
 def from_topic_list(topic_list):
     """Generates a Window from a list of "topics", in which each "topic" is a list of tuples of (message, reason))
@@ -90,6 +92,9 @@ class Window:
     def len_active(self):
         return len(self.topics[-1])
 
+    def __getitem__(self, item):
+        return self.topics[item]
+
     def __len__(self):
         """Length of the window (number of topics)
 
@@ -139,6 +144,23 @@ class Window:
                 _ = self.topics.pop(-1)
 
             self.topics.insert(0, topic)
+
+    def generate_topic_list(self, cleaner=None):
+        """Generates a list with a list for each topic with all words contained in that topic (for |tfidf| model)
+
+        Parameters
+        ----------
+        cleaner : callable, optional
+            Function that gets a str and returns a str back (meant for cleaning and removing stopwords)
+
+        Returns
+        -------
+        list[list[str]]
+            List of list of words (all words in a single topic)
+        """
+        cleaner = cleaner if cleaner is None else lambda x: x
+        return [ ' '.join( map(lambda msg: cleaner(msg.text), tpc) ).lower().split() for tpc in self.topics ]
+
 
     def insert_message(self, message, reason, topic_index=0):
         """Inserts the messgae into the specified topic
