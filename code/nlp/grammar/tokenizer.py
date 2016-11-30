@@ -30,8 +30,8 @@ class SimpleCleaner(object):
         Username pattern (defaults to `<@U-------->` or `<@u-------->`, where `-` is any alphanumeric)
     """
     PATTERNS = { 'user': re.compile('<@[Uu]\w{8}>'),
-                 'symbols_remove': re.compile('[:\.,/\\<>\!\?\*"\']'),
-                 'symbols_space': re.compile('_[\(\)\[\]\{\}]') }
+                 'symbols_remove': re.compile('[\.,/\\<>\!\?\*"\'&`]'),
+                 'symbols_space': re.compile(':;_[\(\)\[\]\{\}]') }
 
     def __init__(self, user=None, symbols_to_remove=None, symbols_to_space=None):
         if (user is not None) and hasattr(user, 'sub'):
