@@ -72,6 +72,16 @@ class Topic:
         self.messages.sort(key=lambda msg: msg.id)
         self.reasons.extend( other.reasons )  # append reasons from other topic
 
+    def get_starter_url(self):
+        """Returns the topic's starter message URL for go-to link creation
+
+        Returns
+        -------
+        str
+            URL for the topic's starter message
+        """
+        return self.start_message.url
+
     def __getitem__(self, item):
         return self.messages[item]
 
