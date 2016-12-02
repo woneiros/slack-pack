@@ -84,7 +84,7 @@ class MessageTokenizer(object):
         self.stopWords = []  # stopwords.words("english")
         self.stemmer = SnowballStemmer('english')
         self.cache = {}
-        self.userRe = re.compile('<@U\w\w\w\w\w\w\w\w>')  # TODO: change the user compilation
+        self.userRe = re.compile('<@[Uu]\w{8}>')
 
     def __call__(self, message):
         """ Fully processes a message (stem and tokenize)
@@ -163,8 +163,3 @@ class MessageTokenizer(object):
 
         """
         return self.userRe.sub('', message)
-
-
-# TODO: create TopicTokenizer
-class TopicTokenizer(object):
-    pass
