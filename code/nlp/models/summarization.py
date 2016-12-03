@@ -95,7 +95,3 @@ class TFIDF(object):
         """
         return map(int, 100 * scores.values / scores.min())
 
-    @staticmethod
-    def find_ngrams(input_list, n_gram):
-        return zip(*[input_list[i:] for i in range(n)])
-
