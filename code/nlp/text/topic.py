@@ -30,7 +30,7 @@ class Topic:
         self.start_message = start_message
         self.messages = [self.start_message, ]
         self.reasons = [reason, ]
-        self.last_timestamp = None
+        self.last_timestamp = start_message.timestamp
         # TODO: possible summary
 
     def append_message(self, message, reason):

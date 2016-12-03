@@ -63,6 +63,7 @@ class Window:
     def __init__(self, window_size=None):
         self.topics = []
         self.window_size = window_size if window_size is not None else float('inf')
+        self.last_timestamp = None
 
     @property
     def is_full(self):
@@ -135,7 +136,7 @@ class Window:
         if topic in self.topics:
             # Pop the actual topic
             current_topic = self.topics.pop( self.topics.index(topic) )
-            # Append to the last position
+            # Append to the first position
             self.topics.insert(0, current_topic )
 
         else:
@@ -144,6 +145,8 @@ class Window:
                 _ = self.topics.pop(-1)
 
             self.topics.insert(0, topic)
+
+        self.last_timestamp = self.topics[0].last_timestamp
 
     def generate_topic_list(self, cleaner=None):
         """Generates a list with a list for each topic with all words contained in that topic (for |tfidf| model)
@@ -162,7 +165,7 @@ class Window:
         return [ ' '.join( map(lambda msg: cleaner(msg.text), tpc) ).lower().split() for tpc in self.topics ]
 
 
-    def insert_message(self, message, reason, topic_index=0):
+    def insert_message(self, message, reason, topic_index=0, force_inactive=False):
         """Inserts the messgae into the specified topic
 
         Parameters
@@ -176,6 +179,10 @@ class Window:
             Reason why the |message| will be appended to the specific |topic|
         """
         self.topics[topic_index].append_message(message, reason)
+
+        # Unless specified not to, activate the topic we just appended to
+        if not force_inactive:
+            self.activate_topic( self.topics[topic_index] )
 
     def report_topics(self):
         """Prints out a report of the amount of topics and the size (in messages) of each topic
