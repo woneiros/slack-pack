@@ -59,6 +59,7 @@ class Wordcloud(object):
         """
         data = self.model.get_top_terms(self.document, self.max_words)
         word_score = [ (t, val) for t, val in zip(data.term, data.score) ]
+        self.cloud_img = self.wcloud.generate_from_frequencies( word_score )
 
 
     def show(self, title=None):
