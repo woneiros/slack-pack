@@ -22,18 +22,21 @@ class SimpleCleaner(object):
 
     Parameters
     ----------
-    symbols_to_remove : |re_pattern|
-        Symbolds to remove (defaults to `,.:'"<>!?*\/`)
-    symbols_to_space : |re_pattern|
+    remove_stopwords : bool, optional
+        Remove stopwords on clean (defaults to True)
+    symbols_to_remove : |re_pattern|, optional
+        Symbols to remove (defaults to `,.:'"<>!?*\/`)
+    symbols_to_space : |re_pattern|, optional
         Symbols to wrap in whitespace (defaults to `()[]{}`)
-    user : |re_pattern|
+    user : |re_pattern|, optional
         Username pattern (defaults to `<@U-------->` or `<@u-------->`, where `-` is any alphanumeric)
     """
     PATTERNS = { 'user': re.compile('<@[Uu]\w{8}>'),
                  'symbols_remove': re.compile('[\.,/\\<>\!\?\*"\'&`]'),
                  'symbols_space': re.compile(':;_[\(\)\[\]\{\}]') }
 
-    def __init__(self, user=None, symbols_to_remove=None, symbols_to_space=None):
+    def __init__(self, remove_stopwords=True, user=None, symbols_to_remove=None, symbols_to_space=None):
+        self.remove_stopwords = remove_stopwords
         if (user is not None) and hasattr(user, 'sub'):
             self.PATTERNS['user'] = user
         if (symbols_to_remove is not None) and hasattr(symbols_to_remove, 'sub'):
@@ -57,7 +60,11 @@ class SimpleCleaner(object):
         text = self.PATTERNS['user'].sub('', text.lower() )
         text = self.PATTERNS['symbols_remove'].sub('', text)
         text = self.PATTERNS['symbols_space'].sub(' ', text)
-        return ' '.join( filter(lambda x: x not in STOPWORDS, text.split()) )
+
+        if self.remove_stopwords:
+            return ' '.join( filter(lambda x: x not in STOPWORDS, text.split()) )
+        else:
+            return text
 
 
 class MessageTokenizer(object):
