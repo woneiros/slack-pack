@@ -18,6 +18,74 @@ import math
 import numpy as np
 import gensim
 
+# For our internal toolbox imports
+import os, sys
+path_to_here = os.path.abspath('.')
+sys.path.append(path_to_here[:path_to_here.index('code')+4])
+
+from nlp.geometry import dist as gd
+from nlp.geometry.repr import GloVe
+from nlp.geometry.repr import list_corpora as list_representations
+from nlp.grammar.tokenizer import SimpleCleaner
+
+
+# TODO: Add documentation!
+def list_distances():
+    return filter(lambda x: (not x.startswith('__')) and (x != 'np') , dir(gd) )
+
+
+class MessageSimilarity(object):
+    """docstring for MessageSimilarity"""
+    def __init__(self, cleaner=None, representation=None, distance=None):
+
+        self.cleaner = cleaner if cleaner is not None else SimpleCleaner()
+
+        # Set representation
+        if representation is None:
+            self.repr = self.get_repr()  # default
+        else:
+            if hasattr(representation, '__call__'):
+                self.repr = cleaner
+            else:
+                self.repr = self.get_repr(representation)
+
+        # Set distance
+        if distance is None:
+            self.dist = self.get_dist()  # default
+        else:
+            if hasattr(distance, '__call__'):
+                self.dist = cleaner
+            else:
+                self.dist = self.get_dist(distance)
+
+    @staticmethod
+    def get_dist(dist_id='cosine'):
+        if dist_id not in list_distances():
+            raise ValueError('The distance {} was not found, use `list_distances()` to check which are available on your machine'.format(dist_id))
+
+        return eval( 'gd.{}'.format(dist_id) )
+
+    @staticmethod
+    def get_repr(repr_id='glove.6B.100d.txt'):
+        print ' -- Loading GloVe, this might take a few (10~30) seconds... -- \n'
+        try:
+            glove = GloVe(repr_id)
+        except:
+            raise ValueError('Fail on loading the representation... Check if the representation is available with `list_representations()`')
+
+        return glove
+
+    def __call__(self, m1, m2):
+        # tokenize
+        text1 = self.cleaner(m1)
+        text2 = self.cleaner(m2)
+
+        # get geometric representation
+        rep1 = self.repr(text1)
+        rep2 = self.repr(text2)
+
+        return self.dist(rep1, rep2)
+
 
 class SimilarTopicCalculator:
     """Processes messages a calculates similarity to a |window| of |topic|s
