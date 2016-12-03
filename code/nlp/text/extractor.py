@@ -134,9 +134,9 @@ class CassandraExtractor(Extractor):
         dictionary with the allowed template queries depending on the intended extraction
 
     """
-    TIME_CALLS = { 'hour': lambda: pm.now().add(hours=-1).timestamp,
-                   'day': lambda: pm.now().add(days=-1).timestamp,
-                   'week': lambda: pm.now().add(days=-7).timestamp,
+    TIME_CALLS = { 'hour': lambda n: pm.now().add(hours=-1*n).timestamp,
+                   'day': lambda n: pm.now().add(days=-1*n).timestamp,
+                   'week': lambda n: pm.now().add(days=-7*n).timestamp,
                    'all': lambda: 0,
                  }
 
@@ -194,13 +194,15 @@ class CassandraExtractor(Extractor):
 
             return temp_channels
 
-    def get_messages(self, type_of_query, channel=None, table=None, min_words=5):
+    def get_messages(self, type_of_query, periods=1, channel=None, table=None, min_words=5):
         """Gets the stream of messages
 
         Parameters
         ----------
         type_of_query : str
             Label of the query type unless custom queries are added: 'hour', 'day', 'week'
+        periods : int, optional
+            Number of periods you want to query back
         channel : str, optional
             channel to be queried
         table : str, optional
@@ -222,7 +224,7 @@ class CassandraExtractor(Extractor):
 
         # If the type_of_query is one of the base
         if type_of_query in self.TIME_CALLS:
-            qtimestamp = self.TIME_CALLS[type_of_query]()
+            qtimestamp = self.TIME_CALLS[type_of_query](periods)
 
             rows = self.session.execute( self.BASE_QUERY.format(tb=qtable, ts=qtimestamp, c=channel) )
 
