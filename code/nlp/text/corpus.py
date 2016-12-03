@@ -21,7 +21,28 @@ from topic import Topic
 from window import Window
 
 
-def from_window(window, cleaner=None):
+def get_ngrams(text, n_grams=1):
+    """Returns the n-gram tokens of the specified text
+
+    Parameters
+    ----------
+    text : str
+        Text to tokenize
+    n_grams : int, optional
+        Number of words to be grouped together and considered a unit token for the corpus (defaults to 1)
+
+    Returns
+    -------
+    list[str]
+        List of n-gram tokens
+    """
+    word_list =  text.split()
+    ngram_list = map(lambda x: ' '.join(x), zip(*[word_list[i:] for i in xrange(n_grams)]))
+    return ngram_list
+
+
+
+def from_window(window, cleaner=None, n_grams=1):
     """Generates a :class: `nlp.text.corpus.Corpus` from a given |window|
 
     Parameters
@@ -30,6 +51,8 @@ def from_window(window, cleaner=None):
         Window containing messages already classified into several topics
     cleaner : callable, optional
         Function that gets a str and returns a str back (meant for cleaning and removing stopwords)
+    n_grams : int, optional
+        Number of words to be grouped together and considered a unit token for the corpus (defaults to 1)
 
     Returns
     -------
@@ -37,7 +60,13 @@ def from_window(window, cleaner=None):
         A :class: `nlp.text.corpus.Corpus` of the topics (each topic as a document containing all messages)
     """
     cleaner = cleaner if cleaner is not None else lambda x: x
-    return Corpus([ ' '.join( map(lambda msg: cleaner(msg.text), tpc) ).lower().split() for tpc in window ] )
+
+    if n_grams == 1:
+        _corpus = Corpus([ ' '.join( map(lambda msg: cleaner(msg.text), tpc) ).lower().split() for tpc in window ])
+    else:
+        _corpus = Corpus([ ' '.join( map(lambda msg: get_ngrams( cleaner( msg.text.lower() ), n_grams), tpc) ).lower().split() for tpc in window ])
+
+    return _corpus
 
 
 def from_documents(documents):
