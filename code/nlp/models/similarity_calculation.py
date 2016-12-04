@@ -29,13 +29,29 @@ from nlp.geometry.repr import list_corpora as list_representations
 from nlp.grammar.tokenizer import SimpleCleaner
 
 
-# TODO: Add documentation!
 def list_distances():
-    return filter(lambda x: (not x.startswith('__')) and (x != 'np') , dir(gd) )
+    """Lists the distances available
+
+    Returns
+    -------
+    list[str]
+        List of distances available
+    """
+    return filter( lambda x: (not x.startswith('__')) and (x not in  ['np', 'entropy']) , dir(gd) )
 
 
 class MessageSimilarity(object):
-    """docstring for MessageSimilarity"""
+    """Callable object that calculates message-to-message similarity
+
+    Attributes
+    ----------
+    cleaner : callable
+        Text cleaner (for removing symbols, stopwrods, etc...)
+    dist : callable
+        Callable object that calculates a multi-dimensional distance (for the geometric embeddings of each message)
+    repr : callable
+        Callable object that returns geometric representation of the passed text
+    """
     def __init__(self, cleaner=None, representation=None, distance=None):
 
         self.cleaner = cleaner if cleaner is not None else SimpleCleaner()
@@ -60,6 +76,24 @@ class MessageSimilarity(object):
 
     @staticmethod
     def get_dist(dist_id='cosine'):
+        """Load the distance callable and return it
+
+        Parameters
+        ----------
+        dist_id : str ,  optional
+            Identifier of the distance object (to obtain a list of the available id's run `list_distances()`)
+            Defaults to 'cosine'
+
+        Returns
+        -------
+        callable
+            Distance calculator
+
+        Raises
+        ------
+        ValueError
+            If the specified distance is not found
+        """
         if dist_id not in list_distances():
             raise ValueError('The distance {} was not found, use `list_distances()` to check which are available on your machine'.format(dist_id))
 
@@ -67,6 +101,24 @@ class MessageSimilarity(object):
 
     @staticmethod
     def get_repr(repr_id='glove.6B.100d.txt'):
+        """Load the representation callable and return it
+
+        Parameters
+        ----------
+        repr_id : str, optional
+            Identifier of the geometric representation object (to obtain a list of the available id's run `list_representations()`)
+            Defaults to 'glove.6B.100d.txt'
+
+        Returns
+        -------
+        callable
+            Representation callable object
+
+        Raises
+        ------
+        ValueError
+            If the specified geometric representation is not found
+        """
         print ' -- Loading GloVe, this might take a few (10~30) seconds... -- \n'
         try:
             glove = GloVe(repr_id)
@@ -76,6 +128,20 @@ class MessageSimilarity(object):
         return glove
 
     def __call__(self, m1, m2):
+        """Similarity between two texts
+
+        Parameters
+        ----------
+        m1 : str
+            Text #1
+        m2 : str
+            Text #2
+
+        Returns
+        -------
+        float
+            Similarity between texts
+        """
         # tokenize
         text1 = self.cleaner(m1)
         text2 = self.cleaner(m2)
