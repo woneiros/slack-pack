@@ -64,7 +64,8 @@ def from_window(window, cleaner=None, n_grams=1):
     if n_grams == 1:
         _corpus = Corpus([ ' '.join( map(lambda msg: cleaner(msg.text), tpc) ).lower().split() for tpc in window ])
     else:
-        _corpus = Corpus([ ' '.join( map(lambda msg: get_ngrams( cleaner( msg.text.lower() ), n_grams), tpc) ).lower().split() for tpc in window ])
+        _corpus = Corpus([ reduce(lambda x,y: x+y,
+                                  map(lambda msg: get_ngrams( cleaner( msg.text.lower() ), n_grams), tpc) ) for tpc in window ])
 
     return _corpus
 

@@ -33,22 +33,22 @@ class Wordcloud(object):
     max_words : int
         Maximum number of words to be shown on the wordcloud
     """
-    def __init__(self, model, document, max_words=10, background='#e9e9e9'):
+    def __init__(self, model, document_id, max_words=10, background='#e9e9e9'):
         """Summary
 
         Parameters
         ----------
         model : |model|
             Model with `get_top_terms` method which (given a document and an integer n) shoots out the top–n terms with their weights
-        document : list[tuples(int,int)]
-            List of tuples of the term-id and the count
+        document_id : int
+            Index of topic to obtain the TF-IDF score
         max_words : int, optional
             Maximum number of words to be shown on the wordcloud
         background : str, optional
             Color of the background
         """
         self.model = model
-        self.document = document
+        self.document_id = document_id
         self.max_words = max_words
 
         self.wcloud = wc.WordCloud(background_color=background)
@@ -57,8 +57,8 @@ class Wordcloud(object):
     def generate_wordcloud(self):
         """Generates the wordcloud internally by obtaining the tokens from the model (on instantiation)
         """
-        data = self.model.get_top_terms(self.document, self.max_words)
-        word_score = [ (t, val) for t, val in zip(data.term, data.score) ]
+        word_score = self.model.get_top_terms(self.document_id, self.max_words)
+        # word_score = [ (t, val) for t, val in zip(data.term, data.score) ]
         self.cloud_img = self.wcloud.generate_from_frequencies( word_score )
 
 
