@@ -8,10 +8,12 @@
 
 .. |message| replace:: :class:`nlp.text.message.Message`
 .. |topic| replace:: :class:`nlp.text.topic.Topic`
+.. |tfidf| replace:: :class:`nlp.models.summarization.TFIDF`
 
 """
 
 from topic import Topic
+
 
 def from_topic_list(topic_list):
     """Generates a Window from a list of "topics", in which each "topic" is a list of tuples of (message, reason))
@@ -61,6 +63,7 @@ class Window:
     def __init__(self, window_size=None):
         self.topics = []
         self.window_size = window_size if window_size is not None else float('inf')
+        self.last_timestamp = None
 
     @property
     def is_full(self):
@@ -89,6 +92,9 @@ class Window:
     @property
     def len_active(self):
         return len(self.topics[-1])
+
+    def __getitem__(self, item):
+        return self.topics[item]
 
     def __len__(self):
         """Length of the window (number of topics)
@@ -130,7 +136,7 @@ class Window:
         if topic in self.topics:
             # Pop the actual topic
             current_topic = self.topics.pop( self.topics.index(topic) )
-            # Append to the last position
+            # Append to the first position
             self.topics.insert(0, current_topic )
 
         else:
@@ -140,7 +146,26 @@ class Window:
 
             self.topics.insert(0, topic)
 
-    def insert_message(self, message, reason, topic_index=0):
+        self.last_timestamp = self.topics[0].last_timestamp
+
+    def generate_topic_list(self, cleaner=None):
+        """Generates a list with a list for each topic with all words contained in that topic (for |tfidf| model)
+
+        Parameters
+        ----------
+        cleaner : callable, optional
+            Function that gets a str and returns a str back (meant for cleaning and removing stopwords)
+
+        Returns
+        -------
+        list[list[str]]
+            List of list of words (all words in a single topic)
+        """
+        cleaner = cleaner if cleaner is None else lambda x: x
+        return [ ' '.join( map(lambda msg: cleaner(msg.text), tpc) ).lower().split() for tpc in self.topics ]
+
+
+    def insert_message(self, message, reason, topic_index=0, force_inactive=False):
         """Inserts the messgae into the specified topic
 
         Parameters
@@ -154,6 +179,10 @@ class Window:
             Reason why the |message| will be appended to the specific |topic|
         """
         self.topics[topic_index].append_message(message, reason)
+
+        # Unless specified not to, activate the topic we just appended to
+        if not force_inactive:
+            self.activate_topic( self.topics[topic_index] )
 
     def report_topics(self):
         """Prints out a report of the amount of topics and the size (in messages) of each topic

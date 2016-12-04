@@ -18,6 +18,140 @@ import math
 import numpy as np
 import gensim
 
+# For our internal toolbox imports
+import os, sys
+path_to_here = os.path.abspath('.')
+sys.path.append(path_to_here[:path_to_here.index('code')+4])
+
+from nlp.geometry import dist as gd
+from nlp.geometry.repr import GloVe
+from nlp.geometry.repr import list_corpora as list_representations
+from nlp.grammar.tokenizer import SimpleCleaner
+
+
+def list_distances():
+    """Lists the distances available
+
+    Returns
+    -------
+    list[str]
+        List of distances available
+    """
+    return filter( lambda x: (not x.startswith('__')) and (x not in  ['np', 'entropy']) , dir(gd) )
+
+
+class MessageSimilarity(object):
+    """Callable object that calculates message-to-message similarity
+
+    Attributes
+    ----------
+    cleaner : callable
+        Text cleaner (for removing symbols, stopwrods, etc...)
+    dist : callable
+        Callable object that calculates a multi-dimensional distance (for the geometric embeddings of each message)
+    repr : callable
+        Callable object that returns geometric representation of the passed text
+    """
+    def __init__(self, cleaner=None, representation=None, distance=None):
+
+        self.cleaner = cleaner if cleaner is not None else SimpleCleaner()
+
+        # Set representation
+        if representation is None:
+            self.repr = self.get_repr()  # default
+        else:
+            if hasattr(representation, '__call__'):
+                self.repr = cleaner
+            else:
+                self.repr = self.get_repr(representation)
+
+        # Set distance
+        if distance is None:
+            self.dist = self.get_dist()  # default
+        else:
+            if hasattr(distance, '__call__'):
+                self.dist = cleaner
+            else:
+                self.dist = self.get_dist(distance)
+
+    @staticmethod
+    def get_dist(dist_id='cosine'):
+        """Load the distance callable and return it
+
+        Parameters
+        ----------
+        dist_id : str ,  optional
+            Identifier of the distance object (to obtain a list of the available id's run `list_distances()`)
+            Defaults to 'cosine'
+
+        Returns
+        -------
+        callable
+            Distance calculator
+
+        Raises
+        ------
+        ValueError
+            If the specified distance is not found
+        """
+        if dist_id not in list_distances():
+            raise ValueError('The distance {} was not found, use `list_distances()` to check which are available on your machine'.format(dist_id))
+
+        return eval( 'gd.{}'.format(dist_id) )
+
+    @staticmethod
+    def get_repr(repr_id='glove.6B.100d.txt'):
+        """Load the representation callable and return it
+
+        Parameters
+        ----------
+        repr_id : str, optional
+            Identifier of the geometric representation object (to obtain a list of the available id's run `list_representations()`)
+            Defaults to 'glove.6B.100d.txt'
+
+        Returns
+        -------
+        callable
+            Representation callable object
+
+        Raises
+        ------
+        ValueError
+            If the specified geometric representation is not found
+        """
+        print ' -- Loading GloVe, this might take a few (10~30) seconds... -- \n'
+        try:
+            glove = GloVe(repr_id)
+        except:
+            raise ValueError('Fail on loading the representation... Check if the representation is available with `list_representations()`')
+
+        return glove
+
+    def __call__(self, m1, m2):
+        """Similarity between two texts
+
+        Parameters
+        ----------
+        m1 : str
+            Text #1
+        m2 : str
+            Text #2
+
+        Returns
+        -------
+        float
+            Similarity between texts
+        """
+        # tokenize
+        text1 = self.cleaner(m1)
+        text2 = self.cleaner(m2)
+
+        # get geometric representation
+        rep1 = self.repr(text1)
+        rep2 = self.repr(text2)
+
+        return self.dist(rep1, rep2)
+
 
 class SimilarTopicCalculator:
     """Processes messages a calculates similarity to a |window| of |topic|s

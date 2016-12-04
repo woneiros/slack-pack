@@ -30,7 +30,7 @@ class Topic:
         self.start_message = start_message
         self.messages = [self.start_message, ]
         self.reasons = [reason, ]
-        self.last_timestamp = None
+        self.last_timestamp = start_message.timestamp
         # TODO: possible summary
 
     def append_message(self, message, reason):
@@ -71,6 +71,19 @@ class Topic:
         self.messages = self.messages + other.messages
         self.messages.sort(key=lambda msg: msg.id)
         self.reasons.extend( other.reasons )  # append reasons from other topic
+
+    def get_starter_url(self):
+        """Returns the topic's starter message URL for go-to link creation
+
+        Returns
+        -------
+        str
+            URL for the topic's starter message
+        """
+        return self.start_message.url
+
+    def __getitem__(self, item):
+        return self.messages[item]
 
     def __len__(self):
         """Length of the topic (number of messages)
