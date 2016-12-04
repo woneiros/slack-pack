@@ -15,7 +15,7 @@
 """
 
 from gensim.models.tfidfmodel import TfidfModel
-import pandas as pd   # TODO: remove the necessity of using pandas (make it lighter!!)
+# import pandas as pd   # remove the necessity of using pandas (make it lighter!!)
 
 # For our internal toolbox imports
 import os, sys
