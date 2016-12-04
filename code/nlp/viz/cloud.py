@@ -2,7 +2,7 @@
 
 """Wordcloud visualization of a topic
 
-.. module:: nlp.models.cloud
+.. module:: nlp.viz.cloud
    :platform: Unix, Windows
    :synopsis: Visualization of topics in wordclouds
 
@@ -20,7 +20,7 @@ import wordcloud as wc
 
 
 class Wordcloud(object):
-    """docstring for Word
+    """Collection of most significant words in a topic with size proporational to significance
 
     Attributes
     ----------
@@ -29,7 +29,7 @@ class Wordcloud(object):
     model : |model|
         Model with `get_top_terms` method which (given a document and an integer n) shoots out the top–n terms with their weights
     wcloud : WordCloud
-        wordcloud object from the package `word_cloud<https://github.com/amueller/word_cloud>`_
+        `wordcloud` object from the package `word_cloud<https://github.com/amueller/word_cloud>`_
     max_words : int
         Maximum number of words to be shown on the wordcloud
     """
