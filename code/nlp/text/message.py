@@ -25,6 +25,8 @@ class Message(object):
         Message text
     author : str
         ID of the message's author
+    team : str
+        Slack team the message was produced in
     url : str
         Message's URL for creating go-to links
     timestamp : Optional[timestamp]
@@ -36,12 +38,13 @@ class Message(object):
 
     """
 
-    def __init__(self, id, text, author, url=None, timestamp=None):
+    def __init__(self, id, text, author, team=None, url=None, timestamp=None):
         self.id = id
         self.text = text
         self.text_repr = None
         self.repr_id = None
         self.author = author
+        self.team = team
         self.url = url
         self.timestamp = pm.from_timestamp(timestamp) if timestamp else None
 

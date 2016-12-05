@@ -253,6 +253,11 @@ class CassandraExtractor(Extractor):
                 _datetime = pm.from_format(r.ts[:19], fmt='%Y-%m-%dT%H:%M:%S')
                 timestamp = float(_datetime.timestamp) + float(r.ts.split('+')[0].split('.')[-1])
             finally:
-                yield( Message(id=r.ts, text=r.message_text, author=r.user, url=r.message_url , timestamp=timestamp) )
+                yield( Message(id=r.ts,
+                               text=r.message_text,
+                               author=r.user,
+                               team=r.team,
+                               url=r.message_url,
+                               timestamp=timestamp) )
 
 
