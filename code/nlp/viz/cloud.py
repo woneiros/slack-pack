@@ -16,6 +16,7 @@
 
 import matplotlib.pyplot as plt
 import wordcloud as wc
+import random
 
 
 
@@ -33,7 +34,8 @@ class Wordcloud(object):
     max_words : int
         Maximum number of words to be shown on the wordcloud
     """
-    def __init__(self, model, document_id, max_words=10, background='#e9e9e9'):
+    
+    def __init__(self, model, document_id, max_words=10, background='#FFFFFF',font=None):
         """Summary
 
         Parameters
@@ -50,8 +52,15 @@ class Wordcloud(object):
         self.model = model
         self.document_id = document_id
         self.max_words = max_words
-
-        self.wcloud = wc.WordCloud(background_color=background)
+        
+        # initialize the word cloud depending on whether a font path exists
+        if font is not None:
+            self.wcloud = wc.WordCloud(font_path=font, background_color=background)
+         
+        else:
+            self.wcloud = wc.WordCloud(background_color=background)
+            
+        # generate the word cloud
         self.generate_wordcloud()
 
     def generate_wordcloud(self):
@@ -60,6 +69,20 @@ class Wordcloud(object):
         word_score = self.model.get_top_terms(self.document_id, self.max_words)
         # word_score = [ (t, val) for t, val in zip(data.term, data.score) ]
         self.cloud_img = self.wcloud.generate_from_frequencies( word_score )
+        self.wcloud.recolor(color_func=self.slack_colorize)
+        
+    @staticmethod
+    def slack_colorize(word, font_size, position, orientation, random_state=None, **kwargs):
+        """Recolorizes the word cloud based on slack colors
+        """
+
+        # slack colors
+        slack_colors = ["#361137","#DE1D64","#24927D","#72CADB","#E7A733"]
+
+        # generate a random number between 0 and 4 (inclusive)
+        rand_int = random.randint(0,len(slack_colors)-1)
+
+        return slack_colors[rand_int]
 
 
     def show(self, title=None):
