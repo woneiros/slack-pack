@@ -225,7 +225,6 @@ class CassandraExtractor(Extractor):
         # If the type_of_query is one of the base
         if type_of_query in self.TIME_CALLS:
             qtimestamp = self.TIME_CALLS[type_of_query](periods)
-            print self.BASE_QUERY.format(tb=qtable, ts=qtimestamp, c=channel)
             rows = self.session.execute( self.BASE_QUERY.format(tb=qtable, ts=qtimestamp, c=channel) )
 
         # Else, fetch query from CUSTOM_QUERIES

@@ -102,35 +102,51 @@ class OutputHelper(object):
 
         sdb_payload = {
             'archiveURL': '',
-            'modelURL': []
+            'modelURL': '',
+            'numMessages': '0'
         }
+        vizes = 0
         while not self.output_ojects.empty():
             viz = self.output_ojects.get()
 
             # Upload to s3 and make public
-            s3_viz_name = '{}_{}_{}_{}.png'.format(
-                viz.team, viz.channel, viz.duration, viz.duration_unit)
+            s3_viz_name = '{}_{}_{}_{}_{}.png'.format(
+                viz.team, viz.channel, viz.duration, viz.duration_unit, vizes)
             viz_obj = self.s3.Object(s3_bucket, s3_viz_name)
             upload_viz_to_s3 = viz_obj.upload_file(viz.viz_path)
             viz_obj.Acl().put(ACL='public-read')
             s3_viz_url = 'https://s3.amazonaws.com/{}/{}'.format(
-                bucket, s3_viz_name)
-            # logger.info('Uploaded image to s3: {}'.format(s3_viz_url))
+                s3_bucket, s3_viz_name)
+            logger.info('Uploaded image to s3: {}'.format(s3_viz_url))
             
-            
+            vizes += 1
             # Update SimpleDB
-            viz_sdb_key = '{}_{}_{}_{}'.format(
+            viz_sdb_key = '{}_{}_{}_{}_{}'.format(
+                viz.team, viz.channel, viz.duration, viz.duration_unit, vizes)
+            duration_sdb_key = '{}_{}_{}_{}'.format(
                 viz.team, viz.channel, viz.duration, viz.duration_unit)
-            sdb_payload['archiveURL'] = viz.starter_message_url
-            sdb_payload['modelURL'].append(viz.s3_viz_url)
+            sdb_payload['archiveURL'] = viz.message_url
+            sdb_payload['modelURL'] = s3_viz_url
+            
+            sdb_payload['numMessages'] = str(vizes)
+            item_attrs = [
+                    {'Name': 'modelURL', 'Value': str(sdb_payload['modelURL']), 'Replace': True},
+                    {'Name': 'archiveURL', 'Value': sdb_payload['archiveURL'], 'Replace': True}
+                    ]
+            response = self.sdb.put_attributes(
+                DomainName=simple_db_domain,
+                ItemName=viz_sdb_key,
+                Attributes=item_attrs)
+            # logger.info(response)
 
+        num_message_attrs = [
+            {'Name': 'numMessages', 'Value': str(sdb_payload['numMessages']), 'Replace': True},
+            ]
         response = self.sdb.put_attributes(
-            DomainName=domain,
-            ItemName=viz_sdb_key,
-            Attributes=str(sdb_payload))
+                DomainName=simple_db_domain,
+                ItemName=duration_sdb_key,
+                Attributes=num_message_attrs)
         # logger.info(response)
-
-
 
 
 
