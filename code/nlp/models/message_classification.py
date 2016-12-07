@@ -106,9 +106,9 @@ class SimpleClassifier(object):
                 high_th = high_threshold
                 topic_scores = []  # in case no topic is close
 
-                for t in xrange( min(len(self.window), max_topic_length) ):
+                for t in xrange( min(len(self.window), max_active_topics) ):
                     tp_len = len(self.window[t])
-                    distances = map(lambda x: self.message_similarity(msg.text, x.text), topics[t])
+                    distances = map(lambda x: self.message_similarity(msg.text, x.text), self.window[t])
 
                     # Assign a non-linear score (very close messages score higher)
                     score = sum([ 0 if d < low_th else 1 if d < high_th else 3 for d in distances ])

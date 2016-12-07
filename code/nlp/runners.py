@@ -13,9 +13,9 @@ from nlp.models.summarization import TFIDF as Model
 from nlp.grammar import tokenizer as nt
 from nlp.viz.cloud import Wordcloud
 
-FONT_PATH = NLP_PATH + 'data/font/Ranga-Regular.ttf'
-IMG_FOLDER = NLP_PATH + 'data/img/'
-
+FONT_PATH = NLP_PATH + 'nlp/data/font/Ranga-Regular.ttf'
+IMG_FOLDER = NLP_PATH + 'nlp/data/img/'
+print FONT_PATH
 if __name__ == "__main__":
     casdb = xt.CassandraExtractor(cluster_ips=['54.175.189.47'],
                               session_keyspace='test_keyspace',
@@ -25,10 +25,9 @@ if __name__ == "__main__":
 
     for channel in channels:
         print channel
-        for p in xrange(7):
+        for p in xrange(1, 8, 1):
+            print p
             msg_stream = casdb.get_messages(type_of_query='day', periods=p, channel=channel, min_words=5)
-            for m in msg_stream:
-                print m.text
             print bool(msg_stream)
             if msg_stream:
                 classified_window = classifier.classify_stream(msg_stream, low_threshold=.4, high_threshold=.7, low_step=.05, high_step=.02, max_messages=30)
@@ -44,11 +43,11 @@ if __name__ == "__main__":
                     viz_path = IMG_FOLDER + 'cloud_topic{}.png'.format(t)
 
                     # Generate the viz out of the model
-                    viz = Wordcloud(model=uni_model, documentid=t, max_words=10, font=FONT_PATH)
+                    viz = Wordcloud(model=uni_model, document_id=t, max_words=10, font=FONT_PATH)
                     viz.save_png(viz_path)
 
                     # Call image_loader with: img_path + starter_message_url + team + channel + duration + duration_unit
-                    image_loader.add_viz(viz_path, topic.starter_message.url, topic.starter_message.team, channel, p, 'day')
+                    image_loader.add_viz(viz_path, topic.start_message.url, topic.start_message.team, channel, p, 'day')
                     # TODO: parameter-ize the duration unit
 
                 image_loader.upload()

@@ -54,9 +54,9 @@ class OutputHelper(object):
         try:
             self.sdb = boto3.client('sdb')
         except:
-            logger.error(
-                "Failed to connect to AWS. Have you configured "
-                "AWS CLI?", exc_info=True)
+            # logger.error(
+            #     "Failed to connect to AWS. Have you configured "
+            #     "AWS CLI?", exc_info=True)
             sys.exit()
         else:
             self.sdb_status = True
@@ -79,9 +79,9 @@ class OutputHelper(object):
         try:
             self.s3 = boto3.resource('s3')
         except:
-            logger.error(
-                "Failed to connect to AWS. Have you configured "
-                "AWS CLI?", exc_info=True)
+            # logger.error(
+            #     "Failed to connect to AWS. Have you configured "
+            #     "AWS CLI?", exc_info=True)
             sys.exit()
         else:
             self.s3_status = True
@@ -89,12 +89,12 @@ class OutputHelper(object):
 
 
     def add_viz(self, viz_path, starter_message_url, team, channel, duration, duration_unit):
-        new_viz = Viz(viz_path, starter_message_url, team, channel, duration, duration_unit)
-        self.output_ojects.append(new_viz)
+        new_viz = self.Viz(viz_path, starter_message_url, team, channel, duration, duration_unit)
+        self.output_ojects.put(new_viz)
         return
 
     
-    def upload(self, s3_bucket, simple_db_domain):
+    def upload(self, s3_bucket='awaybot_test', simple_db_domain='awaybot'):
         if not self.s3_status:
             self.s3Connect()
         if not self.sdb_status:
@@ -115,7 +115,7 @@ class OutputHelper(object):
             viz_obj.Acl().put(ACL='public-read')
             s3_viz_url = 'https://s3.amazonaws.com/{}/{}'.format(
                 bucket, s3_viz_name)
-            logger.info('Uploaded image to s3: {}'.format(s3_viz_url))
+            # logger.info('Uploaded image to s3: {}'.format(s3_viz_url))
             
             
             # Update SimpleDB
@@ -128,7 +128,7 @@ class OutputHelper(object):
             DomainName=domain,
             ItemName=viz_sdb_key,
             Attributes=str(sdb_payload))
-        logger.info(response)
+        # logger.info(response)
 
 
 
