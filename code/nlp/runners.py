@@ -1,40 +1,45 @@
 import os, sys
-from nlp.text import extractor as xt
 
-
-os.path.expanduser('~/slack-pack/code')
+os.path.expanduser('~/slack-pack/code')  # this will probably not work everywhere
 sys.path.append(NLP_PATH)
 
-from nlp.models.massage_classification import SimpleClassier as smc
-from nlp.utils.model_output_management import OutputHelper as oh
+from nlp.text import extractor as xt
+from nlp.models.massage_classification import SimpleClassifier
+from nlp.utils.model_output_management import OutputHelper
 
+
+
+FONT_PATH = '~/slack-pack/code/nlp/data/font/Ranga-Regular.ttf'
+IMG_FOLDER = '~/slack-pack/code/nlp/data/img/'
 
 if name == "main":
 	casdb = xt.CassandraExtractor(cluster_ips=['54.175.189.47'],
                               session_keyspace='test_keyspace',
                               table_name='awaybot_messages')
 
-    classifier = smc()
+    classifier = SimpleClassifier()
 
 	for channel in channels:
-		for i in xrange(1,7, 1):
-			msg_stream = casdb.get_messages(type_of_query='day', periods=i, channel=channel, min_words=5)
-			window_us = classifier.classify_stream(msg_stream, low_threshold=.4, high_threshold=.7, low_step=.05, high_step=.02, max_messages=30)
-
-            # Process the window into a corpus
-            corpus = Corpus()
+		for p in xrange(7):
+			msg_stream = casdb.get_messages(type_of_query='day', periods=p, channel=channel, min_words=5)
+			classified_window = classifier.classify_stream(msg_stream, low_threshold=.4, high_threshold=.7, low_step=.05, high_step=.02, max_messages=30)
 
             # Create a model using the corpus
-            model = Model(  )
+            uni_model = Model(window=classified_window, cleaner=nt.SimpleCleaner())
+            # bigram_model = Model(window=classified_window, cleaner=nt.SimpleCleaner(), n_grams=2)  # if we wanted a bigram model
 
-            image_loader = ImaLoad()
+            image_loader = OutputHelper()
 
-            for topic in window_us: # one per topic
+            for t, topic in enumerate(classified_window):  # one(?) per topic
 
-                # Generate the viz out od the model
-                viz = Wordcloud( --- )
+                viz_path = IMG_FOLDER + 'cloud_topic{}.png'.format(t)
 
-                # Call image_loader
-                image_loader.add_viz(viz.viz_path, viz.starter_message)
+                # Generate the viz out of the model
+                viz = Wordcloud(model=uni_model, t, max_words=10, font=FONT_PATH)
+                viz.save_png(viz_path)
+
+                # Call image_loader with: img_path + starter_message_url + team + channel + duration + duration_unit
+                image_loader.add_viz(viz_path, topic.starter_message.url, topic.starter_message.team, channel, p, 'day')
+                # TODO: parameter-ize the duration unit
 
             image_loader.upload()
