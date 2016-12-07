@@ -133,20 +133,41 @@ class OutputHelper(object):
                     {'Name': 'modelURL', 'Value': str(sdb_payload['modelURL']), 'Replace': True},
                     {'Name': 'archiveURL', 'Value': sdb_payload['archiveURL'], 'Replace': True}
                     ]
-            response = self.sdb.put_attributes(
+            self.sdb.put_attributes(
                 DomainName=simple_db_domain,
                 ItemName=viz_sdb_key,
                 Attributes=item_attrs)
+            logger.info("Created SimpleDB item {}".format(viz_sdb_key))
             # logger.info(response)
 
         num_message_attrs = [
             {'Name': 'numMessages', 'Value': str(sdb_payload['numMessages']), 'Replace': True},
             ]
-        response = self.sdb.put_attributes(
+        self.sdb.put_attributes(
                 DomainName=simple_db_domain,
                 ItemName=duration_sdb_key,
                 Attributes=num_message_attrs)
+        logger.info("Created SimpleDB item {}".format(duration_sdb_key))
         # logger.info(response)
+        return
+
+    def updateImageCount(self, team, channel, duration, duration_unit, simple_db_domain='awaybot'):
+        if not self.sdb_status:
+            self.simpledbConnect()
+        item_name = '{}_{}_{}_{}'.format(team, channel, duration, duration_unit)
+        no_message_attrs = [
+            {'Name': 'numMessages', 'Value': '0', 'Replace': True},
+        ]
+        self.sdb.put_attributes(
+                DomainName=simple_db_domain,
+                ItemName=item_name,
+                Attributes=no_message_attrs)
+        logger.info("Created SimpleDB item {}".format(item_name))
+        return
+
+
+
+
 
 
 

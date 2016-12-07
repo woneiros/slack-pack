@@ -169,7 +169,7 @@ class SimpleClassifier(object):
         try:
             print '... Done, processed {} messages'.format(m)
         except:
-            print  warnings.warn('No messages were streamed')
+            print 'No messages were streamed'
         return self.window
 
 
