@@ -18,7 +18,7 @@
 
 import nltk
 import pendulum as pm
-
+import warnings
 # For our internal toolbox imports
 import os, sys
 path_to_here = os.path.abspath('.')
@@ -166,8 +166,10 @@ class SimpleClassifier(object):
                     # topics.insert(0, [(msg, 'No similar topics (to 0) scores:({})'.format(topic_scores))] )
                     if verbose:
                         print '\t No similar topics (new 0) scores:({})\n'.format(topic_scores)
-
-        print '... Done, processed {} messages'.format(m)
+        try:
+            print '... Done, processed {} messages'.format(m)
+        except:
+            print  warnings.warn('No messages were streamed')
         return self.window
 
 

@@ -1,6 +1,7 @@
 import os
 import sys
 import boto3
+import logging
 from Queue import Queue
 from collections import namedtuple
 
@@ -50,16 +51,16 @@ class OutputHelper(object):
         ----------
         None
         """
-    try:
-        self.sdb = boto3.client('sdb')
-    except:
-        logger.error(
-            "Failed to connect to AWS. Have you configured "
-            "AWS CLI?", exc_info=True)
-        sys.exit()
-    else:
-        self.sdb_status = True
-    return
+        try:
+            self.sdb = boto3.client('sdb')
+        except:
+            logger.error(
+                "Failed to connect to AWS. Have you configured "
+                "AWS CLI?", exc_info=True)
+            sys.exit()
+        else:
+            self.sdb_status = True
+        return
 
 
     def s3Connect(self):
@@ -75,16 +76,16 @@ class OutputHelper(object):
         ----------
         None
         """
-    try:
-        self.s3 = boto3.resource('s3')
-    except:
-        logger.error(
-            "Failed to connect to AWS. Have you configured "
-            "AWS CLI?", exc_info=True)
-        sys.exit()
-    else:
-        self.s3_status = True
-    return
+        try:
+            self.s3 = boto3.resource('s3')
+        except:
+            logger.error(
+                "Failed to connect to AWS. Have you configured "
+                "AWS CLI?", exc_info=True)
+            sys.exit()
+        else:
+            self.s3_status = True
+        return
 
 
     def add_viz(self, viz_path, starter_message_url, team, channel, duration, duration_unit):
@@ -100,7 +101,7 @@ class OutputHelper(object):
             self.simpledbConnect()
 
         sdb_payload = {
-            'archiveURL': ''
+            'archiveURL': '',
             'modelURL': []
         }
         while not self.output_ojects.empty():
