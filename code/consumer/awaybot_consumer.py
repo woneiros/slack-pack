@@ -101,32 +101,34 @@ if __name__ == "__main__":
                 team text,
                 type text,
                 channel text,
-                PRIMARY KEY (uuid)
+                message_url text,
+                PRIMARY KEY (channel, ts)
             )
             """)
         prepared_msg = ac.session.prepare("""
             INSERT INTO awaybot_messages (uuid, message_text, ts,
-                user, team, type, channel)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
+                user, team, type, channel, message_url)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
             """)
         for msg in ac.consumer:
             msg = json.loads(msg.value)
-            logger.info(msg)
             if sorted(
                 [
                     u'text', u'ts', u'user',
                     u'team', u'type',
-                    u'channel', u'uuid'
+                    u'channel', u'uuid', u'message_url'
                 ]
                     ) == sorted(msg.keys()):
+
                 ac.session.execute(
                     prepared_msg, 
                     (msg['uuid'], msg['text'],
                      msg['ts'], msg['user'], 
                      msg['team'], msg['type'],
-                     msg['channel']))
-                logger.info(
-                    'Consume Message:\n{}'.format(msg['uuid']))
+                     msg['channel'], msg['message_url']))
+                # logger.info(
+                #     'Consume Message:\n{}'.format(msg['uuid']))
+                logger.info(msg)
             
 
     except:

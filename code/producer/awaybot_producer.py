@@ -57,7 +57,7 @@ class AwaybotProducer:
         token: str
             String representing a token used to connect to the slack api
         kafka_ip: str, list
-            String representing host:port of the kafka server(s).
+            String representing host:port of the kafka server(s). 
             If a list is supplied, format is ['h:p', 'h:p', ...]
         """
 
@@ -68,19 +68,19 @@ class AwaybotProducer:
         self.kafka_status = False
         self.sdb_status = False
 
-
+    
     def getTokenFromFile(self, auth_file):
         """
         Function that returns the slack token contained
         in the supplied file.
 
-        Parameters:
+        Parameters: 
         -----------
         auth_file: str
-            A single line text file containing a valid slack
+            A single line text file containing a valid slack 
             authorization token.
 
-        Returns:
+        Returns: 
         ----------
         None
         """
@@ -90,7 +90,7 @@ class AwaybotProducer:
         self.token = token
         return
 
-
+    
     def slackConnect(self):
         """
         Function that uses the supplied token to connect to the Slack API.
@@ -101,7 +101,7 @@ class AwaybotProducer:
         -----------
         None
 
-        Returns:
+        Returns: 
         ----------
         None
         """
@@ -123,7 +123,7 @@ class AwaybotProducer:
             self.slack_status = True
             return
 
-
+    
     def getChannelList(self):
         """
         Function that calls the slack API channels.list function
@@ -133,7 +133,7 @@ class AwaybotProducer:
         -----------
         None
 
-        Returns:
+        Returns: 
         ----------
         channel_list: list
             List with each channel represnted as a string.
@@ -141,42 +141,65 @@ class AwaybotProducer:
         if not self.slack_status:
             self.slackConnect(self.token)
         channel_list = [
-            channel_dict['id'] for channel_dict in
+            {channel_dict['id']:channel_dict['name']}  for channel_dict in 
             self.sc.api_call("channels.list")['channels']]
         return channel_list
 
-
+    
     def getTeamName(self):
         """
-        Function that calls the slack API team.info
-        function and returns the name of the team
+        Function that calls the slack API channels.list function
+        and returns the channel names, as aliased by the Slack API.
 
         Parameters:
         -----------
         None
 
-        Returns:
+        Returns: 
         ----------
         team_id: str
             The name of the slack team as aliased by the Slack API
         """
         if not self.slack_status:
             self.slackConnect()
-        team_id = self.sc.api_call('team.info')['team']['id']
-
+        team_id = self.sc.api_call('team.info')['team']['name']
+    
         return team_id
 
 
-    def simpledbConnect(self):
+    def getTeamDomain(self):
         """
-        Function that uses saved AWS CLI configurations to connect to
-        the AWS simpleDB client. Quits if failure to connect.
+        Function that calls the slack API channels.list function
+        and returns the channel names, as aliased by the Slack API.
 
         Parameters:
         -----------
         None
 
-        Returns:
+        Returns: 
+        ----------
+        team_domain: str
+            The portion of the url before '.slack.com'
+            example:
+                awaybot-slack-team(.slack.com)
+        """
+        if not self.slack_status:
+            self.slackConnect()
+        team_id = self.sc.api_call('team.info')['team']['domain']
+    
+        return team_id
+
+    
+    def simpledbConnect(self):
+        """
+        Function that uses the supplied token to connect to the AWS simpleDB
+        client. Quits if failure to connect.
+
+        Parameters:
+        -----------
+        None
+
+        Returns: 
         ----------
         None
         """
@@ -232,12 +255,32 @@ class AwaybotProducer:
                 return '0'
 
 
-    def fetchSlackHistory(self, team_name, channel_list, timestamp = '0'):
+    def updateLatestTimestamp(self, domain, team_name, ts):
+        if not self.sdb_status:
+            self.simpledbConnect()
+        latest_ts = self.getLatestTimestamp(domain, team_name)
+        logger.info(
+            'Updating timestamp: latest: {}\nnew:{}'.format(latest_ts, ts))
+        if float(ts) > float(latest_ts):
+            item_attrs = [
+                {'Name': 'Team', 'Value': team_name, 'Replace': True},
+                {'Name': 'ts', 'Value': ts, 'Replace': True}
+                ]
+            response = self.sdb.put_attributes(
+                DomainName=domain,
+                ItemName=team_name,
+                Attributes=item_attrs)
+            logger.info(response)
+            return
+
+    
+    def fetchSlackHistory(self, team_name, archive_url,
+        channel_list, timestamp = '0'):
         """
         Generator function that fetches messages from the
         slack api using the channel.history method for each channel
         and yields each message.
-        NOTES:
+        NOTES: 
         1. This method only fetches the text of messages and
         not reactions.
         2. Only users and bot users have access to channel.history.
@@ -247,9 +290,14 @@ class AwaybotProducer:
         Parameters:
         team_name: str
             The name of the slack team for which you are fetching messages
+        archive_url: str
+            The URL to the archive of the teams messages
+        channel_list: dict
+            A dictionary of channel ids and the names of channels
+            we will fetch history from.
         timestamp: str
             The unix timestamp (as string) after which we will retrieve
-            messages.
+            messages. 
             Default: '0'
 
         Yields:
@@ -261,23 +309,27 @@ class AwaybotProducer:
                 ts: The unix timestamp when the message was sent
                 channel: The channel the message was senf from
                 team: The slack team the user belongs to.
+                message_url: URL to the archived version of the message
         """
         if not self.slack_status:
             self.slackConnect(self.token)
         for channel in channel_list:
             channel_history = self.sc.api_call(
-                "channels.history", channel=channel,
+                "channels.history", channel=channel.keys()[0],
                 oldest = timestamp, count="1000")
             for message_dict in channel_history['messages']:
                 if (
                     sorted(['user', 'text', 'type', 'ts'])
                         == sorted(message_dict.keys())):
-                    message_dict['channel'] = channel
+                    message_dict['channel'] = channel.values()[0]
                     message_dict['team'] = team_name
+                    message_dict['message_url'] = '{}{}/p{}'.format(
+                        archive_url, message_dict['channel'],
+                        message_dict['ts'].replace('.', ''))
                     message_dict['uuid'] = str(uuid.uuid1())
                     yield message_dict
 
-
+    
     def connectKafkaProducer(self):
         """
         Function that connects to the remote server as a
@@ -313,9 +365,18 @@ class AwaybotProducer:
 
         Returns:
             None
-        """
+        """ 
         if not self.kafka_status:
             self.connectKafkaProducer()
+
+        if ('team' in message_value and 'ts' in message_value):
+            try:
+                self.updateLatestTimestamp(
+                    'awaybot', message_value['team'], 
+                    message_value['ts'])
+            except:
+                logger.error('Failed to update timestamp for {}'.format(
+                    message_value), exc_info=True)
         try:
             self.kp.send(message_topic, json.dumps(message_value))
         except:
@@ -326,10 +387,10 @@ class AwaybotProducer:
         return
 
 
-    def openRtmConnection(self):
+    def openRtmConnection(self, team_name):
         """
         Generator function that fetches messages from the
-        slack RTM API.
+        slack RTM API. 
 
         TODO:
         -------
@@ -354,12 +415,12 @@ class AwaybotProducer:
         """
         if not self.slack_status:
             self.slackConnect(self.token)
-        if self.sc.rtm_connnect():
-            print 'Currently Connected'
+        if self.sc.rtm_connect():
+            logger.info('Connected to Slack RTM API!')
             while True:
                 time.sleep(5)
                 try:
-                    message_dict = self.sc.rtm_ream()
+                    message_dict = self.sc.rtm_read()
                 except Exception as e:
                     logger.info(
                         'Failed to fetch latest message.', exc_info=True)
@@ -367,8 +428,11 @@ class AwaybotProducer:
                     return
                 else:
                     if message_dict:
-                        message_dict['uuid'] = str(uuid.uuid1())
-                        yield message_dict
+                        for message in message_dict:
+                            if message:
+                                message['uuid'] = str(uuid.uuid1())
+                                message['team'] = team_name
+                                yield message
         else:
             raise ValueError(
                 "Could not connect to Slack RTM API. "
@@ -383,6 +447,8 @@ if __name__ == "__main__":
         token=os.environ.get('SLACK_TOKEN'),
         kafka_ip=os.environ.get('KAFKA_IP'))
     team_id = ap.getTeamName()
+    team_domain = ap.getTeamDomain()
+    team_archive_url = r'https://{}.slack.com/archives/'.format(team_domain)
     logger.info('Team name: {}'.format(team_id))
     latest_timestamp = ap.getLatestTimestamp(
         domain='awaybot', team_name=team_id)
@@ -391,10 +457,43 @@ if __name__ == "__main__":
             team_id, datetime.datetime.fromtimestamp(
                 float(latest_timestamp)).strftime('%Y-%m-%d %H:%M:%S')))
     channels = ap.getChannelList()
+    channel_dict = {}
+    for i in channels:
+        channel_dict.update(i)
     logger.info('Channnels available to producer: {}'.format
-        (' '.join([i for i in channels])))
+        (' '.join([i.values()[0] for i in channels])))
     history = ap.fetchSlackHistory(
-        team_name=team_id, channel_list=channels, timestamp=latest_timestamp)
+        team_name=team_id, archive_url=team_archive_url,
+        channel_list=channels, timestamp=latest_timestamp)
     for msg in history:
         logger.info(msg)
         ap.produceMessage("test_topic", msg)
+
+
+    message_keys = sorted(
+                [
+                    u'text', u'ts', u'user',
+                    u'team', u'type',
+                    u'channel', u'uuid'
+                ])
+    c = 0
+    while True:
+        if c:
+            logger.info('Reconnected to RTM API {} time(s)'.format(c))
+        real_time_messages = ap.openRtmConnection(team_name=team_id)
+        for msg in real_time_messages:
+            if 'channel' in msg:
+                if not msg['channel'] in channel_dict:
+                    continue
+                msg['channel'] = channel_dict[msg['channel']]
+
+            if sorted(msg.keys()) == message_keys:
+                msg['message_url'] = '{}{}/p{}'.format(
+                    team_archive_url, msg['channel'],
+                    msg['ts'].replace('.', ''))
+
+            logger.info(msg)
+            ap.produceMessage("test_topic", msg)
+        c += 1
+
+
