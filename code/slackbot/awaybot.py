@@ -158,7 +158,7 @@ class Slackbot:
 
                 ## CASE TWO: VALID COMMAND BUT NOT ENOUGH MESSAGES FOR WORDCLOUD GENERATION
                 if not int(num_topics):
-                    response = "{} has no topics for {} {}".format(
+                    response = "{} has no topics for last {} {}".format(
                         command_channel, command_duration, command_duration_units)
                     self.slack_client.api_call("chat.postMessage",
                                            channel=channel,
@@ -178,7 +178,7 @@ class Slackbot:
 
 
                     # Respond for each topic
-                    for topic in xrange(1, int(num_topics), 1):
+                    for topic in xrange(1, int(num_topics) + 1, 1):
                         sdbImageItem = '{}_{}_{}_{}_{}'.format(
                             team_name, channel_name,
                             command_duration, command_duration_units, topic)

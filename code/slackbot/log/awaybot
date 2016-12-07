@@ -1,30 +1,12 @@
-2016-12-07 14:59:05,059 - INFO - BOT 'awaybot' has received MESSAGE '{u'user_profile': {u'avatar_hash': u'1594b5257d41', u'first_name': None, u'real_name': u'', u'name': u'awaybot', u'image_72': u'https://avatars.slack-edge.com/2016-10-02/86527498929_1594b5257d41264bd115_72.png'}, u'inviter': u'U2C9M9GP5', u'ts': u'1481140737.000017', u'subtype': u'channel_join', u'text': u'<@U2JFHEMNV|awaybot> has joined the channel', u'user': u'U2JFHEMNV', u'team': u'T2BT8MVE3', u'type': u'message', u'channel': u'C2CV4G41G'}'
-2016-12-07 14:59:13,614 - INFO - Stating __main__, simple test for awaybot.py
-2016-12-07 14:59:13,614 - INFO - RTM API read websocket delay set to '1' seconds
-2016-12-07 14:59:13,615 - INFO - Initializing bot with parameters:
-            	slack_client : <slackclient._client.SlackClient object at 0x7f352447d9d0>
-            	bot_name : awaybot
-            	command : /summarize
-2016-12-07 14:59:14,284 - INFO - starterbot connected and running!
-2016-12-07 14:59:21,299 - INFO - BOT 'awaybot' has received MESSAGE '{u'text': u'<@U2JFHEMNV> /summarize <#C2BSVGJQ4|general> 4 days', u'ts': u'1481140754.000018', u'user': u'U2C9M9GP5', u'team': u'T2BT8MVE3', u'type': u'message', u'channel': u'C2CV4G41G'}'
-2016-12-07 14:59:21,299 - INFO - Fetching number of items for Slack-pack_general_4_days
-2016-12-07 14:59:21,545 - INFO - COMMAND /summarize <#c2bsvgjq4|general> 4 days has a valid format for processing:
-                command_channel : <#c2bsvgjq4|general>
-                command_duration : 4
-                command_duration_units : days
-2016-12-07 14:59:21,829 - INFO - Sending:
-                        	channel : C2CV4G41G
-                        	text : <https://slackpack-project.slack.com/archives/general/p1480799357000121|Go To Topic 1>
-                        	image_url : [{"title": "Topic 1" , "image_url":"https://s3.amazonaws.com/awaybot_test/Slack-pack_general_4_days_0.png"}]
-2016-12-07 14:59:22,385 - INFO - Sending:
-                        	channel : C2CV4G41G
-                        	text : <https://slackpack-project.slack.com/archives/general/p1480798385000103|Go To Topic 2>
-                        	image_url : [{"title": "Topic 2" , "image_url":"https://s3.amazonaws.com/awaybot_test/Slack-pack_general_4_days_1.png"}]
-2016-12-07 14:59:22,724 - INFO - Sending:
-                        	channel : C2CV4G41G
+2016-12-07 18:12:21,683 - INFO - Sending:
+                        	channel : C2CNEMD0S
                         	text : <https://slackpack-project.slack.com/archives/general/p1480796789000062|Go To Topic 3>
                         	image_url : [{"title": "Topic 3" , "image_url":"https://s3.amazonaws.com/awaybot_test/Slack-pack_general_4_days_2.png"}]
-2016-12-07 14:59:23,035 - INFO - Sending:
-                        	channel : C2CV4G41G
-                        	text : <https://slackpack-project.slack.com/archives/general/p1480798094000076|Go To Topic 4>
+2016-12-07 18:12:22,183 - INFO - Sending:
+                        	channel : C2CNEMD0S
+                        	text : <https://slackpack-project.slack.com/archives/general/p1480798132000079|Go To Topic 4>
                         	image_url : [{"title": "Topic 4" , "image_url":"https://s3.amazonaws.com/awaybot_test/Slack-pack_general_4_days_3.png"}]
+2016-12-07 18:12:22,553 - INFO - Sending:
+                        	channel : C2CNEMD0S
+                        	text : <https://slackpack-project.slack.com/archives/general/p1480796590000057|Go To Topic 5>
+                        	image_url : [{"title": "Topic 5" , "image_url":"https://s3.amazonaws.com/awaybot_test/Slack-pack_general_4_days_4.png"}]
