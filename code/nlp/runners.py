@@ -1,7 +1,12 @@
 import os, sys
 
-os.path.expanduser('~/slack-pack/code')  # this will probably not work everywhere
+
+# For our internal toolbox imports
+import os, sys
+path_to_here = os.path.abspath('.')
+NLP_PATH = path_to_here[:path_to_here.index('slack-pack') + 10] + '/code/'
 sys.path.append(NLP_PATH)
+
 
 from nlp.text import extractor as xt
 from nlp.models.massage_classification import SimpleClassifier
