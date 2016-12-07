@@ -1,0 +1,12 @@
+2016-12-07 15:02:21,998 - INFO - {'team': u'Slack-pack', u'type': u'user_typing', u'user': u'U2BTFJNPL', u'channel': u'nlp-methodology', 'uuid': '109b171c-bcb8-11e6-b18b-08002749f6f8'}
+2016-12-07 15:02:27,005 - INFO - {'uuid': '139730cc-bcb8-11e6-b18b-08002749f6f8', u'text': u'that\u2019s on my side', u'ts': u'1481140829.000033', u'user': u'U2BTFJNPL', u'team': u'Slack-pack', 'message_url': 'https://slackpack-project.slack.com/archives/nlp-methodology/p1481140829000033', u'type': u'message', u'channel': u'nlp-methodology'}
+2016-12-07 15:02:27,041 - INFO - Updating timestamp: latest: 1481140823.000032
+new:1481140829.000033
+2016-12-07 15:02:27,098 - INFO - {'ResponseMetadata': {'RetryAttempts': 0, 'HTTPStatusCode': 200, 'BoxUsage': '0.0000219923', 'RequestId': '8181bb8b-a2fb-323e-bcbe-e13e322e90c2', 'HTTPHeaders': {'transfer-encoding': 'chunked', 'vary': 'Accept-Encoding', 'server': 'Amazon SimpleDB', 'connection': 'keep-alive', 'date': 'Wed, 07 Dec 2016 20:02:21 GMT', 'content-type': 'text/xml'}}}
+2016-12-07 15:02:32,105 - INFO - {'uuid': '16a15824-bcb8-11e6-b18b-08002749f6f8', u'mention_count': 0, u'event_ts': u'1481140830.778600', u'ts': u'1481140829.000033', u'unread_count': 0, u'num_mentions': 0, u'mention_count_display': 0, u'unread_count_display': 0, 'team': u'Slack-pack', u'num_mentions_display': 0, u'type': u'channel_marked', u'channel': u'nlp-methodology'}
+2016-12-07 15:02:32,163 - INFO - Updating timestamp: latest: 1481140829.000033
+new:1481140829.000033
+2016-12-07 15:02:37,169 - INFO - {'uuid': '19a6095c-bcb8-11e6-b18b-08002749f6f8', u'text': u'agreed, they can probably 50% the size', u'ts': u'1481140846.000034', u'user': u'U2C9M9GP5', u'team': u'Slack-pack', 'message_url': 'https://slackpack-project.slack.com/archives/nlp-methodology/p1481140846000034', u'type': u'message', u'channel': u'nlp-methodology'}
+2016-12-07 15:02:37,208 - INFO - Updating timestamp: latest: 1481140829.000033
+new:1481140846.000034
+2016-12-07 15:02:37,297 - INFO - {'ResponseMetadata': {'RetryAttempts': 0, 'HTTPStatusCode': 200, 'BoxUsage': '0.0000219923', 'RequestId': '095f420a-bee4-33a9-4483-44fa133fccae', 'HTTPHeaders': {'transfer-encoding': 'chunked', 'vary': 'Accept-Encoding', 'server': 'Amazon SimpleDB', 'connection': 'keep-alive', 'date': 'Wed, 07 Dec 2016 20:02:31 GMT', 'content-type': 'text/xml'}}}

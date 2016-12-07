@@ -150,6 +150,7 @@ class CassandraExtractor(Extractor):
 
         self.CUSTOM_QUERIES = {}
         self.__channels = None
+        self.__teams = None
 
     def add_query(self, label, query):
         """Adds a custom query to the QUERIES dictionary
@@ -193,6 +194,25 @@ class CassandraExtractor(Extractor):
                 temp_channels.add( r.channel )
 
             return temp_channels
+
+    def list_teams(self, table=None):
+
+        if table is None:
+            # Obtain channels for the object's `table_name`
+            if self.__teams is None:
+                self.__teams = set()
+                for r in self.session.execute('select team from {}'.format(self.table_name)):
+                    self.__teams.add( r.team )
+
+            return self.__teams
+
+        else:
+            # Obtain the channel for the table specified
+            temp_teams = set()
+            for r in self.session.execute('select DISTINCT channel from {}'.format(table)):
+                temp_teams.add( r.team )
+
+            return temp_teams
 
     def get_messages(self, type_of_query, periods=1, channel=None, table=None, min_words=5):
         """Gets the stream of messages
