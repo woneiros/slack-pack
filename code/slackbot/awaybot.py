@@ -1,3 +1,30 @@
+# -*- coding: utf-8 -*-
+
+
+
+"""
+  Awaybot - Slackbot that responds to
+  \summarize commands of the form
+  \summarize [channel] [duration] [time unit]
+
+  Example \summarize #general 1 days
+
+  Responds to user inputs by querying SimpleDB
+  for the item that matches the input command.
+  Items are of the form
+  [team]_[channel]_[duration]_[time unit]
+
+
+
+.. module:: awaybot
+
+  :platform: Unix, Windows
+
+  :synopsis: Slack API, Slackbot
+
+"""
+
+
 import os
 import time
 from slackclient import SlackClient

@@ -1,12 +1,24 @@
-2016-12-07 18:12:21,683 - INFO - Sending:
-                        	channel : C2CNEMD0S
-                        	text : <https://slackpack-project.slack.com/archives/general/p1480796789000062|Go To Topic 3>
-                        	image_url : [{"title": "Topic 3" , "image_url":"https://s3.amazonaws.com/awaybot_test/Slack-pack_general_4_days_2.png"}]
-2016-12-07 18:12:22,183 - INFO - Sending:
-                        	channel : C2CNEMD0S
-                        	text : <https://slackpack-project.slack.com/archives/general/p1480798132000079|Go To Topic 4>
-                        	image_url : [{"title": "Topic 4" , "image_url":"https://s3.amazonaws.com/awaybot_test/Slack-pack_general_4_days_3.png"}]
-2016-12-07 18:12:22,553 - INFO - Sending:
-                        	channel : C2CNEMD0S
-                        	text : <https://slackpack-project.slack.com/archives/general/p1480796590000057|Go To Topic 5>
-                        	image_url : [{"title": "Topic 5" , "image_url":"https://s3.amazonaws.com/awaybot_test/Slack-pack_general_4_days_4.png"}]
+2016-12-07 21:04:32,153 - INFO - BOT 'awaybot' has received MESSAGE '{u'text': u'<@U2JFHEMNV> /summarize 4 days', u'ts': u'1481162661.000002', u'user': u'U2C5M1L6L', u'team': u'T2BT8MVE3', u'type': u'message', u'channel': u'D2JFHEMT3'}'
+2016-12-07 21:04:32,153 - INFO - Incorrectly formatted COMMAND '/summarize 4 days' sent to BOT 'awaybot'
+2016-12-07 21:05:10,436 - INFO - BOT 'awaybot' has received MESSAGE '{u'text': u'<@U2JFHEMNV> /summarize <#C2BSVGJQ4|general> 1 weeks', u'ts': u'1481162701.000004', u'user': u'U2C5M1L6L', u'team': u'T2BT8MVE3', u'type': u'message', u'channel': u'D2JFHEMT3'}'
+2016-12-07 21:05:10,437 - INFO - Fetching number of items for Slack-pack_general_1_weeks
+2016-12-07 21:05:10,685 - INFO - COMMAND /summarize <#c2bsvgjq4|general> 1 weeks has a valid format for processing:
+                command_channel : <#c2bsvgjq4|general>
+                command_duration : 1
+                command_duration_units : weeks
+2016-12-07 21:05:11,082 - INFO - Sending:
+                        	channel : D2JFHEMT3
+                        	text : <https://slackpack-project.slack.com/archives/general/p1480798269000090|Go To Topic 1>
+                        	image_url : [{"title": "Topic 1" , "image_url":"https://s3.amazonaws.com/awaybot_test/Slack-pack_general_1_weeks_0.png"}]
+2016-12-07 21:05:11,487 - INFO - Sending:
+                        	channel : D2JFHEMT3
+                        	text : <https://slackpack-project.slack.com/archives/general/p1480713406000002|Go To Topic 2>
+                        	image_url : [{"title": "Topic 2" , "image_url":"https://s3.amazonaws.com/awaybot_test/Slack-pack_general_1_weeks_1.png"}]
+2016-12-07 21:05:12,045 - INFO - Sending:
+                        	channel : D2JFHEMT3
+                        	text : <https://slackpack-project.slack.com/archives/general/p1480787692000017|Go To Topic 3>
+                        	image_url : [{"title": "Topic 3" , "image_url":"https://s3.amazonaws.com/awaybot_test/Slack-pack_general_1_weeks_2.png"}]
+2016-12-07 21:05:12,672 - INFO - Sending:
+                        	channel : D2JFHEMT3
+                        	text : <https://slackpack-project.slack.com/archives/general/p1480554010000091|Go To Topic 4>
+                        	image_url : [{"title": "Topic 4" , "image_url":"https://s3.amazonaws.com/awaybot_test/Slack-pack_general_1_weeks_3.png"}]
