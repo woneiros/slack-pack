@@ -2,7 +2,7 @@ import os
 import sys
 import boto3
 import logging
-from Queue import Queue
+from Queue import PriorityQueue
 from collections import namedtuple
 
 
@@ -34,7 +34,7 @@ class OutputHelper(object):
     Viz = namedtuple('Viz', 'viz_path message_url team channel duration duration_unit')
 
     def __init__(self):
-        self.output_ojects = Queue(0)
+        self.output_ojects = PriorityQueue(0)
         self.sdb_status = False
         self.s3_status = False
 
@@ -90,7 +90,8 @@ class OutputHelper(object):
 
     def add_viz(self, viz_path, starter_message_url, team, channel, duration, duration_unit):
         new_viz = self.Viz(viz_path, starter_message_url, team, channel, duration, duration_unit)
-        self.output_ojects.put(new_viz)
+        priority_ts = starter_message_url.split('/')[-1].replace('p', '')
+        self.output_ojects.put((priority_ts, new_viz))
         return
 
     
@@ -107,7 +108,7 @@ class OutputHelper(object):
         }
         vizes = 0
         while not self.output_ojects.empty():
-            viz = self.output_ojects.get()
+            viz = self.output_ojects.get()[1]
 
             # Upload to s3 and make public
             s3_viz_name = '{}_{}_{}_{}_{}.png'.format(
