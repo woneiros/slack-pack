@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+
+<style>
+
+#NavBar {
+  font-size: 12pt;
+  font-family: "Open Sans Condensed",sans-serif;
+  color: #FFFFFF;
+  background-color: rgba(54,17,55,0.8);
+  text-transform: uppercase;
+
+  padding-left: 50px;
+  padding-right: 25px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+#NavRight {
+  display: inline-block;
+  float: right;
+}
+
+#NavBar a {
+  text-decoration: none;
+  padding-left: 0;
+  padding-right: 60px;
+}
+
+#introImage {
+  font-size: 90pt;
+  font-family: "Alfa Slab One";
+  background-image: url(slackPlaidDark.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+
+  color: #FFFFFF;
+  text-align: center;
+
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+#title {
+  margin-left: 125px;
+  margin-right: 125px;
+  /*background-color: rgba(0,0,0,0.1);*/
+}
+
+.subtitle {
+  margin-left: 125px;
+  margin-right: 125px;
+  font-size: 50pt;
+  font-family: "Ranga";
+  font-weight: bold;
+  /*background-color: rgba(0,0,0,0.1);*/
+}
+
+.heading {
+  font-family: "Ranga";
+  font-size: 25pt;
+  text-align: center;
+}
+
+#Section1 {
+  background-color: #E7A733;
+  color: #FFFFFF;
+  padding-left: 100px;
+  padding-right: 100px;
+  padding-top: 30px;
+  padding-bottom: 80px;
+
+  border-top: solid 5px white;
+}
+
+#Section2 {
+  background-color: #DE1D64;
+  color: #FFFFFF;
+  padding-left: 100px;
+  padding-right: 100px;
+  padding-top: 30px;
+  padding-bottom: 80px;
+
+  border-top: solid 5px white;
+}
+
+#Section3 {
+  background-color: #FFFFFF;
+  color: #484A4A;
+  padding-left: 100px;
+  padding-right: 100px;
+  padding-top: 30px;
+  padding-bottom: 80px;
+  text-align: center;
+}
+
+#Section4 {
+  background-color: #72CADB;
+  color: #FFFFFF;
+  padding-left: 100px;
+  padding-right: 100px;
+  padding-top: 30px;
+  padding-bottom: 80px;
+}
+
+#Section5 {
+  background-color: #FFFFFF;
+  color: #484A4A;
+  padding-left: 100px;
+  padding-right: 100px;
+  padding-top: 30px;
+  padding-bottom: 80px;
+  text-align: center;
+}
+
+#Section6 {
+  background-color: #24927D;
+  color: #FFFFFF;
+  padding-left: 100px;
+  padding-right: 100px;
+  padding-top: 30px;
+  padding-bottom: 80px;
+}
+
+#Section7 {
+  background-color: #FFFFFF;
+  color: #484A4A;
+  padding-left: 100px;
+  padding-right: 100px;
+  padding-top: 30px;
+  padding-bottom: 80px;
+  text-align: center;
+}
+
+#Section8 {
+  background-color: #361137;
+  color: #FFFFFF;
+  padding-left: 100px;
+  padding-right: 100px;
+  padding-top: 30px;
+  padding-bottom: 80px;
+}
+
+body {
+  margin:0;
+  font-family: "Open Sans Condensed","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 16pt;
+  text-align: justify;
+}
+
+body a {
+  color: #FFFFFF;
+  font-weight: bold;
+}
+
+strong {
+  font-family: "Ranga";
+  font-size: 18pt;
+  font-style: normal;
+}
+
+.centered {
+  text-align: center;
+}
+
+</style>
+
+<head>
+  <title>Awaybot</title>
+  <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Dancing+Script|Lato:100i|Open+Sans+Condensed:300|Ranga" rel="stylesheet">
+  <link rel="icon" href="favicon.png">
+</head>
+
+<body>
+
+  <div id="NavBar">
+    <a href="#top">Awaybot</a>
+    <div id="NavRight">
+      <a href="#Section1">Problem</a>
+      <a href="#Section2">Solution</a>
+      <a href="#Section4">Architecture</a>
+      <a href="#Section6">NLP</a>
+      <a href="#Section8">The team</a>
+      <!-- extra spacing to prevent links going off page -->
+      <a style="opacity:0.0">.</a>
+    </div>
+  </div>
+
+  <div id="top"></div>
+
+  <div id="introImage">
+    <p id="title">Awaybot</p>
+    <p class="subtitle">solving your #slack anxiety since 2016</p>
+  </div>
+
+  <div id="Section1">
+    <p class="heading">your problem, my problem, our problem...</p>
+    We all love Slack. Slack creates a “virtual hallway” where ideas flow
+    freely, questions are answered by the collective, and debate on topics
+    of interest flourishes. This is wonderful. However, as working-students
+    (or one might argue, members of the 21st century), we recognize that
+    our limited time is no match for the deluge of information available on Slack.
+    This leads to a serious case of <strong>slack anxiety</strong>. When there is all
+    this useful and valuable information out there, finding the information you
+    need becomes a case of finding a needle in a haystack.
+  </div>
+
+  <div id="Section2">
+    <p class="heading">a solution...</p>
+    <p>Slack already provides an organizing structure for the deluge of data, channels.
+    Every team has a number of channels where conversation is housed. The channels
+    are sorted by time of message. When a user opens a channel, the most recent
+    messages appear first. The user can then scroll up to find older messages.</p>
+    <p>Because we were unsatisfied with this organizing structure, we created
+    <strong>awaybot</strong>. A user simply invites <strong>awaybot</strong> to
+    listen to one or more public channels. The bot listens in real time to the
+    conversations as they unfold. It continuously uses natural language processing
+    algorithms to divide the conversation into topics and summarize these topics.
+    When the user feel overwhelmed by the deluge of information on Slack, they
+    simple queury <strong>awaybot</strong>. The user provides a command, the name
+    of the channel, and a time duration. The bot returns a high-level of the topics
+    that transpired during that duration. It's never been easier to get summaries
+    of the conversations you missed.</p>
+  </div>
+
+  <div id="Section3">
+    <!-- <p class="heading">INSERT TITLE</p> -->
+    <img src="awaybotSample.png" alt="Sample" style="width:900px">
+  </div>
+
+  <div id="Section4">
+    <p class="heading">the architecture...</p>
+    We use the <a href="https://api.slack.com/rtm" target="_blank">Slack real time messaging API</a>
+    to listen to the Slack channel. We use a simple
+    <a href="https://kafka.apache.org/" target="_blank">Kafka</a> producer to write this
+    information to a 3 node Kafka cluster. We originally planned to serialize
+    this data before writing to Kafka with
+    <a href="https://avro.apache.org/" target="_blank">Avro</a>. However, we found that Kafka’s
+    latest version makes serializing with Avro unnecessary. We then use a Kafka
+    consumer to store the data in a 3-node
+    <a href="http://cassandra.apache.org/" target="_blank">Cassandra</a> cluster from which our
+    NLP builds summaries for different time durations. These summaries are
+    stored in SimpleDB. When the user queries the Slackbot for a summary, the
+    request goes to a python layer that queries
+    <a href="https://aws.amazon.com/documentation/simpledb/" target="_blank">SimpleDB</a> for
+    the relevant information and serves it to the user as the Slackbot.
+  </div>
+
+  <div id="Section5">
+    <!-- <p class="heading">INSERT TITLE</p> -->
+    <img src="Architecture.png" alt="Architecture" style="width:900px">
+  </div>
+
+  <div id="Section6">
+    <p class="heading">the natural language processing (nlp)...</p>
+    <p>We have successfully created a topic generator that appropriately splits
+    conversation into relevant topics based on two key ideas: implicit reply and
+    concept similarity.</p>
+    <p><a href="https://drive.google.com/open?id=0BwEDqldf45ESeUdnUzRNQ0xBN0E" target="_blank">Implicit
+    Reply</a> clusters messages based on the probability that a message is a
+    reply to a previous message. It does not rely on the assumption that related
+    messages share similar words. This is helpful because it is not uncommon for
+    users who are engaged in conversation on a single topic to interchange words
+    used for similar ideas. Additionally, we use
+    <a href="https://en.wikipedia.org/wiki/Part-of-speech_tagging" target="_blank">
+    part-of-speech tagging</a> to help determine when a message is a reply. This
+    is especially useful for short responses that carry little meaning outside
+    of the conversation context.</p>
+    <p>We calcualte concept similarity by comparing the geometric representations
+    of words and sentences using <a href="https://en.wikipedia.org/wiki/Word2vec" target="_blank">
+    Google's Word2Vec models</a>. We first stem the words, and then compare the
+    distances between the message vectors. Messages closer together are closer in
+    semantic meaning. Messages farther apart are semantically, more dissimilar.</p>
+    <p>Once the topic generation is complete, we summarize the topics using word clouds.
+    These word clouds are built around the <a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf" target="_blank">
+    term frequency–inverse document frequency (TF-IDF)</a> statistics of the words
+    in the topic. This statistic is a measure of how important a word is to a topic
+    in the corpus of all topics. It does this by calculating how often the word
+    appears in that particular topic, offset by how often the word appears in the
+    corpus of all topics.</p>
+  </div>
+
+  <div id="Section7">
+    <!-- <p class="heading">INSERT TITLE</p> -->
+    <img src="wordcloud1.png" alt="wordcloud1" style="width:300px">
+    <img src="wordcloud2.png" alt="wordcloud2" style="width:300px">
+  </div>
+
+  <div id="Section8">
+    <p class="heading">☆ ☆ ☆ ☆ ☆</p>
+    <p class="heading">meet the all-star team</p>
+    We are students enrolled in UC Berkeley's Master of Information and Data
+    Science program. This project is the cumulation of a semester long class
+    that brought together all that we had learned during the program (<a
+    href="https://www.ischool.berkeley.edu/courses/datasci/210" target="_blank">W210
+    - Capstone</a>).
+    <p>
+      <div class="centered">
+        <a href="https://www.linkedin.com/in/kevin-davis-5a83075a" target="_blank">Kevin Davis</a> &nbsp &nbsp
+        <a href="https://www.linkedin.com/in/werquinigo/en" target="_blank">Walter Erquinigo</a> &nbsp &nbsp
+        <a href="https://www.linkedin.com/in/guillermomonge/en" target="_blank">Guillermo Monge</a> &nbsp &nbsp
+        <a href="https://www.linkedin.com/in/carloserodriguezcastillo" target="_blank">Carlos Rodriguez Castillo</a> &nbsp &nbsp
+        <a href="https://www.linkedin.com/in/alexksmith" target="_blank">Alex Keivahn Smith</a>
+      </div>
+    </p>
+  </div>
+
+</body>
+
+</html>

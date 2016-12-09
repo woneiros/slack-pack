@@ -1,0 +1,27 @@
+{
+"namespace": "slack_kafka.avro",
+"type": "record",
+"name": "slack_message_schema",
+"fields" : [
+    {
+        "name": "user_id",
+        "type": ["string", "null"],
+        "doc": "Code given by slack api for username"
+    },
+    {
+        "name": "text",
+        "type": ["string", "null"],
+        "doc": "The text of the message"
+    },
+    {
+        "name": "channel",
+        "type": ["string", "null"],
+        "doc": "The code given by slack api for channel"
+    },
+    {
+        "name": "timestamp",
+        "type": ["string", "null"],
+        "doc": "Unix timestamp of record assigned by slack api"}
+ ],
+"doc": "A Schema for storing Slack messages."
+}

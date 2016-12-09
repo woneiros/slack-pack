@@ -1,0 +1,10 @@
+2016-11-12 21:57:09,128 - INFO - Stating __main__, simple test for awaybot.py
+2016-11-12 21:57:09,128 - INFO - Connecting to simpleDB
+2016-11-12 21:57:09,226 - INFO - Pulling ITEM 'grumpy' from DOMAIN 'test'
+2016-11-12 21:57:09,287 - INFO - summary payload URL: 'https://raw.githubusercontent.com/WillahScott/slack-pack/dev/data/grumpy_cat_2.png'
+2016-11-12 21:57:09,287 - INFO - RTM API read websocket delay set to '1' seconds
+2016-11-12 21:57:09,287 - INFO - Initializing bot with parameters:
+            	slack_client : <slackclient._client.SlackClient object at 0x7f01ad21f0d0>
+            	bot_name : starterbot
+            	command : /summarize
+2016-11-12 21:57:09,530 - INFO - starterbot connected and running!

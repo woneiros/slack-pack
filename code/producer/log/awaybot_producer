@@ -1,0 +1,3 @@
+2016-12-07 22:46:23,081 - INFO - {'uuid': 'e32f3286-bcf8-11e6-a5ec-08002749f6f8', 'team': u'Slack-pack', u'type': u'presence_change', u'user': u'U2C5M1L6L', u'presence': u'active'}
+2016-12-07 22:46:28,087 - INFO - {u'url': u'wss://mpmulti-uuc9.slack-msgs.com/websocket/n17FKVCpH4OMumhO4TdVcC2mr45wICZIwqdJSTWUoA4i5Gv1Vn-Z1nO_TRytqsm3-m6OoLNHtJ67jvBTva3XkOAEeKAGDP0N96d4AzbFJaQWtv69p3qFUfssgVx7Sp5uSUeA7UKhidPxrDwW15EgEUmQViqnn0jAi19aKUKLw3k=', u'type': u'reconnect_url', 'uuid': 'e62b2b98-bcf8-11e6-a5ec-08002749f6f8', 'team': u'Slack-pack'}
+2016-12-07 22:46:43,109 - INFO - {'uuid': 'ef1f2b46-bcf8-11e6-a5ec-08002749f6f8', 'team': u'Slack-pack', u'type': u'presence_change', u'user': u'U2C5M1L6L', u'presence': u'away'}
