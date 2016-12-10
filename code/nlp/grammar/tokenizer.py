@@ -13,7 +13,7 @@
 
 from nltk.stem.snowball import SnowballStemmer
 from nltk import word_tokenize
-from gensim.parsing.preprocessing import STOPWORDS
+from nlp.text.stopwords import STOPWORDS
 import re
 
 
