@@ -34,7 +34,7 @@ class Wordcloud(object):
     max_words : int
         Maximum number of words to be shown on the wordcloud
     """
-    
+
     def __init__(self, model, document_id, max_words=10, background='#FFFFFF',font=None):
         """Summary
 
@@ -52,14 +52,14 @@ class Wordcloud(object):
         self.model = model
         self.document_id = document_id
         self.max_words = max_words
-        
+
         # initialize the word cloud depending on whether a font path exists
         if font is not None:
             self.wcloud = wc.WordCloud(font_path=font, background_color=background)
-         
+
         else:
             self.wcloud = wc.WordCloud(background_color=background)
-            
+
         # generate the word cloud
         self.generate_wordcloud()
 
@@ -70,7 +70,7 @@ class Wordcloud(object):
         # word_score = [ (t, val) for t, val in zip(data.term, data.score) ]
         self.cloud_img = self.wcloud.generate_from_frequencies( word_score )
         self.wcloud.recolor(color_func=self.slack_colorize)
-        
+
     @staticmethod
     def slack_colorize(word, font_size, position, orientation, random_state=None, **kwargs):
         """Recolorizes the word cloud based on slack colors
@@ -110,11 +110,13 @@ class Wordcloud(object):
             Path to the file where the wordcloud will be stored to
         title : str, optional
             Title of the wordcloud (optional)
-       """
-        fig = plt.imshow(self.wcloud.to_array())
+        """
+        # Create figure
+        fig, ax = plt.subplots(1, figsize=(2.7, 2))
+        ax.imshow( self.wcloud.to_array() )
 
         if title is not None:
-            plt.title(title, fontsize=15, fontweight='bold')
+            plt.title(title, fontsize=10, fontweight='bold')
 
         # Adjust axis and margins
         plt.axis('off')
