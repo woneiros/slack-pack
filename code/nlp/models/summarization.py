@@ -89,23 +89,28 @@ class TFIDF(object):
         """
         if (self.n_grams == 1) or unigram:
             document = self.uni_corpus[document_id]
-            # tid = map(lambda x: x[0], document)
             terms = map( lambda x: self.uni_corpus.dictionary.get(x[0]), document )
             scores = map( lambda x: x[1], self.model[document] )
             return zip(terms, scores)
-            # return pd.DataFrame({ 'term': trm, 'score': scr })
+
         else:
             document = self.n_gram_corpus[document_id]
-            # tid = map(lambda x: x[0], document)
             terms = map( lambda x: self.n_gram_corpus.dictionary.get(x[0]), document )
 
-            words_in_tokens =[ self.n_gram_corpus.dictionary[token[0]].split() for token in document ]
-            indices_in_tokens = [ self.uni_corpus.dictionary.doc2bow(ws) for ws in words_in_tokens ]
+            # get the words in the tokens
+            words_in_tokens = [ self.n_gram_corpus.dictionary[token[0]].split() for token in document ]
+
+            # Remove same-word-ngrams
+            words_in_tokens_norep = filter(lambda x: len(set(x)) > 1, words_in_tokens )
+
+            # Obtain the index of each of these ngram tokens
+            indices_in_tokens = [ self.uni_corpus.dictionary.doc2bow(ws) for ws in words_in_tokens_norep ]
+
+            # Obtain the score for each of the words in the ngram tokens and produce final ngram score
             scores_in_tokens = [ self.model[inds] for inds in indices_in_tokens ]
             scores = [ max([x[1] for x in scs ]) for scs in scores_in_tokens ]
 
             return zip(terms, scores)
-            # return pd.DataFrame({ 'term': trm, 'score': scr })
 
     def get_top_terms(self, document_id, top=10, unigram=False):
         """Obtain the top terms from a document

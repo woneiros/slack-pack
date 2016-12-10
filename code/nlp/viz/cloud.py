@@ -83,7 +83,7 @@ class Wordcloud(object):
         except:
             max_words = self.max_words
 
-        word_score = self.model.get_top_terms(self.document_id, max_words)
+        word_score = self.model.get_top_terms(self.document_id, top=max_words)
         # word_score = [ (t, val) for t, val in zip(data.term, data.score) ]
         self.cloud_img = self.wcloud.generate_from_frequencies( word_score )
         self.wcloud.recolor(color_func=self.slack_colorize)
@@ -96,7 +96,7 @@ class Wordcloud(object):
         except:
             max_words = self.max_words
 
-        word_score = self.model.get_top_terms(self.document_id, max_words, unigram=True)
+        word_score = self.model.get_top_terms(self.document_id, top=max_words, unigram=True)
         # word_score = [ (t, val) for t, val in zip(data.term, data.score) ]
         self.uni_cloud_img = self.uni_wcloud.generate_from_frequencies( word_score )
         self.uni_wcloud.recolor(color_func=self.slack_colorize)
@@ -123,12 +123,27 @@ class Wordcloud(object):
         title : str, optional
             Title of the wordcloud (optional)
         """
-        plt.imshow(self.wcloud.to_array())
+        # Create figure
+        num_plots = 2 if self.multi_plot else 1
 
-        if title is not None:
-            plt.title(title, fontsize=15, fontweight='bold')
+        fig, ax = plt.subplots(1, num_plots, figsize=(2.7 * num_plots, 2))
 
-        plt.axis('off')  # remove axes
+        if num_plots == 1:
+            ax.imshow( self.wcloud.to_array() )
+            if title is not None:
+                plt.title(title, fontsize=10, fontweight='bold')
+            plt.axis('off')
+
+        else:
+            ax[0].imshow( self.uni_wcloud.to_array() )
+            ax[0].axis('off')  # remove axes
+            ax[1].imshow( self.wcloud.to_array() )
+            ax[1].axis('off')  # remove axes
+
+            if title is not None:
+                plt.suptitle(title, fontsize=10, fontweight='bold')
+
+        plt.subplots_adjust(left=0.02, right=.98, top=.9, bottom=0.1)
         plt.show()
 
     def save_png(self, filepath, title=None):
@@ -154,9 +169,9 @@ class Wordcloud(object):
 
         else:
             ax[0].imshow( self.uni_wcloud.to_array() )
-            ax[0].axis('off')
+            ax[0].axis('off')  # remove axes
             ax[1].imshow( self.wcloud.to_array() )
-            ax[1].axis('off')
+            ax[1].axis('off')  # remove axes
 
             if title is not None:
                 plt.suptitle(title, fontsize=10, fontweight='bold')
