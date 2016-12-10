@@ -1,1 +1,6 @@
-2016-12-07 22:09:05,853 - INFO - {u'uuid': u'ad79ced0-bcf3-11e6-a5ec-08002749f6f8', u'text': u"Gentle reminder on documentation. If you could fill out those module summaries as specified on <#C31034Q8Y|code-documentation> that'd be awesome for generating that sweet read the docs", u'ts': u'1481166503.000202', u'user': u'U2BTFJNPL', u'team': u'Slack-pack', u'message_url': u'https://slackpack-project.slack.com/archives/general/p1481166503000202', u'type': u'message', u'channel': u'general'}
+2016-12-10 13:46:08,314 - INFO - Initializing cassandra connection with parameters:
+	ip: ['54.175.189.47']
+	keyspace: test_keyspace
+2016-12-10 13:46:08,692 - INFO - Initializing kafka connection with parameters:
+	ip: 54.197.178.209:9092
+	opic: fe_s16_topic
