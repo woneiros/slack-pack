@@ -74,7 +74,7 @@ class TFIDF(object):
         # Initialize model from unigram corpus
         self.model = TfidfModel(corpus=self.uni_corpus)
 
-    def get_score(self, document_id):
+    def get_score(self, document_id, unigram=False):
         """Generates the TF-IDF score table for each of the terms in the document
 
         Parameters
@@ -87,7 +87,7 @@ class TFIDF(object):
         list[tuples(str, float)]
             DataFrame containing a table with the termID, term and score of each of the terms in the document
         """
-        if self.n_grams == 1:
+        if (self.n_grams == 1) or unigram:
             document = self.uni_corpus[document_id]
             # tid = map(lambda x: x[0], document)
             terms = map( lambda x: self.uni_corpus.dictionary.get(x[0]), document )
@@ -107,7 +107,7 @@ class TFIDF(object):
             return zip(terms, scores)
             # return pd.DataFrame({ 'term': trm, 'score': scr })
 
-    def get_top_terms(self, document_id, top=10):
+    def get_top_terms(self, document_id, top=10, unigram=False):
         """Obtain the top terms from a document
 
         Parameters
@@ -122,7 +122,7 @@ class TFIDF(object):
         list[tuples(str, float)]
             List with the (term, score) tuples
         """
-        scores = sorted(self.get_score(document_id), key=lambda x: x[1], reverse=True)
+        scores = sorted(self.get_score(document_id, unigram=unigram), key=lambda x: x[1], reverse=True)
         return scores[:top]
 
     @staticmethod

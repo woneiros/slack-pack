@@ -35,7 +35,7 @@ class Wordcloud(object):
         Maximum number of words to be shown on the wordcloud
     """
 
-    def __init__(self, model, document_id, max_words=10, background='#FFFFFF',font=None):
+    def __init__(self, model, document_id, max_words=10, background='#FFFFFF',font=None, multi_plot=False):
         """Summary
 
         Parameters
@@ -52,6 +52,7 @@ class Wordcloud(object):
         self.model = model
         self.document_id = document_id
         self.max_words = max_words
+        self.multi_plot = multi_plot
 
         # initialize the word cloud depending on whether a font path exists
         if font is not None:
@@ -63,6 +64,17 @@ class Wordcloud(object):
         # generate the word cloud
         self.generate_wordcloud()
 
+        # If multi_plot add a secondary unigram wordcloud
+        if multi_plot:
+            if font is not None:
+                self.uni_wcloud = wc.WordCloud(font_path=font, background_color=background)
+
+            else:
+                self.uni_wcloud = wc.WordCloud(background_color=background)
+
+            self.generate_uni_wordcloud()
+
+
     def generate_wordcloud(self):
         """Generates the wordcloud internally by obtaining the tokens from the model (on instantiation)
         """
@@ -70,6 +82,14 @@ class Wordcloud(object):
         # word_score = [ (t, val) for t, val in zip(data.term, data.score) ]
         self.cloud_img = self.wcloud.generate_from_frequencies( word_score )
         self.wcloud.recolor(color_func=self.slack_colorize)
+
+    def generate_uni_wordcloud(self):
+        """Generates the second wordcloud internally by obtaining the tokens from the model (on instantiation)
+        """
+        word_score = self.model.get_top_terms(self.document_id, self.max_words, unigram=True)
+        # word_score = [ (t, val) for t, val in zip(data.term, data.score) ]
+        self.uni_cloud_img = self.uni_wcloud.generate_from_frequencies( word_score )
+        self.uni_wcloud.recolor(color_func=self.slack_colorize)
 
     @staticmethod
     def slack_colorize(word, font_size, position, orientation, random_state=None, **kwargs):
@@ -112,14 +132,25 @@ class Wordcloud(object):
             Title of the wordcloud (optional)
         """
         # Create figure
-        fig, ax = plt.subplots(1, figsize=(2.7, 2))
-        ax.imshow( self.wcloud.to_array() )
+        num_plots = 2 if self.multi_plot else 1
 
-        if title is not None:
-            plt.title(title, fontsize=10, fontweight='bold')
+        fig, ax = plt.subplots(1, num_plots, figsize=(2.7 * num_plots, 2))
 
-        # Adjust axis and margins
-        plt.axis('off')
+        if num_plots == 1:
+            ax.imshow( self.wcloud.to_array() )
+            if title is not None:
+                plt.title(title, fontsize=10, fontweight='bold')
+            plt.axis('off')
+
+        else:
+            ax[0].imshow( self.uni_wcloud.to_array() )
+            ax[0].axis('off')
+            ax[1].imshow( self.wcloud.to_array() )
+            ax[1].axis('off')
+
+            if title is not None:
+                plt.suptitle(title, fontsize=10, fontweight='bold')
+
         plt.subplots_adjust(left=0.02, right=.98, top=.9, bottom=0.1)
 
         # Save to path
