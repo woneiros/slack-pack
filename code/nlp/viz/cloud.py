@@ -78,7 +78,12 @@ class Wordcloud(object):
     def generate_wordcloud(self):
         """Generates the wordcloud internally by obtaining the tokens from the model (on instantiation)
         """
-        word_score = self.model.get_top_terms(self.document_id, self.max_words)
+        try:
+            max_words = self.max_words[0]
+        except:
+            max_words = self.max_words
+
+        word_score = self.model.get_top_terms(self.document_id, max_words)
         # word_score = [ (t, val) for t, val in zip(data.term, data.score) ]
         self.cloud_img = self.wcloud.generate_from_frequencies( word_score )
         self.wcloud.recolor(color_func=self.slack_colorize)
@@ -86,7 +91,12 @@ class Wordcloud(object):
     def generate_uni_wordcloud(self):
         """Generates the second wordcloud internally by obtaining the tokens from the model (on instantiation)
         """
-        word_score = self.model.get_top_terms(self.document_id, self.max_words, unigram=True)
+        try:
+            max_words = self.max_words[1]
+        except:
+            max_words = self.max_words
+
+        word_score = self.model.get_top_terms(self.document_id, max_words, unigram=True)
         # word_score = [ (t, val) for t, val in zip(data.term, data.score) ]
         self.uni_cloud_img = self.uni_wcloud.generate_from_frequencies( word_score )
         self.uni_wcloud.recolor(color_func=self.slack_colorize)
