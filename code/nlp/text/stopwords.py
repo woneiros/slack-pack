@@ -16,4 +16,7 @@ STOPWORDS = [u'i', u'me', u'my', u'myself', u'we', u'our', u'ours', u'ourselves'
              u'ma', u'mightn', u'mustn', u'needn', u'shan', u'shouldn', u'wasn', u'weren', u'won', u'wouldn'] + \
             ['okay', 'ok', 'yep', 'sure', 'k', 'cool', 'yup', 'yeap', 'yeah', 'yea', 'tho', 'btw', 'sounds good',
             'ive', 'youll', 'lemme', 'actually', 'want', 'think', 'good', 'im', 'back', 'oh', 'right', 'get',
-            'says', 'i\'m', 'i\'ve', 'havnt', 'thanks', 'ty']
+            'says', 'i\'m', 'i\'ve', 'havnt', 'thanks', 'ty', 'anyone', 'please', 'know', 'use', 'one',
+            'ill', 'x', 'got', 'gotcha', 'show', 'try', 'thinking', 'ugh', 'sweet', 'awesome', 'anything',
+            'let', 'see', 'link'
+            ]
