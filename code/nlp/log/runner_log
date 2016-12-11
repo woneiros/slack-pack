@@ -1,31 +1,53 @@
-2016-12-10 16:59:07,034 - INFO - Updloaded 6 Images for channel class-deliverables and duration: 7 day(s)
-2016-12-10 16:59:07,277 - INFO - topic 0 for class-deliverables duration 1 week(s) has length 5
-2016-12-10 16:59:07,553 - INFO - topic 1 for class-deliverables duration 1 week(s) has length 11
-2016-12-10 16:59:07,816 - INFO - topic 4 for class-deliverables duration 1 week(s) has length 10
-2016-12-10 16:59:08,085 - INFO - topic 6 for class-deliverables duration 1 week(s) has length 9
-2016-12-10 16:59:08,333 - INFO - topic 11 for class-deliverables duration 1 week(s) has length 7
-2016-12-10 16:59:08,582 - INFO - topic 13 for class-deliverables duration 1 week(s) has length 6
-2016-12-10 16:59:11,174 - INFO - Updloaded 6 Images for channel class-deliverables and duration: 1 week(s)
-2016-12-10 16:59:11,467 - INFO - topic 1 for class-deliverables duration 2 week(s) has length 11
-2016-12-10 16:59:11,717 - INFO - topic 4 for class-deliverables duration 2 week(s) has length 10
-2016-12-10 16:59:11,999 - INFO - topic 13 for class-deliverables duration 2 week(s) has length 10
-2016-12-10 16:59:13,321 - INFO - Updloaded 3 Images for channel class-deliverables and duration: 2 week(s)
-2016-12-10 16:59:13,609 - INFO - topic 1 for class-deliverables duration 3 week(s) has length 11
-2016-12-10 16:59:13,846 - INFO - topic 4 for class-deliverables duration 3 week(s) has length 10
-2016-12-10 16:59:14,089 - INFO - topic 13 for class-deliverables duration 3 week(s) has length 10
-2016-12-10 16:59:15,463 - INFO - Updloaded 3 Images for channel class-deliverables and duration: 3 week(s)
-2016-12-10 16:59:15,725 - INFO - topic 1 for class-deliverables duration 4 week(s) has length 11
-2016-12-10 16:59:15,987 - INFO - topic 4 for class-deliverables duration 4 week(s) has length 10
-2016-12-10 16:59:16,236 - INFO - topic 13 for class-deliverables duration 4 week(s) has length 10
-2016-12-10 16:59:17,883 - INFO - Updloaded 3 Images for channel class-deliverables and duration: 4 week(s)
-2016-12-10 16:59:18,167 - INFO - topic 1 for class-deliverables duration 5 week(s) has length 11
-2016-12-10 16:59:18,421 - INFO - topic 4 for class-deliverables duration 5 week(s) has length 10
-2016-12-10 16:59:18,659 - INFO - topic 13 for class-deliverables duration 5 week(s) has length 10
-2016-12-10 16:59:21,426 - INFO - Updloaded 3 Images for channel class-deliverables and duration: 5 week(s)
-2016-12-10 16:59:21,774 - INFO - topic 1 for class-deliverables duration 6 week(s) has length 11
-2016-12-10 16:59:22,006 - INFO - topic 4 for class-deliverables duration 6 week(s) has length 10
-2016-12-10 16:59:22,272 - INFO - topic 6 for class-deliverables duration 6 week(s) has length 11
-2016-12-10 16:59:22,537 - INFO - topic 11 for class-deliverables duration 6 week(s) has length 10
-2016-12-10 16:59:22,803 - INFO - topic 13 for class-deliverables duration 6 week(s) has length 10
-2016-12-10 16:59:23,065 - INFO - topic 21 for class-deliverables duration 6 week(s) has length 10
-2016-12-10 16:59:25,776 - INFO - Updloaded 6 Images for channel class-deliverables and duration: 6 week(s)
+2016-12-11 13:13:12,720 - INFO - Updloaded 7 Images for channel class-deliverables and duration: 1 week(s)
+2016-12-11 13:13:12,720 - INFO - msg_stream
+2016-12-11 13:13:12,720 - INFO - classifier
+2016-12-11 13:13:12,720 - INFO - classified_window
+2016-12-11 13:13:12,860 - INFO - image_loader
+2016-12-11 13:13:12,865 - INFO - uni_model
+2016-12-11 13:13:12,880 - INFO - viz
+2016-12-11 13:13:12,965 - INFO - topic 4 for class-deliverables duration 2 week(s) has length 12
+2016-12-11 13:13:13,135 - INFO - viz
+2016-12-11 13:13:13,214 - INFO - topic 14 for class-deliverables duration 2 week(s) has length 10
+2016-12-11 13:13:14,306 - INFO - Updloaded 2 Images for channel class-deliverables and duration: 2 week(s)
+2016-12-11 13:13:14,306 - INFO - msg_stream
+2016-12-11 13:13:14,306 - INFO - classifier
+2016-12-11 13:13:14,307 - INFO - classified_window
+2016-12-11 13:13:14,447 - INFO - image_loader
+2016-12-11 13:13:14,451 - INFO - uni_model
+2016-12-11 13:13:14,472 - INFO - viz
+2016-12-11 13:13:14,555 - INFO - topic 4 for class-deliverables duration 3 week(s) has length 12
+2016-12-11 13:13:14,658 - INFO - viz
+2016-12-11 13:13:14,743 - INFO - topic 14 for class-deliverables duration 3 week(s) has length 10
+2016-12-11 13:13:15,846 - INFO - Updloaded 2 Images for channel class-deliverables and duration: 3 week(s)
+2016-12-11 13:13:15,846 - INFO - msg_stream
+2016-12-11 13:13:15,846 - INFO - classifier
+2016-12-11 13:13:15,846 - INFO - classified_window
+2016-12-11 13:13:16,006 - INFO - image_loader
+2016-12-11 13:13:16,010 - INFO - uni_model
+2016-12-11 13:13:16,026 - INFO - viz
+2016-12-11 13:13:16,119 - INFO - topic 4 for class-deliverables duration 4 week(s) has length 12
+2016-12-11 13:13:16,234 - INFO - viz
+2016-12-11 13:13:16,311 - INFO - topic 14 for class-deliverables duration 4 week(s) has length 10
+2016-12-11 13:13:17,383 - INFO - Updloaded 2 Images for channel class-deliverables and duration: 4 week(s)
+2016-12-11 13:13:17,383 - INFO - msg_stream
+2016-12-11 13:13:17,383 - INFO - classifier
+2016-12-11 13:13:17,383 - INFO - classified_window
+2016-12-11 13:13:17,525 - INFO - image_loader
+2016-12-11 13:13:17,529 - INFO - uni_model
+2016-12-11 13:13:17,545 - INFO - viz
+2016-12-11 13:13:17,628 - INFO - topic 4 for class-deliverables duration 5 week(s) has length 12
+2016-12-11 13:13:17,747 - INFO - viz
+2016-12-11 13:13:17,821 - INFO - topic 14 for class-deliverables duration 5 week(s) has length 10
+2016-12-11 13:13:19,166 - INFO - Updloaded 2 Images for channel class-deliverables and duration: 5 week(s)
+2016-12-11 13:13:19,166 - INFO - msg_stream
+2016-12-11 13:13:19,166 - INFO - classifier
+2016-12-11 13:13:19,166 - INFO - classified_window
+2016-12-11 13:13:19,363 - INFO - image_loader
+2016-12-11 13:13:19,367 - INFO - uni_model
+2016-12-11 13:13:19,389 - INFO - viz
+2016-12-11 13:13:19,470 - INFO - topic 4 for class-deliverables duration 6 week(s) has length 12
+2016-12-11 13:13:19,578 - INFO - viz
+2016-12-11 13:13:19,660 - INFO - topic 14 for class-deliverables duration 6 week(s) has length 10
+2016-12-11 13:13:19,765 - INFO - viz
+2016-12-11 13:13:19,843 - INFO - topic 21 for class-deliverables duration 6 week(s) has length 10
+2016-12-11 13:13:21,345 - INFO - Updloaded 3 Images for channel class-deliverables and duration: 6 week(s)

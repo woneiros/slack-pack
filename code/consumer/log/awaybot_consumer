@@ -1,6 +1,1 @@
-2016-12-10 13:46:08,314 - INFO - Initializing cassandra connection with parameters:
-	ip: ['54.175.189.47']
-	keyspace: test_keyspace
-2016-12-10 13:46:08,692 - INFO - Initializing kafka connection with parameters:
-	ip: 54.197.178.209:9092
-	opic: fe_s16_topic
+2016-12-11 00:40:44,602 - INFO - {u'uuid': u'5c02f798-bf64-11e6-9707-08002749f6f8', u'text': u'actually, might be a good idea to chat about the way this is handled tomorrow (the three handling cases in `handle_command`)', u'ts': u'1481434818.000011', u'user': u'U2C5M1L6L', u'team': u'Slack-pack', u'message_url': u'https://slackpack-project.slack.com/archives/tech-stuff/p1481434818000011', u'type': u'message', u'channel': u'tech-stuff'}

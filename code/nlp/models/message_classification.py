@@ -52,7 +52,7 @@ class SimpleClassifier(object):
         # Check message_similarity is callable
         if not hasattr(self.message_similarity, '__call__'):
             raise IOError('The message_similarity needs to be a callable object')
-
+        return
 
     def classify_stream(self, message_stream, max_messages=20, max_active_topics=5,
                         low_threshold=.4, high_threshold=.7, low_step=.05, high_step=.02, verbose=True):
@@ -169,7 +169,7 @@ class SimpleClassifier(object):
         try:
             print '... Done, processed {} messages'.format(m)
         except:
-            print 'No messages were streamed'
+            pass
         return self.window
 
 

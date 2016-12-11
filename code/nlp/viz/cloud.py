@@ -13,7 +13,8 @@
 .. |model| replace:: :class:`nlp.text.models.Summarizer`
 
 """
-
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import wordcloud as wc
 import random

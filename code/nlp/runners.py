@@ -108,7 +108,7 @@ if __name__ == "__main__":
                         try:
                             viz = Wordcloud(model=uni_model, document_id=t, max_words=(10, 5), font=FONT_PATH, multi_plot=True)
                         except:
-                            logger.warning("Failed to generate word cloud for",exc_info=True)
+                            # logger.warning("Failed to generate word cloud for",exc_info=True)
                             continue
                         viz_topics += 1
                         logger.info('topic {} for {} duration {} day(s) has length {}'.format(t, channel, p, len(topic)))
@@ -130,12 +130,13 @@ if __name__ == "__main__":
                 min_topic_length = 5 if p < 2 else 10
                 msg_stream = casdb.get_messages(type_of_query='week', periods=p, channel=channel, min_words=5)
                 classifier = SimpleClassifier(message_similarity=msg_sim)
-                classified_window = classifier.classify_stream(msg_stream, low_threshold=.4, high_threshold=.7, low_step=.05, high_step=.02, max_messages=10000, verbose=False)
+                classified_window = classifier.classify_stream(
+                    msg_stream, low_threshold=.4, high_threshold=.7,
+                    low_step=.05, high_step=.02, max_messages=10000, verbose=False)
                 image_loader = OutputHelper()
                 if len(classified_window) == 0:
                     image_loader.updateImageCount(team, channel, p, 'weeks')
-                    continue
-
+                    continue        
                 # Create a model using the corpus
                 uni_model = Model(window=classified_window, cleaner=nt.SimpleCleaner(), n_grams=2)
                 # bigram_model = Model(window=classified_window, cleaner=nt.SimpleCleaner(), n_grams=2)  # if we wanted a bigram model
@@ -144,12 +145,13 @@ if __name__ == "__main__":
                 for t, topic in enumerate(classified_window):  # one(?) per topic
                     if len(topic) >= min_topic_length:
                         try:
+                            logger.info('viz')
                             viz = Wordcloud(model=uni_model, document_id=t, max_words=(10, 5), font=FONT_PATH, multi_plot=True)
                         except:
                             logger.warning("Failed to generate word cloud for",exc_info=True)
                             continue
                         viz_topics += 1
-                        logger.info('topic {} for {} duration {} week(s) has length {}'.format(t, channel, p, len(topic)))
+                        # logger.info('topic {} for {} duration {} week(s) has length {}'.format(t, channel, p, len(topic)))
                         viz_path = IMG_FOLDER + 'cloud_topic_{}_{}_{}_{}.png'.format(channel, 'weeks', p, viz_topics)
                         viz.save_png(viz_path, title='Topic {}'.format(viz_topics))
 
