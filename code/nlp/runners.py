@@ -145,7 +145,6 @@ if __name__ == "__main__":
                 for t, topic in enumerate(classified_window):  # one(?) per topic
                     if len(topic) >= min_topic_length:
                         try:
-                            logger.info('viz')
                             viz = Wordcloud(model=uni_model, document_id=t, max_words=(10, 5), font=FONT_PATH, multi_plot=True)
                         except:
                             logger.warning("Failed to generate word cloud for",exc_info=True)
