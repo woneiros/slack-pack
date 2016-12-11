@@ -62,7 +62,8 @@ class Slackbot:
     def __init__(self,
                  slack_client,
                  bot_name,
-                 command):
+                 command,
+                 domain):
         """
         Constructor for Slackbot class
         
@@ -84,6 +85,7 @@ class Slackbot:
             self.command = command
             self.bot_name = bot_name
             self.sdb_status = False
+            self.sdb_domain = domain
             api_call = self.slack_client.api_call("users.list")
             if api_call.get('ok'):
                 # retrieve all users so we can find our bot
@@ -100,7 +102,7 @@ class Slackbot:
         except SlackUserNotFoundError as e:
             print 'SlackUserNotFoundError:', e.value
             # at this point, quitting if we hit this issue
-            quit()
+            sys.exit(1)
     
     def simpledbConnect(self):
         """
@@ -156,14 +158,17 @@ class Slackbot:
             sdbItem = '{}_{}_{}_{}'.format(
                 team_name, channel_name,
                 command_duration, command_duration_units)
-            logger.info('Fetching number of items for {}'.format(sdbItem))
-            fetch_num_topics = self.sdb.get_attributes(
-                DomainName='awaybot', ItemName=sdbItem, ConsistentRead=True)
+            try:
+                fetch_num_topics = self.sdb.get_attributes(
+                    DomainName=self.sdb_domain, ItemName=sdbItem, ConsistentRead=True)
+            except:
+                logger.error(
+                    'Failed to fetch number of topics for sdb Item {}'.format(sdbItem),
+                    exc_info=True)
+                sys.exit(1)
 
             ## CASE ONE: VALID COMMAND BUT INVALID TIME RANGE
-            try:
-                num_topics = fetch_num_topics['Attributes'][0]['Value']
-            except:
+            if fetch_num_topics.get('Attributes') is None:
                 logger.info("Could not fetch number of topics from Simple DB for COMMAND '%s'" % (command))
                 response = ("""Not sure what you mean. Use the */summarize* command with the *channel name* and the *duration*. 
                     For example, if you want to see 3 weeks of history in the #general channel, type: */summarize #general 3 weeks*.
@@ -175,6 +180,7 @@ class Slackbot:
                                            text=response,
                                            as_user=True)
             else:
+                num_topics = fetch_num_topics['Attributes'][0]['Value']
                 logger.info("""COMMAND %s has a valid format for processing:
                 command_channel : %s
                 command_duration : %s
@@ -184,7 +190,7 @@ class Slackbot:
                                                   command_duration_units))
 
                 ## CASE TWO: VALID COMMAND BUT NOT ENOUGH MESSAGES FOR WORDCLOUD GENERATION
-                if not int(num_topics):
+                if int(num_topics) == 0:
                     response = "{} has no topics for last {} {}".format(
                         command_channel, command_duration, command_duration_units)
                     self.slack_client.api_call("chat.postMessage",
@@ -211,7 +217,7 @@ class Slackbot:
                             command_duration, command_duration_units, topic)
 
                         fetch_image = self.sdb.get_attributes(
-                            DomainName=SDB_DOMAIN, ItemName=sdbImageItem, ConsistentRead=True)
+                            DomainName=self.sdb_domain, ItemName=sdbImageItem, ConsistentRead=True)
                         topic_url = [i['Value'] for i in fetch_image['Attributes'] if i['Name'] == 'archiveURL'][0]
                         topic_wordcloud = [i['Value'] for i in fetch_image['Attributes'] if i['Name'] == 'modelURL'][0]
 
@@ -348,7 +354,8 @@ if __name__ == "__main__":
 
         bot = Slackbot(sc,
                      os.environ.get('SLACK_BOT_NAME'),
-                     '/summarize')
+                     '/summarize',
+                     SDB_DOMAIN)
         bot.simpledbConnect()
 
         team_name = sc.api_call('team.info')['team']['name']
@@ -376,4 +383,4 @@ if __name__ == "__main__":
             raise UnauthError("Credentials/token invalid")
     except UnauthError as e:
         print 'UnauthError:', e
-        quit()
+        sys.exit(1)

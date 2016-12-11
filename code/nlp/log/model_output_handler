@@ -1,8 +1,124 @@
-2016-12-11 13:23:38,017 - INFO - Created SimpleDB item Slack-pack_general_2_days
-2016-12-11 13:23:39,025 - INFO - Uploaded image to s3: https://s3.amazonaws.com/awaybot_test/Slack-pack_general_3_days_0.png
-2016-12-11 13:23:39,171 - INFO - Created SimpleDB item Slack-pack_general_3_days_1
-2016-12-11 13:23:39,468 - INFO - Uploaded image to s3: https://s3.amazonaws.com/awaybot_test/Slack-pack_general_3_days_1.png
-2016-12-11 13:23:39,512 - INFO - Created SimpleDB item Slack-pack_general_3_days_2
-2016-12-11 13:23:39,555 - INFO - Created SimpleDB item Slack-pack_general_3_days
-2016-12-11 13:23:40,951 - INFO - Uploaded image to s3: https://s3.amazonaws.com/awaybot_test/Slack-pack_general_4_days_0.png
-2016-12-11 13:23:41,188 - INFO - Created SimpleDB item Slack-pack_general_4_days_1
+2016-12-11 13:25:38,381 - INFO - Uploaded image to s3: https://s3.amazonaws.com/awaybot_test/Slack-pack_bot-sandbox_4_weeks_0.png
+2016-12-11 13:25:38,611 - INFO - Created SimpleDB item Slack-pack_bot-sandbox_4_weeks_1
+2016-12-11 13:25:40,618 - INFO - Uploaded image to s3: https://s3.amazonaws.com/awaybot_test/Slack-pack_bot-sandbox_4_weeks_1.png
+2016-12-11 13:25:40,669 - INFO - Created SimpleDB item Slack-pack_bot-sandbox_4_weeks_2
+2016-12-11 13:25:40,951 - INFO - Uploaded image to s3: https://s3.amazonaws.com/awaybot_test/Slack-pack_bot-sandbox_4_weeks_2.png
+2016-12-11 13:25:40,995 - INFO - Created SimpleDB item Slack-pack_bot-sandbox_4_weeks_3
+2016-12-11 13:25:41,384 - INFO - Uploaded image to s3: https://s3.amazonaws.com/awaybot_test/Slack-pack_bot-sandbox_4_weeks_3.png
+2016-12-11 13:25:41,437 - INFO - Created SimpleDB item Slack-pack_bot-sandbox_4_weeks_4
+2016-12-11 13:25:41,480 - INFO - Created SimpleDB item Slack-pack_bot-sandbox_4_weeks
+2016-12-11 13:25:43,953 - INFO - Uploaded image to s3: https://s3.amazonaws.com/awaybot_test/Slack-pack_bot-sandbox_5_weeks_0.png
+2016-12-11 13:25:44,191 - INFO - Created SimpleDB item Slack-pack_bot-sandbox_5_weeks_1
+2016-12-11 13:25:44,536 - INFO - Uploaded image to s3: https://s3.amazonaws.com/awaybot_test/Slack-pack_bot-sandbox_5_weeks_1.png
+2016-12-11 13:25:44,578 - INFO - Created SimpleDB item Slack-pack_bot-sandbox_5_weeks_2
+2016-12-11 13:25:44,937 - INFO - Uploaded image to s3: https://s3.amazonaws.com/awaybot_test/Slack-pack_bot-sandbox_5_weeks_2.png
+2016-12-11 13:25:44,988 - INFO - Created SimpleDB item Slack-pack_bot-sandbox_5_weeks_3
+2016-12-11 13:25:45,271 - INFO - Uploaded image to s3: https://s3.amazonaws.com/awaybot_test/Slack-pack_bot-sandbox_5_weeks_3.png
+2016-12-11 13:25:45,319 - INFO - Created SimpleDB item Slack-pack_bot-sandbox_5_weeks_4
+2016-12-11 13:25:45,688 - INFO - Uploaded image to s3: https://s3.amazonaws.com/awaybot_test/Slack-pack_bot-sandbox_5_weeks_4.png
+2016-12-11 13:25:45,733 - INFO - Created SimpleDB item Slack-pack_bot-sandbox_5_weeks_5
+2016-12-11 13:25:46,115 - INFO - Uploaded image to s3: https://s3.amazonaws.com/awaybot_test/Slack-pack_bot-sandbox_5_weeks_5.png
+2016-12-11 13:25:46,166 - INFO - Created SimpleDB item Slack-pack_bot-sandbox_5_weeks_6
+2016-12-11 13:25:46,211 - INFO - Created SimpleDB item Slack-pack_bot-sandbox_5_weeks
+2016-12-11 13:25:48,160 - INFO - Uploaded image to s3: https://s3.amazonaws.com/awaybot_test/Slack-pack_bot-sandbox_6_weeks_0.png
+2016-12-11 13:25:48,311 - INFO - Created SimpleDB item Slack-pack_bot-sandbox_6_weeks_1
+2016-12-11 13:25:48,719 - INFO - Uploaded image to s3: https://s3.amazonaws.com/awaybot_test/Slack-pack_bot-sandbox_6_weeks_1.png
+2016-12-11 13:25:48,802 - INFO - Created SimpleDB item Slack-pack_bot-sandbox_6_weeks_2
+2016-12-11 13:25:49,104 - INFO - Uploaded image to s3: https://s3.amazonaws.com/awaybot_test/Slack-pack_bot-sandbox_6_weeks_2.png
+2016-12-11 13:25:49,148 - INFO - Created SimpleDB item Slack-pack_bot-sandbox_6_weeks_3
+2016-12-11 13:25:49,449 - INFO - Uploaded image to s3: https://s3.amazonaws.com/awaybot_test/Slack-pack_bot-sandbox_6_weeks_3.png
+2016-12-11 13:25:49,497 - INFO - Created SimpleDB item Slack-pack_bot-sandbox_6_weeks_4
+2016-12-11 13:25:49,735 - INFO - Uploaded image to s3: https://s3.amazonaws.com/awaybot_test/Slack-pack_bot-sandbox_6_weeks_4.png
+2016-12-11 13:25:49,778 - INFO - Created SimpleDB item Slack-pack_bot-sandbox_6_weeks_5
+2016-12-11 13:25:50,020 - INFO - Uploaded image to s3: https://s3.amazonaws.com/awaybot_test/Slack-pack_bot-sandbox_6_weeks_5.png
+2016-12-11 13:25:50,066 - INFO - Created SimpleDB item Slack-pack_bot-sandbox_6_weeks_6
+2016-12-11 13:25:50,448 - INFO - Uploaded image to s3: https://s3.amazonaws.com/awaybot_test/Slack-pack_bot-sandbox_6_weeks_6.png
+2016-12-11 13:25:50,491 - INFO - Created SimpleDB item Slack-pack_bot-sandbox_6_weeks_7
+2016-12-11 13:25:50,532 - INFO - Created SimpleDB item Slack-pack_bot-sandbox_6_weeks
+2016-12-11 13:25:50,696 - INFO - Created SimpleDB item Slack-pack_class-deliverables_1_hours
+2016-12-11 13:25:50,864 - INFO - Created SimpleDB item Slack-pack_class-deliverables_2_hours
+2016-12-11 13:25:51,033 - INFO - Created SimpleDB item Slack-pack_class-deliverables_3_hours
+2016-12-11 13:25:51,200 - INFO - Created SimpleDB item Slack-pack_class-deliverables_4_hours
+2016-12-11 13:25:51,373 - INFO - Created SimpleDB item Slack-pack_class-deliverables_5_hours
+2016-12-11 13:25:51,558 - INFO - Created SimpleDB item Slack-pack_class-deliverables_6_hours
+2016-12-11 13:25:51,731 - INFO - Created SimpleDB item Slack-pack_class-deliverables_7_hours
+2016-12-11 13:25:51,907 - INFO - Created SimpleDB item Slack-pack_class-deliverables_8_hours
+2016-12-11 13:25:52,084 - INFO - Created SimpleDB item Slack-pack_class-deliverables_9_hours
+2016-12-11 13:25:52,258 - INFO - Created SimpleDB item Slack-pack_class-deliverables_10_hours
+2016-12-11 13:25:52,421 - INFO - Created SimpleDB item Slack-pack_class-deliverables_11_hours
+2016-12-11 13:25:52,597 - INFO - Created SimpleDB item Slack-pack_class-deliverables_12_hours
+2016-12-11 13:25:52,775 - INFO - Created SimpleDB item Slack-pack_class-deliverables_1_days
+2016-12-11 13:25:52,938 - INFO - Created SimpleDB item Slack-pack_class-deliverables_2_days
+2016-12-11 13:25:53,114 - INFO - Created SimpleDB item Slack-pack_class-deliverables_3_days
+2016-12-11 13:25:53,316 - INFO - Created SimpleDB item Slack-pack_class-deliverables_4_days
+2016-12-11 13:25:53,526 - INFO - Created SimpleDB item Slack-pack_class-deliverables_5_days
+2016-12-11 13:25:55,239 - INFO - Uploaded image to s3: https://s3.amazonaws.com/awaybot_test/Slack-pack_class-deliverables_6_days_0.png
+2016-12-11 13:25:55,389 - INFO - Created SimpleDB item Slack-pack_class-deliverables_6_days_1
+2016-12-11 13:25:55,707 - INFO - Uploaded image to s3: https://s3.amazonaws.com/awaybot_test/Slack-pack_class-deliverables_6_days_1.png
+2016-12-11 13:25:55,750 - INFO - Created SimpleDB item Slack-pack_class-deliverables_6_days_2
+2016-12-11 13:25:56,032 - INFO - Uploaded image to s3: https://s3.amazonaws.com/awaybot_test/Slack-pack_class-deliverables_6_days_2.png
+2016-12-11 13:25:56,075 - INFO - Created SimpleDB item Slack-pack_class-deliverables_6_days_3
+2016-12-11 13:25:56,401 - INFO - Uploaded image to s3: https://s3.amazonaws.com/awaybot_test/Slack-pack_class-deliverables_6_days_3.png
+2016-12-11 13:25:56,448 - INFO - Created SimpleDB item Slack-pack_class-deliverables_6_days_4
+2016-12-11 13:25:56,733 - INFO - Uploaded image to s3: https://s3.amazonaws.com/awaybot_test/Slack-pack_class-deliverables_6_days_4.png
+2016-12-11 13:25:56,774 - INFO - Created SimpleDB item Slack-pack_class-deliverables_6_days_5
+2016-12-11 13:25:57,055 - INFO - Uploaded image to s3: https://s3.amazonaws.com/awaybot_test/Slack-pack_class-deliverables_6_days_5.png
+2016-12-11 13:25:57,095 - INFO - Created SimpleDB item Slack-pack_class-deliverables_6_days_6
+2016-12-11 13:25:57,137 - INFO - Created SimpleDB item Slack-pack_class-deliverables_6_days
+2016-12-11 13:25:59,034 - INFO - Uploaded image to s3: https://s3.amazonaws.com/awaybot_test/Slack-pack_class-deliverables_7_days_0.png
+2016-12-11 13:25:59,173 - INFO - Created SimpleDB item Slack-pack_class-deliverables_7_days_1
+2016-12-11 13:25:59,576 - INFO - Uploaded image to s3: https://s3.amazonaws.com/awaybot_test/Slack-pack_class-deliverables_7_days_1.png
+2016-12-11 13:25:59,619 - INFO - Created SimpleDB item Slack-pack_class-deliverables_7_days_2
+2016-12-11 13:25:59,911 - INFO - Uploaded image to s3: https://s3.amazonaws.com/awaybot_test/Slack-pack_class-deliverables_7_days_2.png
+2016-12-11 13:25:59,954 - INFO - Created SimpleDB item Slack-pack_class-deliverables_7_days_3
+2016-12-11 13:26:00,250 - INFO - Uploaded image to s3: https://s3.amazonaws.com/awaybot_test/Slack-pack_class-deliverables_7_days_3.png
+2016-12-11 13:26:00,302 - INFO - Created SimpleDB item Slack-pack_class-deliverables_7_days_4
+2016-12-11 13:26:00,658 - INFO - Uploaded image to s3: https://s3.amazonaws.com/awaybot_test/Slack-pack_class-deliverables_7_days_4.png
+2016-12-11 13:26:00,703 - INFO - Created SimpleDB item Slack-pack_class-deliverables_7_days_5
+2016-12-11 13:26:01,428 - INFO - Uploaded image to s3: https://s3.amazonaws.com/awaybot_test/Slack-pack_class-deliverables_7_days_5.png
+2016-12-11 13:26:01,474 - INFO - Created SimpleDB item Slack-pack_class-deliverables_7_days_6
+2016-12-11 13:26:02,031 - INFO - Uploaded image to s3: https://s3.amazonaws.com/awaybot_test/Slack-pack_class-deliverables_7_days_6.png
+2016-12-11 13:26:02,147 - INFO - Created SimpleDB item Slack-pack_class-deliverables_7_days_7
+2016-12-11 13:26:02,185 - INFO - Created SimpleDB item Slack-pack_class-deliverables_7_days
+2016-12-11 13:26:04,586 - INFO - Uploaded image to s3: https://s3.amazonaws.com/awaybot_test/Slack-pack_class-deliverables_1_weeks_0.png
+2016-12-11 13:26:04,726 - INFO - Created SimpleDB item Slack-pack_class-deliverables_1_weeks_1
+2016-12-11 13:26:05,133 - INFO - Uploaded image to s3: https://s3.amazonaws.com/awaybot_test/Slack-pack_class-deliverables_1_weeks_1.png
+2016-12-11 13:26:05,179 - INFO - Created SimpleDB item Slack-pack_class-deliverables_1_weeks_2
+2016-12-11 13:26:05,481 - INFO - Uploaded image to s3: https://s3.amazonaws.com/awaybot_test/Slack-pack_class-deliverables_1_weeks_2.png
+2016-12-11 13:26:05,530 - INFO - Created SimpleDB item Slack-pack_class-deliverables_1_weeks_3
+2016-12-11 13:26:05,998 - INFO - Uploaded image to s3: https://s3.amazonaws.com/awaybot_test/Slack-pack_class-deliverables_1_weeks_3.png
+2016-12-11 13:26:06,042 - INFO - Created SimpleDB item Slack-pack_class-deliverables_1_weeks_4
+2016-12-11 13:26:06,443 - INFO - Uploaded image to s3: https://s3.amazonaws.com/awaybot_test/Slack-pack_class-deliverables_1_weeks_4.png
+2016-12-11 13:26:06,491 - INFO - Created SimpleDB item Slack-pack_class-deliverables_1_weeks_5
+2016-12-11 13:26:06,923 - INFO - Uploaded image to s3: https://s3.amazonaws.com/awaybot_test/Slack-pack_class-deliverables_1_weeks_5.png
+2016-12-11 13:26:06,966 - INFO - Created SimpleDB item Slack-pack_class-deliverables_1_weeks_6
+2016-12-11 13:26:07,259 - INFO - Uploaded image to s3: https://s3.amazonaws.com/awaybot_test/Slack-pack_class-deliverables_1_weeks_6.png
+2016-12-11 13:26:07,305 - INFO - Created SimpleDB item Slack-pack_class-deliverables_1_weeks_7
+2016-12-11 13:26:07,350 - INFO - Created SimpleDB item Slack-pack_class-deliverables_1_weeks
+2016-12-11 13:26:08,255 - INFO - Uploaded image to s3: https://s3.amazonaws.com/awaybot_test/Slack-pack_class-deliverables_2_weeks_0.png
+2016-12-11 13:26:08,408 - INFO - Created SimpleDB item Slack-pack_class-deliverables_2_weeks_1
+2016-12-11 13:26:08,821 - INFO - Uploaded image to s3: https://s3.amazonaws.com/awaybot_test/Slack-pack_class-deliverables_2_weeks_1.png
+2016-12-11 13:26:08,869 - INFO - Created SimpleDB item Slack-pack_class-deliverables_2_weeks_2
+2016-12-11 13:26:08,919 - INFO - Created SimpleDB item Slack-pack_class-deliverables_2_weeks
+2016-12-11 13:26:09,865 - INFO - Uploaded image to s3: https://s3.amazonaws.com/awaybot_test/Slack-pack_class-deliverables_3_weeks_0.png
+2016-12-11 13:26:10,019 - INFO - Created SimpleDB item Slack-pack_class-deliverables_3_weeks_1
+2016-12-11 13:26:10,374 - INFO - Uploaded image to s3: https://s3.amazonaws.com/awaybot_test/Slack-pack_class-deliverables_3_weeks_1.png
+2016-12-11 13:26:10,426 - INFO - Created SimpleDB item Slack-pack_class-deliverables_3_weeks_2
+2016-12-11 13:26:10,467 - INFO - Created SimpleDB item Slack-pack_class-deliverables_3_weeks
+2016-12-11 13:26:11,439 - INFO - Uploaded image to s3: https://s3.amazonaws.com/awaybot_test/Slack-pack_class-deliverables_4_weeks_0.png
+2016-12-11 13:26:11,582 - INFO - Created SimpleDB item Slack-pack_class-deliverables_4_weeks_1
+2016-12-11 13:26:11,933 - INFO - Uploaded image to s3: https://s3.amazonaws.com/awaybot_test/Slack-pack_class-deliverables_4_weeks_1.png
+2016-12-11 13:26:11,980 - INFO - Created SimpleDB item Slack-pack_class-deliverables_4_weeks_2
+2016-12-11 13:26:12,023 - INFO - Created SimpleDB item Slack-pack_class-deliverables_4_weeks
+2016-12-11 13:26:13,194 - INFO - Uploaded image to s3: https://s3.amazonaws.com/awaybot_test/Slack-pack_class-deliverables_5_weeks_0.png
+2016-12-11 13:26:13,329 - INFO - Created SimpleDB item Slack-pack_class-deliverables_5_weeks_1
+2016-12-11 13:26:13,626 - INFO - Uploaded image to s3: https://s3.amazonaws.com/awaybot_test/Slack-pack_class-deliverables_5_weeks_1.png
+2016-12-11 13:26:13,673 - INFO - Created SimpleDB item Slack-pack_class-deliverables_5_weeks_2
+2016-12-11 13:26:13,719 - INFO - Created SimpleDB item Slack-pack_class-deliverables_5_weeks
+2016-12-11 13:26:15,037 - INFO - Uploaded image to s3: https://s3.amazonaws.com/awaybot_test/Slack-pack_class-deliverables_6_weeks_0.png
+2016-12-11 13:26:15,180 - INFO - Created SimpleDB item Slack-pack_class-deliverables_6_weeks_1
+2016-12-11 13:26:15,540 - INFO - Uploaded image to s3: https://s3.amazonaws.com/awaybot_test/Slack-pack_class-deliverables_6_weeks_1.png
+2016-12-11 13:26:15,581 - INFO - Created SimpleDB item Slack-pack_class-deliverables_6_weeks_2
+2016-12-11 13:26:15,871 - INFO - Uploaded image to s3: https://s3.amazonaws.com/awaybot_test/Slack-pack_class-deliverables_6_weeks_2.png
+2016-12-11 13:26:15,911 - INFO - Created SimpleDB item Slack-pack_class-deliverables_6_weeks_3
+2016-12-11 13:26:15,973 - INFO - Created SimpleDB item Slack-pack_class-deliverables_6_weeks

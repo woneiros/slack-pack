@@ -1,25 +1,7 @@
-2016-12-11 12:32:13,658 - INFO - BOT 'awaybot' has received MESSAGE '{u'text': u'<@U2JFHEMNV> /summarize <#C2BSVGJQ4|general> 14 days', u'ts': u'1481477532.000284', u'user': u'U2C9M9GP5', u'team': u'T2BT8MVE3', u'type': u'message', u'channel': u'D2JFGMAQP'}'
-2016-12-11 12:32:13,659 - INFO - Fetching number of items for Slack-pack_general_14_days
-2016-12-11 12:32:13,898 - INFO - Could not fetch number of topics from Simple DB for COMMAND '/summarize <#c2bsvgjq4|general> 14 days'
-2016-12-11 12:32:31,155 - INFO - BOT 'awaybot' has received MESSAGE '{u'text': u'<@U2JFHEMNV> /summarize <#C2BSVGJQ4|general> 3 days', u'ts': u'1481477550.000286', u'user': u'U2C9M9GP5', u'team': u'T2BT8MVE3', u'type': u'message', u'channel': u'D2JFGMAQP'}'
-2016-12-11 12:32:31,155 - INFO - Fetching number of items for Slack-pack_general_3_days
-2016-12-11 12:32:31,213 - INFO - COMMAND /summarize <#c2bsvgjq4|general> 3 days has a valid format for processing:
-                command_channel : <#c2bsvgjq4|general>
-                command_duration : 3
-                command_duration_units : days
-2016-12-11 12:32:31,453 - INFO - Sending:
-                        	channel : D2JFGMAQP
-                        	text : <https://slackpack-project.slack.com/archives/general/p1481160141000134|Go To Topic 1>
-                        	image_url : [{"title": "Topic 1" , "image_url":"https://s3.amazonaws.com/awaybot_test/Slack-pack_general_3_days_0.png"}]
-2016-12-11 12:32:31,731 - INFO - Sending:
-                        	channel : D2JFGMAQP
-                        	text : <https://slackpack-project.slack.com/archives/general/p1481160768000156|Go To Topic 2>
-                        	image_url : [{"title": "Topic 2" , "image_url":"https://s3.amazonaws.com/awaybot_test/Slack-pack_general_3_days_1.png"}]
-2016-12-11 12:32:32,000 - INFO - Sending:
-                        	channel : D2JFGMAQP
-                        	text : <https://slackpack-project.slack.com/archives/general/p1481260618000003|Go To Topic 3>
-                        	image_url : [{"title": "Topic 3" , "image_url":"https://s3.amazonaws.com/awaybot_test/Slack-pack_general_3_days_2.png"}]
-2016-12-11 12:32:32,300 - INFO - Sending:
-                        	channel : D2JFGMAQP
-                        	text : <https://slackpack-project.slack.com/archives/general/p1481397061000023|Go To Topic 4>
-                        	image_url : [{"title": "Topic 4" , "image_url":"https://s3.amazonaws.com/awaybot_test/Slack-pack_general_3_days_3.png"}]
+2016-12-11 14:45:21,652 - INFO - Stating __main__, simple test for awaybot.py
+2016-12-11 14:45:21,652 - INFO - RTM API read websocket delay set to '1' seconds
+2016-12-11 14:45:21,652 - INFO - Initializing bot with parameters:
+            	slack_client : <slackclient._client.SlackClient object at 0x7f29940c99d0>
+            	bot_name : awaybot
+            	command : /summarize
+2016-12-11 14:45:22,388 - INFO - starterbot connected and running!
