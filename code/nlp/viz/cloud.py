@@ -13,8 +13,6 @@
 .. |model| replace:: :class:`nlp.text.models.Summarizer`
 
 """
-import matplotlib
-matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import wordcloud as wc
 import random
@@ -49,6 +47,10 @@ class Wordcloud(object):
             Maximum number of words to be shown on the wordcloud
         background : str, optional
             Color of the background
+        font : str, optional
+            Path to the font specification
+        multi_plot : bool, optional
+            Whether to create side by side plots with the unigram wordcloud as well
         """
         self.model = model
         self.document_id = document_id
@@ -104,7 +106,7 @@ class Wordcloud(object):
 
     @staticmethod
     def slack_colorize(word, font_size, position, orientation, random_state=None, **kwargs):
-        """Recolorizes the word cloud based on slack colors
+        """Recolorizes the word cloud based on slack colors (used for slackifying the wordcloud)
         """
 
         # slack colors
@@ -148,7 +150,7 @@ class Wordcloud(object):
         plt.show()
 
     def save_png(self, filepath, title=None):
-        """Summary
+        """Saves the wordcloud as a png image to the specified filepath
 
         Parameters
         ----------
