@@ -51,7 +51,7 @@ class Wordgraph(object):
         self.MAX_FONT = max_font
         self.EDGE_CMAP = edge_cmap
 
-        self.ngrams_in_doc = map( lambda x: self.model.n_gram_corpus.dictionary.get(x[0]), self.model.n_gram_corpus.corpus[3] )
+        self.ngrams_in_doc = map( lambda x: self.model.n_gram_corpus.dictionary.get(x[0]), self.model.n_gram_corpus.corpus[self.document_id] )
         self.reverse_uni_dict = { v:k for k,v in self.model.uni_corpus.dictionary.iteritems() }
         self.codified_ngrams = map( lambda x: [ self.reverse_uni_dict[w] for w in x.split() ], self.ngrams_in_doc)
 
