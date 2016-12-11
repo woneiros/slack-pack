@@ -126,7 +126,7 @@ class Slackbot:
             self.sdb_status = True
         return
 
-    def handle_command(self, team, command, simpleDB_domain):
+    def handle_command(self, team, command):
         """
         Receives commands directed at the bot and determines if they
         are valid commands. If so, then acts on the commands. If not,
@@ -211,7 +211,7 @@ class Slackbot:
                             command_duration, command_duration_units, topic)
 
                         fetch_image = self.sdb.get_attributes(
-                            DomainName='awaybot', ItemName=sdbImageItem, ConsistentRead=True)
+                            DomainName=SDB_DOMAIN, ItemName=sdbImageItem, ConsistentRead=True)
                         topic_url = [i['Value'] for i in fetch_image['Attributes'] if i['Name'] == 'archiveURL'][0]
                         topic_wordcloud = [i['Value'] for i in fetch_image['Attributes'] if i['Name'] == 'modelURL'][0]
 
@@ -365,7 +365,7 @@ if __name__ == "__main__":
                 # use our predefined handle command function
                 # NOTE THAT THE PAYLOAD IS PREDEFINED
                 if command and channel:
-                    bot.handle_command(team_name, command, SDB_DOMAIN)
+                    bot.handle_command(team_name, command)
 
                 # sleep for the number of seconds before reading from
                 # the fire hose again
