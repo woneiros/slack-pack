@@ -1,3 +1,26 @@
+# -*- coding: utf-8 -*-
+
+
+
+"""
+  Implements a class called AwaybotProducer. Fetches
+  messages from the Slack Real Time Messaging API
+  and publishes them to a kafka topic using
+  python-kafka. For each message, the latest
+  timestamp of the last produced message is recorded
+  in Simple DB.
+
+
+
+.. module:: awaybot_producer
+
+  :platform: Unix, Windows
+
+  :synopsis: Slack RTM API, python-kafka, KafkaProducer, SimpleDB
+
+"""
+
+
 from slackclient import SlackClient
 from kafka import KafkaClient, KafkaConsumer, KafkaProducer
 import logging
@@ -256,6 +279,23 @@ class AwaybotProducer:
 
 
     def updateLatestTimestamp(self, domain, team_name, ts):
+        """
+        Function that comparse the time stamp of the current
+        message and compares it to the current timestamp value in
+        SimpleDB. If it is greater, updates the value.
+
+        Parameters:
+        -----------
+        domain: str
+            The name of the domain stored in simpleDB
+        team_name: str
+            The name of the slack team for which you are fetching messages
+        ts:
+            The timestamp value of the current message
+
+        Returns:
+            None
+        """
         if not self.sdb_status:
             self.simpledbConnect()
         latest_ts = self.getLatestTimestamp(domain, team_name)

@@ -112,7 +112,7 @@ class Wordgraph(object):
         self.SIZES = [ x*5 for x in self.TOP_NODES_INTS ]
         self.COLORS = np.random.choice(self.COLOR_BASE, size=len( self.gr.nodes() ), replace=True)
 
-        self.pos = nx.fruchterman_reingold_layout(self.gr)
+        self.pos = nx.spring_layout(self.gr)
 
     def rescale(self, x):
         """Rescale a number to the specified font according to the specified max and min font

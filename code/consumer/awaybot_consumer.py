@@ -1,3 +1,22 @@
+# -*- coding: utf-8 -*-
+
+
+"""
+  Implements a class called AwaybotConsumer. Subscribes
+  to kafka topics containing events from the Slack Real
+  Time Messaging API and filters for messages. Publishes
+  messages to a Cassandra database.
+
+
+
+.. module:: awaybot_consumer
+
+  :platform: Unix, Windows
+
+  :synopsis: Slack RTM API, python-kafka, KafkaConsumer, cassandra
+
+"""
+
 from kafka import KafkaClient, KafkaConsumer
 from cassandra import ConsistencyLevel
 from cassandra.cluster import Cluster
