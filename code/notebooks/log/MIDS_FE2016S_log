@@ -1,28 +1,14 @@
-2016-12-12 18:39:13,245 - INFO - topic 0 for general duration 0 hour(s) has length 11
-2016-12-12 18:39:13,371 - INFO - saved /home/kjydavis/slack-pack/code/nlp/data/img/cloud_topic_general_hours_0_1.png
-2016-12-12 18:39:13,471 - INFO - topic 1 for general duration 0 hour(s) has length 14
-2016-12-12 18:39:13,571 - INFO - saved /home/kjydavis/slack-pack/code/nlp/data/img/cloud_topic_general_hours_0_2.png
-2016-12-12 18:39:13,652 - INFO - topic 2 for general duration 0 hour(s) has length 15
-2016-12-12 18:39:13,748 - INFO - saved /home/kjydavis/slack-pack/code/nlp/data/img/cloud_topic_general_hours_0_3.png
-2016-12-12 18:39:13,831 - INFO - topic 3 for general duration 0 hour(s) has length 10
-2016-12-12 18:39:13,927 - INFO - saved /home/kjydavis/slack-pack/code/nlp/data/img/cloud_topic_general_hours_0_4.png
-2016-12-12 18:39:14,011 - INFO - topic 4 for general duration 0 hour(s) has length 16
-2016-12-12 18:39:14,171 - INFO - saved /home/kjydavis/slack-pack/code/nlp/data/img/cloud_topic_general_hours_0_5.png
-2016-12-12 18:39:14,248 - INFO - topic 5 for general duration 0 hour(s) has length 17
-2016-12-12 18:39:14,344 - INFO - saved /home/kjydavis/slack-pack/code/nlp/data/img/cloud_topic_general_hours_0_6.png
-2016-12-12 18:39:14,435 - INFO - topic 6 for general duration 0 hour(s) has length 11
-2016-12-12 18:39:14,540 - INFO - saved /home/kjydavis/slack-pack/code/nlp/data/img/cloud_topic_general_hours_0_7.png
-2016-12-12 18:40:03,953 - INFO - topic 0 for general duration 0 hour(s) has length 11
-2016-12-12 18:40:04,045 - INFO - saved /home/kjydavis/slack-pack/code/nlp/data/img/FE2016S_general_testing_0_1.png
-2016-12-12 18:40:04,119 - INFO - topic 1 for general duration 0 hour(s) has length 14
-2016-12-12 18:40:04,220 - INFO - saved /home/kjydavis/slack-pack/code/nlp/data/img/FE2016S_general_testing_0_2.png
-2016-12-12 18:40:04,306 - INFO - topic 2 for general duration 0 hour(s) has length 15
-2016-12-12 18:40:04,404 - INFO - saved /home/kjydavis/slack-pack/code/nlp/data/img/FE2016S_general_testing_0_3.png
-2016-12-12 18:40:04,486 - INFO - topic 3 for general duration 0 hour(s) has length 10
-2016-12-12 18:40:04,580 - INFO - saved /home/kjydavis/slack-pack/code/nlp/data/img/FE2016S_general_testing_0_4.png
-2016-12-12 18:40:04,659 - INFO - topic 4 for general duration 0 hour(s) has length 16
-2016-12-12 18:40:04,751 - INFO - saved /home/kjydavis/slack-pack/code/nlp/data/img/FE2016S_general_testing_0_5.png
-2016-12-12 18:40:04,833 - INFO - topic 5 for general duration 0 hour(s) has length 17
-2016-12-12 18:40:04,933 - INFO - saved /home/kjydavis/slack-pack/code/nlp/data/img/FE2016S_general_testing_0_6.png
-2016-12-12 18:40:05,018 - INFO - topic 6 for general duration 0 hour(s) has length 11
-2016-12-12 18:40:05,218 - INFO - saved /home/kjydavis/slack-pack/code/nlp/data/img/FE2016S_general_testing_0_7.png
+2016-12-12 20:49:23,644 - INFO - topic 0 for general duration 0 hour(s) has length 11
+2016-12-12 20:49:23,852 - INFO - saved /home/kjydavis/slack-pack/code/nlp/data/img/FE2016S_general_testing_0_1.png
+2016-12-12 20:49:23,972 - INFO - topic 1 for general duration 0 hour(s) has length 14
+2016-12-12 20:49:24,101 - INFO - saved /home/kjydavis/slack-pack/code/nlp/data/img/FE2016S_general_testing_0_2.png
+2016-12-12 20:49:24,195 - INFO - topic 2 for general duration 0 hour(s) has length 15
+2016-12-12 20:49:24,403 - INFO - saved /home/kjydavis/slack-pack/code/nlp/data/img/FE2016S_general_testing_0_3.png
+2016-12-12 20:49:24,546 - INFO - topic 3 for general duration 0 hour(s) has length 10
+2016-12-12 20:49:24,720 - INFO - saved /home/kjydavis/slack-pack/code/nlp/data/img/FE2016S_general_testing_0_4.png
+2016-12-12 20:49:24,801 - INFO - topic 4 for general duration 0 hour(s) has length 16
+2016-12-12 20:49:24,936 - INFO - saved /home/kjydavis/slack-pack/code/nlp/data/img/FE2016S_general_testing_0_5.png
+2016-12-12 20:49:25,067 - INFO - topic 5 for general duration 0 hour(s) has length 17
+2016-12-12 20:49:25,172 - INFO - saved /home/kjydavis/slack-pack/code/nlp/data/img/FE2016S_general_testing_0_6.png
+2016-12-12 20:49:25,271 - INFO - topic 6 for general duration 0 hour(s) has length 10
+2016-12-12 20:49:25,395 - INFO - saved /home/kjydavis/slack-pack/code/nlp/data/img/FE2016S_general_testing_0_7.png

@@ -1,9 +1,102 @@
-2016-12-11 20:58:14,153 - INFO - {'uuid': '7122682a-c00e-11e6-9707-08002749f6f8', u'event_ts': u'1481507888.667794', u'user': {u'status': None, u'profile': {u'first_name': u'Alex', u'last_name': u'Smith', u'fields': None, u'real_name': u'Alex Smith', u'image_24': u'https://secure.gravatar.com/avatar/16ec424d70480ffcf006193f421824f8.jpg?s=24&d=https%3A%2F%2Fa.slack-edge.com%2F0180%2Fimg%2Favatars%2Fava_0003-24.png', u'real_name_normalized': u'Alex Smith', u'image_512': u'https://secure.gravatar.com/avatar/16ec424d70480ffcf006193f421824f8.jpg?s=512&d=https%3A%2F%2Fa.slack-edge.com%2F7fa9%2Fimg%2Favatars%2Fava_0003-512.png', u'image_32': u'https://secure.gravatar.com/avatar/16ec424d70480ffcf006193f421824f8.jpg?s=32&d=https%3A%2F%2Fa.slack-edge.com%2F66f9%2Fimg%2Favatars%2Fava_0003-32.png', u'image_48': u'https://secure.gravatar.com/avatar/16ec424d70480ffcf006193f421824f8.jpg?s=48&d=https%3A%2F%2Fa.slack-edge.com%2F66f9%2Fimg%2Favatars%2Fava_0003-48.png', u'image_72': u'https://secure.gravatar.com/avatar/16ec424d70480ffcf006193f421824f8.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2F66f9%2Fimg%2Favatars%2Fava_0003-72.png', u'avatar_hash': u'g16ec424d704', u'email': u'keivahn@gmail.com', u'image_192': u'https://secure.gravatar.com/avatar/16ec424d70480ffcf006193f421824f8.jpg?s=192&d=https%3A%2F%2Fa.slack-edge.com%2F7fa9%2Fimg%2Favatars%2Fava_0003-192.png'}, u'tz': u'America/New_York', u'name': u'alex.smith', u'presence': u'away', u'deleted': False, u'is_bot': False, u'tz_label': u'Eastern Standard Time', u'real_name': u'Alex Smith', u'color': u'df3dc0', u'team_id': u'T2BT8MVE3', u'is_admin': False, u'is_ultra_restricted': False, u'is_restricted': False, u'is_owner': False, u'tz_offset': -18000, u'id': u'U3DCL5KGS', u'is_primary_owner': False}, 'team': u'Slack-pack', u'cache_ts': 1481507889, u'type': u'team_join'}
-2016-12-11 20:58:19,160 - INFO - {'uuid': '741e7154-c00e-11e6-9707-08002749f6f8', u'user_profile': {u'avatar_hash': u'g16ec424d704', u'first_name': u'Alex', u'real_name': u'Alex Smith', u'name': u'alex.smith', u'image_72': u'https://secure.gravatar.com/avatar/16ec424d70480ffcf006193f421824f8.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2F66f9%2Fimg%2Favatars%2Fava_0003-72.png'}, u'text': u'<@U3DCL5KGS|alex.smith> has joined the channel', u'ts': u'1481507888.000002', u'subtype': u'channel_join', u'user': u'U3DCL5KGS', u'team': u'Slack-pack', u'type': u'message', u'channel': u'random'}
-2016-12-11 20:58:19,377 - INFO - Updating timestamp: latest: 1481501890.000026
-new:1481507888.000002
-2016-12-11 20:58:19,432 - INFO - {'ResponseMetadata': {'RetryAttempts': 0, 'HTTPStatusCode': 200, 'BoxUsage': '0.0000219923', 'RequestId': '453d8b1a-53d2-b29d-212d-811abeb5cb3a', 'HTTPHeaders': {'transfer-encoding': 'chunked', 'vary': 'Accept-Encoding', 'server': 'Amazon SimpleDB', 'connection': 'keep-alive', 'date': 'Mon, 12 Dec 2016 01:58:18 GMT', 'content-type': 'text/xml'}}}
-2016-12-11 20:58:24,440 - INFO - {'uuid': '7744033a-c00e-11e6-9707-08002749f6f8', u'user_profile': {u'avatar_hash': u'g16ec424d704', u'first_name': u'Alex', u'real_name': u'Alex Smith', u'name': u'alex.smith', u'image_72': u'https://secure.gravatar.com/avatar/16ec424d70480ffcf006193f421824f8.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2F66f9%2Fimg%2Favatars%2Fava_0003-72.png'}, u'text': u'<@U3DCL5KGS|alex.smith> has joined the channel', u'ts': u'1481507888.000041', u'subtype': u'channel_join', u'user': u'U3DCL5KGS', u'team': u'Slack-pack', u'type': u'message', u'channel': u'general'}
-2016-12-11 20:58:24,500 - INFO - Updating timestamp: latest: 1481507888.000002
-new:1481507888.000041
-2016-12-11 20:58:24,562 - INFO - {'ResponseMetadata': {'RetryAttempts': 0, 'HTTPStatusCode': 200, 'BoxUsage': '0.0000219923', 'RequestId': '66f7e2d6-9022-24b7-353a-8b7a5df7e7c0', 'HTTPHeaders': {'transfer-encoding': 'chunked', 'vary': 'Accept-Encoding', 'server': 'Amazon SimpleDB', 'connection': 'keep-alive', 'date': 'Mon, 12 Dec 2016 01:58:23 GMT', 'content-type': 'text/xml'}}}
+2016-12-12 20:42:42,710 - INFO - Starting __main__ for awaybot_producer.py
+2016-12-12 20:42:43,109 - INFO - Team name: Slack-pack
+2016-12-12 20:42:43,377 - INFO - Latest timestamp for team Slack-pack is 2016-12-11 20:58:08
+2016-12-12 20:42:43,537 - INFO - Channnels available to producer: architecture bot-sandbox class-deliverables code-documentation data final_presentation general github-repo name-selection next-meeting nlp-methodology random tech-stuff
+2016-12-12 20:42:43,945 - INFO - {'uuid': '7119c054-c0d5-11e6-9707-08002749f6f8', u'text': u'ah ^^^ public user will do!', u'ts': u'1481591983.000009', u'user': u'U2C5M1L6L', 'team': u'Slack-pack', 'message_url': 'https://slackpack-project.slack.com/archives/class-deliverables/p1481591983000009', u'type': u'message', 'channel': u'class-deliverables'}
+2016-12-12 20:42:44,255 - INFO - Updating timestamp: latest: 1481507888.000041
+new:1481591983.000009
+2016-12-12 20:42:44,320 - INFO - {'ResponseMetadata': {'RetryAttempts': 0, 'HTTPStatusCode': 200, 'BoxUsage': '0.0000219923', 'RequestId': 'c9f37488-94ac-0c32-04c8-c06e2d03e31d', 'HTTPHeaders': {'transfer-encoding': 'chunked', 'vary': 'Accept-Encoding', 'server': 'Amazon SimpleDB', 'connection': 'keep-alive', 'date': 'Tue, 13 Dec 2016 01:42:42 GMT', 'content-type': 'text/xml'}}}
+2016-12-12 20:42:44,323 - INFO - {'uuid': '7119c055-c0d5-11e6-9707-08002749f6f8', u'text': u'also, just a tad embarassed that I missed the banner image checkbox', u'ts': u'1481591350.000008', u'user': u'U2D0B7S82', 'team': u'Slack-pack', 'message_url': 'https://slackpack-project.slack.com/archives/class-deliverables/p1481591350000008', u'type': u'message', 'channel': u'class-deliverables'}
+2016-12-12 20:42:44,359 - INFO - Updating timestamp: latest: 1481591983.000009
+new:1481591350.000008
+2016-12-12 20:42:44,359 - INFO - {'uuid': '7119c056-c0d5-11e6-9707-08002749f6f8', u'text': u'<!here|@here>: make sure that your user is set to public if you want your name in the list for the project page:', u'ts': u'1481591301.000006', u'user': u'U2D0B7S82', 'team': u'Slack-pack', 'message_url': 'https://slackpack-project.slack.com/archives/class-deliverables/p1481591301000006', u'type': u'message', 'channel': u'class-deliverables'}
+2016-12-12 20:42:44,395 - INFO - Updating timestamp: latest: 1481591983.000009
+new:1481591301.000006
+2016-12-12 20:42:45,117 - INFO - {'uuid': '71cc87ca-c0d5-11e6-9707-08002749f6f8', u'text': u'no worries! gives me time to eat some dinner :slightly_smiling_face:', u'ts': u'1481592436.000083', u'user': u'U2D0B7S82', 'team': u'Slack-pack', 'message_url': 'https://slackpack-project.slack.com/archives/general/p1481592436000083', u'type': u'message', 'channel': u'general'}
+2016-12-12 20:42:45,158 - INFO - Updating timestamp: latest: 1481591983.000009
+new:1481592436.000083
+2016-12-12 20:42:45,224 - INFO - {'ResponseMetadata': {'RetryAttempts': 0, 'HTTPStatusCode': 200, 'BoxUsage': '0.0000219923', 'RequestId': 'b22e0333-0f07-ca37-0a94-524be34e211c', 'HTTPHeaders': {'transfer-encoding': 'chunked', 'vary': 'Accept-Encoding', 'server': 'Amazon SimpleDB', 'connection': 'keep-alive', 'date': 'Tue, 13 Dec 2016 01:42:43 GMT', 'content-type': 'text/xml'}}}
+2016-12-12 20:42:45,224 - INFO - {'uuid': '71cc87cb-c0d5-11e6-9707-08002749f6f8', u'text': u'ok 10 more minutes :flushed:', u'ts': u'1481592366.000082', u'user': u'U2C5M1L6L', 'team': u'Slack-pack', 'message_url': 'https://slackpack-project.slack.com/archives/general/p1481592366000082', u'type': u'message', 'channel': u'general'}
+2016-12-12 20:42:45,261 - INFO - Updating timestamp: latest: 1481592436.000083
+new:1481592366.000082
+2016-12-12 20:42:45,261 - INFO - {'uuid': '71cc87cc-c0d5-11e6-9707-08002749f6f8', u'text': u'perfectg', u'ts': u'1481591291.000081', u'user': u'U2C9M9GP5', 'team': u'Slack-pack', 'message_url': 'https://slackpack-project.slack.com/archives/general/p1481591291000081', u'type': u'message', 'channel': u'general'}
+2016-12-12 20:42:45,299 - INFO - Updating timestamp: latest: 1481592436.000083
+new:1481591291.000081
+2016-12-12 20:42:45,300 - INFO - {'uuid': '71cc87cd-c0d5-11e6-9707-08002749f6f8', u'text': u'give me 15ish minutes to close current work n quickly meet?', u'ts': u'1481591284.000080', u'user': u'U2C5M1L6L', 'team': u'Slack-pack', 'message_url': 'https://slackpack-project.slack.com/archives/general/p1481591284000080', u'type': u'message', 'channel': u'general'}
+2016-12-12 20:42:45,337 - INFO - Updating timestamp: latest: 1481592436.000083
+new:1481591284.000080
+2016-12-12 20:42:45,337 - INFO - {'uuid': '71cc87ce-c0d5-11e6-9707-08002749f6f8', u'text': u"yep, I've set up a test notebook. We can divide up tasks. You available for skype <@U2C5M1L6L>?", u'ts': u'1481591141.000079', u'user': u'U2C9M9GP5', 'team': u'Slack-pack', 'message_url': 'https://slackpack-project.slack.com/archives/general/p1481591141000079', u'type': u'message', 'channel': u'general'}
+2016-12-12 20:42:45,373 - INFO - Updating timestamp: latest: 1481592436.000083
+new:1481591141.000079
+2016-12-12 20:42:45,373 - INFO - {'uuid': '71cc87cf-c0d5-11e6-9707-08002749f6f8', u'text': u'I\u2019m still in the office x____x', u'ts': u'1481591119.000078', u'user': u'U2C5M1L6L', 'team': u'Slack-pack', 'message_url': 'https://slackpack-project.slack.com/archives/general/p1481591119000078', u'type': u'message', 'channel': u'general'}
+2016-12-12 20:42:45,408 - INFO - Updating timestamp: latest: 1481592436.000083
+new:1481591119.000078
+2016-12-12 20:42:45,409 - INFO - {'uuid': '71cc87d0-c0d5-11e6-9707-08002749f6f8', u'text': u'was gonna say, we should meet', u'ts': u'1481591112.000077', u'user': u'U2C5M1L6L', 'team': u'Slack-pack', 'message_url': 'https://slackpack-project.slack.com/archives/general/p1481591112000077', u'type': u'message', 'channel': u'general'}
+2016-12-12 20:42:45,446 - INFO - Updating timestamp: latest: 1481592436.000083
+new:1481591112.000077
+2016-12-12 20:42:45,447 - INFO - {'uuid': '71cc87d1-c0d5-11e6-9707-08002749f6f8', u'text': u'<@U2C5M1L6L> and <@U2C9M9GP5>, yall doing any validity testing tonight? How can I help?', u'ts': u'1481591098.000076', u'user': u'U2D0B7S82', 'team': u'Slack-pack', 'message_url': 'https://slackpack-project.slack.com/archives/general/p1481591098000076', u'type': u'message', 'channel': u'general'}
+2016-12-12 20:42:45,483 - INFO - Updating timestamp: latest: 1481592436.000083
+new:1481591098.000076
+2016-12-12 20:42:45,483 - INFO - {'uuid': '71cc87d2-c0d5-11e6-9707-08002749f6f8', u'text': u"That sounds good! I'll see if I can shorten it, and also if I can cut out the mistake part. ", u'ts': u'1481544937.000075', u'user': u'U2D0B7S82', 'team': u'Slack-pack', 'message_url': 'https://slackpack-project.slack.com/archives/general/p1481544937000075', u'type': u'message', 'channel': u'general'}
+2016-12-12 20:42:45,518 - INFO - Updating timestamp: latest: 1481592436.000083
+new:1481544937.000075
+2016-12-12 20:42:45,519 - INFO - {'uuid': '71cc87d3-c0d5-11e6-9707-08002749f6f8', u'text': u'The GIF is awesome, but it might be a bit long\u2026 Maybe we don\u2019t want to add the \u201cmistake\u201d command , and/or navigate as much through the vizes (like scroll dow one or two, stop on a cool one and then Go To Topic)', u'ts': u'1481520554.000072', u'user': u'U2BTFJNPL', 'team': u'Slack-pack', 'message_url': 'https://slackpack-project.slack.com/archives/general/p1481520554000072', u'type': u'message', 'channel': u'general'}
+2016-12-12 20:42:45,553 - INFO - Updating timestamp: latest: 1481592436.000083
+new:1481520554.000072
+2016-12-12 20:42:45,554 - INFO - {'uuid': '71cc87d4-c0d5-11e6-9707-08002749f6f8', u'text': u'Maybe we could add a \u201cClick here to see awaybot in action"', u'ts': u'1481520453.000071', u'user': u'U2BTFJNPL', 'team': u'Slack-pack', 'message_url': 'https://slackpack-project.slack.com/archives/general/p1481520453000071', u'type': u'message', 'channel': u'general'}
+2016-12-12 20:42:45,594 - INFO - Updating timestamp: latest: 1481592436.000083
+new:1481520453.000071
+2016-12-12 20:42:45,595 - INFO - {'uuid': '71cc87d5-c0d5-11e6-9707-08002749f6f8', u'text': u'One/two more thoughts on the gif', u'ts': u'1481520400.000070', u'user': u'U2BTFJNPL', 'team': u'Slack-pack', 'message_url': 'https://slackpack-project.slack.com/archives/general/p1481520400000070', u'type': u'message', 'channel': u'general'}
+2016-12-12 20:42:45,630 - INFO - Updating timestamp: latest: 1481592436.000083
+new:1481520400.000070
+2016-12-12 20:42:45,631 - INFO - {'uuid': '71cc87d6-c0d5-11e6-9707-08002749f6f8', u'text': u'<http://slackpack.io|slackpack.io> has been updated with the gif. Tomorrow, I\u2019m going to see if perhaps embedding a sped-up movie might be a better option', u'ts': u'1481518241.000067', u'user': u'U2D0B7S82', 'team': u'Slack-pack', 'message_url': 'https://slackpack-project.slack.com/archives/general/p1481518241000067', u'type': u'message', 'channel': u'general'}
+2016-12-12 20:42:45,669 - INFO - Updating timestamp: latest: 1481592436.000083
+new:1481518241.000067
+2016-12-12 20:42:45,670 - INFO - {'uuid': '71cc87d7-c0d5-11e6-9707-08002749f6f8', u'text': u'good edits! thank you! they\u2019ve been made!', u'ts': u'1481516966.000066', u'user': u'U2D0B7S82', 'team': u'Slack-pack', 'message_url': 'https://slackpack-project.slack.com/archives/general/p1481516966000066', u'type': u'message', 'channel': u'general'}
+2016-12-12 20:42:45,709 - INFO - Updating timestamp: latest: 1481592436.000083
+new:1481516966.000066
+2016-12-12 20:42:45,710 - INFO - {'uuid': '71cc87d8-c0d5-11e6-9707-08002749f6f8', u'text': u'Just changed the first sentence\u2026 see if it makes sense / you agree with it', u'ts': u'1481513585.000059', u'user': u'U2BTFJNPL', 'team': u'Slack-pack', 'message_url': 'https://slackpack-project.slack.com/archives/general/p1481513585000059', u'type': u'message', 'channel': u'general'}
+2016-12-12 20:42:45,746 - INFO - Updating timestamp: latest: 1481592436.000083
+new:1481513585.000059
+2016-12-12 20:42:45,747 - INFO - {'uuid': '71cc87d9-c0d5-11e6-9707-08002749f6f8', u'text': u'&gt; In the longer term, we will launch our code as a Python package to serve as base framework. We have written code that is modular and extensible. We have documented our code well which makes its accessible to others. We can potentially release this code as a package that others in industry and research can use as a baseline for further exploration. For example, we could imagine our framework as a useful tutorial on the Slack API or a basic algorithm for identifying and summarizing topics.', u'ts': u'1481513558.000058', u'user': u'U2BTFJNPL', 'team': u'Slack-pack', 'message_url': 'https://slackpack-project.slack.com/archives/general/p1481513558000058', u'type': u'message', 'channel': u'general'}
+2016-12-12 20:42:45,783 - INFO - Updating timestamp: latest: 1481592436.000083
+new:1481513558.000058
+2016-12-12 20:42:45,783 - INFO - {'uuid': '71cc87da-c0d5-11e6-9707-08002749f6f8', u'text': u'our code is *already open to the public* since we created a public repo from the start', u'ts': u'1481513476.000057', u'user': u'U2BTFJNPL', 'team': u'Slack-pack', 'message_url': 'https://slackpack-project.slack.com/archives/general/p1481513476000057', u'type': u'message', 'channel': u'general'}
+2016-12-12 20:42:45,820 - INFO - Updating timestamp: latest: 1481592436.000083
+new:1481513476.000057
+2016-12-12 20:42:45,820 - INFO - {'uuid': '71cc87db-c0d5-11e6-9707-08002749f6f8', u'text': u'One last thing', u'ts': u'1481513447.000056', u'user': u'U2BTFJNPL', 'team': u'Slack-pack', 'message_url': 'https://slackpack-project.slack.com/archives/general/p1481513447000056', u'type': u'message', 'channel': u'general'}
+2016-12-12 20:42:45,853 - INFO - Updating timestamp: latest: 1481592436.000083
+new:1481513447.000056
+2016-12-12 20:42:45,853 - INFO - {'uuid': '71cc87dc-c0d5-11e6-9707-08002749f6f8', u'text': u'I would not link to such a generic wiki article', u'ts': u'1481513318.000053', u'user': u'U2BTFJNPL', 'team': u'Slack-pack', 'message_url': 'https://slackpack-project.slack.com/archives/general/p1481513318000053', u'type': u'message', 'channel': u'general'}
+2016-12-12 20:42:45,924 - INFO - Updating timestamp: latest: 1481592436.000083
+new:1481513318.000053
+2016-12-12 20:42:45,924 - INFO - {'uuid': '71cc87dd-c0d5-11e6-9707-08002749f6f8', u'text': u'Sorry for being so tardy on this feedback', u'ts': u'1481513296.000052', u'user': u'U2BTFJNPL', 'team': u'Slack-pack', 'message_url': 'https://slackpack-project.slack.com/archives/general/p1481513296000052', u'type': u'message', 'channel': u'general'}
+2016-12-12 20:42:45,961 - INFO - Updating timestamp: latest: 1481592436.000083
+new:1481513296.000052
+2016-12-12 20:42:45,962 - INFO - {'uuid': '71cc87de-c0d5-11e6-9707-08002749f6f8', u'text': u'nice gif bro', u'ts': u'1481513155.000051', u'user': u'U2BTFJNPL', 'team': u'Slack-pack', 'message_url': 'https://slackpack-project.slack.com/archives/general/p1481513155000051', u'type': u'message', 'channel': u'general'}
+2016-12-12 20:42:46,000 - INFO - Updating timestamp: latest: 1481592436.000083
+new:1481513155.000051
+2016-12-12 20:42:46,000 - INFO - {'uuid': '71cc87df-c0d5-11e6-9707-08002749f6f8', u'text': u'hahaha', u'ts': u'1481513152.000050', u'user': u'U2BTFJNPL', 'team': u'Slack-pack', 'message_url': 'https://slackpack-project.slack.com/archives/general/p1481513152000050', u'type': u'message', 'channel': u'general'}
+2016-12-12 20:42:46,040 - INFO - Updating timestamp: latest: 1481592436.000083
+new:1481513152.000050
+2016-12-12 20:42:46,040 - INFO - {'uuid': '71cc87e0-c0d5-11e6-9707-08002749f6f8', u'text': u'oh lol', u'ts': u'1481513151.000049', u'user': u'U2BTFJNPL', 'team': u'Slack-pack', 'message_url': 'https://slackpack-project.slack.com/archives/general/p1481513151000049', u'type': u'message', 'channel': u'general'}
+2016-12-12 20:42:46,076 - INFO - Updating timestamp: latest: 1481592436.000083
+new:1481513151.000049
+2016-12-12 20:42:46,077 - INFO - {'uuid': '71cc87e1-c0d5-11e6-9707-08002749f6f8', u'text': u'like i wanted a blank slate when querying awaybot for the gif so that the gif would show the description of the bot', u'ts': u'1481513050.000048', u'user': u'U2D0B7S82', 'team': u'Slack-pack', 'message_url': 'https://slackpack-project.slack.com/archives/general/p1481513050000048', u'type': u'message', 'channel': u'general'}
+2016-12-12 20:42:46,113 - INFO - Updating timestamp: latest: 1481592436.000083
+new:1481513050.000048
+2016-12-12 20:42:46,114 - INFO - {'uuid': '71cc87e2-c0d5-11e6-9707-08002749f6f8', u'text': u'lol, i needed to create a 2nd alex so that I could create the gif and not have all my playing around with awaybot show up', u'ts': u'1481513024.000047', u'user': u'U2D0B7S82', 'team': u'Slack-pack', 'message_url': 'https://slackpack-project.slack.com/archives/general/p1481513024000047', u'type': u'message', 'channel': u'general'}
+2016-12-12 20:42:46,149 - INFO - Updating timestamp: latest: 1481592436.000083
+new:1481513024.000047
+2016-12-12 20:42:46,149 - INFO - {'uuid': '71cc87e3-c0d5-11e6-9707-08002749f6f8', u'text': u'that\u2019s weird.. are there 2 alex\u2019s now?', u'ts': u'1481513001.000046', u'user': u'U2BTFJNPL', 'team': u'Slack-pack', 'message_url': 'https://slackpack-project.slack.com/archives/general/p1481513001000046', u'type': u'message', 'channel': u'general'}
+2016-12-12 20:42:46,186 - INFO - Updating timestamp: latest: 1481592436.000083
+new:1481513001.000046
+2016-12-12 20:42:46,186 - INFO - {'uuid': '71cc87e4-c0d5-11e6-9707-08002749f6f8', u'text': u'I\u2019m going to try to make a modal image that pops up when you click the awaybot image under the solution section', u'ts': u'1481512999.000045', u'user': u'U2D0B7S82', 'team': u'Slack-pack', 'message_url': 'https://slackpack-project.slack.com/archives/general/p1481512999000045', u'type': u'message', 'channel': u'general'}
+2016-12-12 20:42:46,223 - INFO - Updating timestamp: latest: 1481592436.000083
+new:1481512999.000045
+2016-12-12 20:42:46,224 - INFO - {'uuid': '71cc87e5-c0d5-11e6-9707-08002749f6f8', u'text': u'I updated <http://slackpack.io|slackpack.io> with a `next steps` section and tried to incorporate Carlos\u2019 feedback. Let me know what yall think!', u'ts': u'1481512944.000042', u'user': u'U2D0B7S82', 'team': u'Slack-pack', 'message_url': 'https://slackpack-project.slack.com/archives/general/p1481512944000042', u'type': u'message', 'channel': u'general'}
+2016-12-12 20:42:46,261 - INFO - Updating timestamp: latest: 1481592436.000083
+new:1481512944.000042
+2016-12-12 20:42:48,860 - INFO - Connected to Slack RTM API!
+2016-12-12 20:42:53,869 - INFO - {u'type': u'hello', 'uuid': '7703f804-c0d5-11e6-9707-08002749f6f8', 'team': u'Slack-pack'}
+2016-12-12 20:42:58,874 - INFO - {u'url': u'wss://mpmulti-4r34.slack-msgs.com/websocket/7Zuc7zxuL5H6Z1eoSCeRzJ1FpVIbiV0g1aeSzSO_ryOQ1F1bt4U_YV6nORjMynuKvukofypif1fK_0YlioyLiMMt9IjLht0TaKqsRxQ_jcgAA8rw4t8LewWexKMsqs0kYrIbb3CLZwS5R0h8YG_iGdAxsMW5u3Dnp7HT_S-rd1s=', u'type': u'reconnect_url', 'uuid': '79ffa364-c0d5-11e6-9707-08002749f6f8', 'team': u'Slack-pack'}
