@@ -1,7 +1,39 @@
-2016-12-11 14:45:21,652 - INFO - Stating __main__, simple test for awaybot.py
-2016-12-11 14:45:21,652 - INFO - RTM API read websocket delay set to '1' seconds
-2016-12-11 14:45:21,652 - INFO - Initializing bot with parameters:
-            	slack_client : <slackclient._client.SlackClient object at 0x7f29940c99d0>
-            	bot_name : awaybot
-            	command : /summarize
-2016-12-11 14:45:22,388 - INFO - starterbot connected and running!
+2016-12-11 21:02:00,449 - INFO - BOT 'awaybot' has received MESSAGE '{u'text': u'<@U2JFHEMNV> /summarize something?', u'ts': u'1481508118.000002', u'user': u'U3DCL5KGS', u'team': u'T2BT8MVE3', u'type': u'message', u'channel': u'D3DCLMH8S'}'
+2016-12-11 21:02:00,450 - INFO - Incorrectly formatted COMMAND '/summarize something?' sent to BOT 'awaybot'
+2016-12-11 21:02:27,753 - INFO - BOT 'awaybot' has received MESSAGE '{u'text': u'<@U2JFHEMNV> /summarize <#C2BSVGJQ4|general> 2 weeks', u'ts': u'1481508145.000004', u'user': u'U3DCL5KGS', u'team': u'T2BT8MVE3', u'type': u'message', u'channel': u'D3DCLMH8S'}'
+2016-12-11 21:02:27,997 - INFO - COMMAND /summarize <#c2bsvgjq4|general> 2 weeks has a valid format for processing:
+                command_channel : <#c2bsvgjq4|general>
+                command_duration : 2
+                command_duration_units : weeks
+2016-12-11 21:02:28,280 - INFO - Sending:
+                        	channel : D3DCLMH8S
+                        	text : <https://slackpack-project.slack.com/archives/general/p1480391539000021|Go To Topic 1>
+                        	image_url : [{"title": "Topic 1" , "image_url":"https://s3.amazonaws.com/awaybot_test/Slack-pack_general_2_weeks_0.png"}]
+2016-12-11 21:02:28,575 - INFO - Sending:
+                        	channel : D3DCLMH8S
+                        	text : <https://slackpack-project.slack.com/archives/general/p1480439605000048|Go To Topic 2>
+                        	image_url : [{"title": "Topic 2" , "image_url":"https://s3.amazonaws.com/awaybot_test/Slack-pack_general_2_weeks_1.png"}]
+2016-12-11 21:02:28,918 - INFO - Sending:
+                        	channel : D3DCLMH8S
+                        	text : <https://slackpack-project.slack.com/archives/general/p1480556537000100|Go To Topic 3>
+                        	image_url : [{"title": "Topic 3" , "image_url":"https://s3.amazonaws.com/awaybot_test/Slack-pack_general_2_weeks_2.png"}]
+2016-12-11 21:02:29,239 - INFO - Sending:
+                        	channel : D3DCLMH8S
+                        	text : <https://slackpack-project.slack.com/archives/general/p1480789450000039|Go To Topic 4>
+                        	image_url : [{"title": "Topic 4" , "image_url":"https://s3.amazonaws.com/awaybot_test/Slack-pack_general_2_weeks_3.png"}]
+2016-12-11 21:02:30,998 - INFO - Sending:
+                        	channel : D3DCLMH8S
+                        	text : <https://slackpack-project.slack.com/archives/general/p1480797006000071|Go To Topic 5>
+                        	image_url : [{"title": "Topic 5" , "image_url":"https://s3.amazonaws.com/awaybot_test/Slack-pack_general_2_weeks_4.png"}]
+2016-12-11 21:02:31,416 - INFO - Sending:
+                        	channel : D3DCLMH8S
+                        	text : <https://slackpack-project.slack.com/archives/general/p1480803135000127|Go To Topic 6>
+                        	image_url : [{"title": "Topic 6" , "image_url":"https://s3.amazonaws.com/awaybot_test/Slack-pack_general_2_weeks_5.png"}]
+2016-12-11 21:02:31,725 - INFO - Sending:
+                        	channel : D3DCLMH8S
+                        	text : <https://slackpack-project.slack.com/archives/general/p1481160717000149|Go To Topic 7>
+                        	image_url : [{"title": "Topic 7" , "image_url":"https://s3.amazonaws.com/awaybot_test/Slack-pack_general_2_weeks_6.png"}]
+2016-12-11 21:02:32,297 - INFO - Sending:
+                        	channel : D3DCLMH8S
+                        	text : <https://slackpack-project.slack.com/archives/general/p1481260618000003|Go To Topic 8>
+                        	image_url : [{"title": "Topic 8" , "image_url":"https://s3.amazonaws.com/awaybot_test/Slack-pack_general_2_weeks_7.png"}]

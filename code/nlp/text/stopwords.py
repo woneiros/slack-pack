@@ -18,5 +18,6 @@ STOPWORDS = [u'i', u'me', u'my', u'myself', u'we', u'our', u'ours', u'ourselves'
             'ive', 'youll', 'lemme', 'actually', 'want', 'think', 'good', 'im', 'back', 'oh', 'right', 'get',
             'says', 'i\'m', 'i\'ve', 'havnt', 'thanks', 'ty', 'anyone', 'please', 'know', 'use', 'one',
             'ill', 'x', 'got', 'gotcha', 'show', 'try', 'thinking', 'ugh', 'sweet', 'awesome', 'anything',
-            'let', 'see',  'i', 'go', 'although', 'though', 'through'
+            'let', 'see',  'i', 'go', 'although', 'though', 'through', 'probably', 'theyll',
+            'new', 'going', 'shes'
             ]
