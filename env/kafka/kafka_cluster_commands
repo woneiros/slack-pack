@@ -1,0 +1,80 @@
+# Start 4 instances
+# 1 for zookeeper, 3 for kafka brokers
+./ec2_reserve_4node_demo_kafka_cluster.sh
+
+# Get the public dns of each node
+TEMP="$(aws ec2 describe-instance-status --query InstanceStatuses[*][InstanceId] --output text)"
+publicDnsName="$(aws ec2 describe-instances --instance-ids $temp --query Reservations[*].Instances[*].NetworkInterfaces[*].Association.PublicDnsName --output text)"
+echo $publicDnsName
+
+# Open 3 terminals and connect to each node
+ssh -i /etc/ssh/EC2-US-EAST-1A.pem ubuntu@ec2-54-173-19-70.compute-1.amazonaws.com
+# ubuntu@ip-172-31-14-151
+ssh -i /etc/ssh/EC2-US-EAST-1A.pem ubuntu@ec2-54-197-32-189.compute-1.amazonaws.com
+# ubuntu@ip-172-31-14-152
+ssh -i /etc/ssh/EC2-US-EAST-1A.pem ubuntu@ec2-54-174-158-228.compute-1.amazonaws.com
+# ubuntu@ip-172-31-14-149
+ssh -i /etc/ssh/EC2-US-EAST-1A.pem ubuntu@ec2-54-84-88-0.compute-1.amazonaws.com
+# ubuntu@ip-172-31-14-150
+
+# Install java 8
+sudo add-apt-repository ppa:webupd8team/java
+sudo apt-get update
+sudo apt-get install oracle-java8-installer
+# Set JAVA_HOME
+sudo vi /etc/environment
+# Add line
+JAVA_HOME="/usr/lib/jvm/java-8-oracle"
+source /etc/environment
+
+#Install kafka
+wget http://ftp.wayne.edu/apache/kafka/0.10.0.0/kafka_2.11-0.10.0.0.tgz
+sudo tar -xzf kafka_2.11-0.10.0.0.tgz 
+
+# Set up zookeeper on zookeeper node
+cd kafka_2.11-0.10.0.0
+sudo vi ./config/zookeeper.properties
+# After clintPort=2181, insert line
+zk.server.1=ec2-54-173-19-70.compute-1.amazonaws.com:2888:3888
+
+
+# Configure zookeeper properties for kafka nodes 1-3
+cd kafka_2.11-0.10.0.0
+sudo vi ./config/zookeeper.properties
+# After clintPort=2181, insert line
+zk.server.1=ec2-54-173-19-70.compute-1.amazonaws.com:2888:3888
+
+# Set up kafka on instances 2-4
+sudo vi ./config/server.properties
+broker.id = NUM (must be unique for all instances)
+# Line 35
+advertised.listeners=PLAINTEXT://ec2-54-197-32-189.compute-1.amazonaws.com:9092 <replace with proper machine>
+# Line 60
+num.partitions=2
+# Line 111
+zookeeper.connect=ec2-54-173-19-70.compute-1.amazonaws.com:2181
+
+# Start zookeeper on zookeeper node
+./bin.zookeeper-server-start.sh config/zookeeper.properties
+
+# Start kafka on kafka nodes
+./bin/kafka-server-start.sh config/server.properties
+
+# Test a few things
+# New terminal
+ssh -i /etc/ssh/EC2-US-EAST-1A.pem ubuntu@ec2-54-197-32-189.compute-1.amazonaws.com
+cd kafka_2.11-0.10.0.0
+./bin/kafka-topics.sh --list --zookeeper ec2-54-173-19-70.compute-1.amazonaws.com:2181
+# Create a topic
+./bin/kafka-topics.sh --create --zookeeper ec2-54-173-19-70.compute-1.amazonaws.com:2181 --topic test_topic --partitions 1 --replication-factor 1
+# Produce a message
+./bin/kafka-console-producer.sh --broker-list ec2-54-197-32-189.compute-1.amazonaws.com:9092 --topic test_topic
+# Type "hello from broker 0"
+# Consume the message
+./bin/kafka-console-consumer.sh --zookeeper ec2-54-173-19-70.compute-1.amazonaws.com:2181 --topic test_topic --from-beginning
+
+
+# Terminate
+aws ec2 terminate-instances --instance-ids "$kafka_instances" --output text --query 'TerminatingInstances[*].CurrentState.Name'
+
+

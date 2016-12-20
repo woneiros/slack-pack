@@ -1,0 +1,49 @@
+# Setting up a cassandra cluster
+
+# Run the provided ec2_reserve_3node_demo_cassandra_cluster.sh
+./ec2_reserve_3node_demo_cassandra_cluster.sh
+
+# Get your instance info in the terminal
+instance_ids="$(aws ec2 describe-instance-status --query InstanceStatuses[*][InstanceId] --output text)"
+c=0;for id in $instance_ids; do eval "id$c=$id"; c=$((c+1));done
+dns0="$(aws ec2 describe-instances --instance-ids $id0 --query Reservations[*].Instances[*].NetworkInterfaces[*].Association.PublicDnsName --output text)"
+dns1="$(aws ec2 describe-instances --instance-ids $id1 --query Reservations[*].Instances[*].NetworkInterfaces[*].Association.PublicDnsName --output text)"
+dns2="$(aws ec2 describe-instances --instance-ids $id2 --query Reservations[*].Instances[*].NetworkInterfaces[*].Association.PublicDnsName --output text)"
+
+# For each instance
+ssh -o StrictHostKeyChecking=no -i /etc/ssh/EC2-US-EAST-1A.pem ubuntu@$dns2
+# In the instance
+wget https://raw.githubusercontent.com/WillahScott/slack-pack/dev-env/env/cassandra_remote_install.sh
+sudo chmod a+x cassandra_remote_install.sh
+sudo ./cassandra_remote_install.sh
+sudo service cassandra stop;sudo rm -rf /var/lib/cassandra/data/system/*
+sudo cp /etc/cassandra/cassandra.yaml /etc/cassandra/cassandra_default.yaml
+sudo rm /etc/cassandra/cassandra.yaml
+
+# For seed node 1
+wget https://raw.githubusercontent.com/WillahScott/slack-pack/dev-env/env/cassandra/cassandra_ec2_187
+sudo mv cassandra_ec2_187 /etc/cassandra/cassandra.yaml
+exit
+
+# For seed node 2
+wget  https://raw.githubusercontent.com/WillahScott/slack-pack/dev-env/env/cassandra/cassandra_ec2_202
+sudo mv cassandra_ec2_202 /etc/cassandra/cassandra.yaml
+exit
+
+# For node 3
+wget  https://raw.githubusercontent.com/WillahScott/slack-pack/dev-env/env/cassandra/cassandra_ec2_225
+sudo mv cassandra_ec2_225 /etc/cassandra/cassandra.yaml
+exit
+
+
+# ssh back in to each instance
+# Note you must start cassandra first with one of the seed nodes
+ssh -o StrictHostKeyChecking=no -i /etc/ssh/EC2-US-EAST-1A.pem ubuntu@$dns0
+sudo service cassandra start
+
+# Check status (Should see 3 nodes)
+nodetool status
+
+# Terminate instances
+aws ec2 terminate-instances --instance-ids "$id0" "$id1" "$id2" --output text --query 'TerminatingInstances[*].CurrentState.Name'
+

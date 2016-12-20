@@ -3,7 +3,7 @@
 # Simple script that launches micro server with
 # ------> security group : clouderaTest
 # ------> availability zone : us-east-1a
-# ------> AMI : ami-1785de00 
+# ------> AMI : ami-dabcfccd
 # you need to choose your own security group (named above "clouderaTest") which has open ports: 8080,8088,4040,50070,22,8020
 # Also make sure to set environmental variables for your EC2 KEY (KEY)
 
@@ -15,14 +15,13 @@
 
 #############################################################################
 
-#SEC_GROUP="clouderaTest"
-SEC_GROUP="openTest"
+SEC_GROUP="slackpstone-2"
 AVAIL_ZONE="us-east-1a"
-AMI="ami-1785de00" 
-INSTANCE_TYPE="m3.medium"
+AMI="ami-d05e75b8" 
+INSTANCE_TYPE="m3.large"
 KEY="EC2-US-EAST-1A" # Key for the appropriate region
-
-NEWINATANCES="$(aws ec2 run-instances --image-id $AMI --key $KEY --count 1 --instance-type $INSTANCE_TYPE --security-groups $SEC_GROUP)"
+NUM_INSTANCES="4"
+NEWINATANCES="$(aws ec2 run-instances --image-id $AMI --key $KEY --count $NUM_INSTANCES --instance-type $INSTANCE_TYPE --security-groups $SEC_GROUP)"
 
 check_status=$(aws ec2 describe-instance-status --instance-ids $NEWINSTACEID --query 'InstanceStatuses[*].InstanceState.Name' --output text)
 
@@ -48,3 +47,17 @@ done
 # ssh -i "your_key.pem" root@xx.x.xxx.xx
 
 #TODO: write bootsrap.sh
+
+# To get instance ids as output
+# aws ec2 describe-instances --query 'Reservations[*].Instances[*].InstanceID' --output text
+
+# To get instance ids as text
+# instance_ids="$(aws ec2 describe-instance-status --query InstanceStatuses[*][InstanceId] --output text)"
+
+# To format the instance ids
+# quoted_instances="\"${instance_ids// /\" \"}\""
+
+# To terminate
+# aws ec2 terminate-instances --instance-ids "$quoted_instances" --output text --query 'TerminatingInstances[*].CurrentState.Name'
+
+# aws ec2 describe-instances --instance-ids $instance_ids --query Reservations[*].Instances[*].NetworkInterfaces[*].Association.PublicDnsName --output text

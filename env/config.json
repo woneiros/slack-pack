@@ -1,0 +1,14 @@
+{
+  "kafka" : {
+    "bootstrap_servers" : {
+      "host" : "localhost",
+      "port" : "9092"
+    },
+    "producer" : {
+
+    },
+    "consumer" : {
+      "default_auto_offset_reset" : "earliest"
+    }
+  }
+}
